@@ -7,8 +7,8 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 
 RUN apk update && apk add wget bash curl openrc screen aria2 tar --no-cache
 
-COPY aria2.conf /root
-COPY aria2c.sh /root
+ADD conf /root/conf
+
 
 COPY Caddyfile /usr/local/caddy/Caddyfile
 
@@ -18,11 +18,11 @@ RUN mkdir -p /usr/local/www && mkdir -p /usr/local/www/aria2
 RUN mkdir /usr/local/www/aria2/Download && cd /usr/local/www/aria2 \
  && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/0.2.0/aria-ng-0.2.0.zip && unzip aria-ng-0.2.0.zip && rm -rf aria-ng-0.2.0.zip \
  && chmod -R 755 /usr/local/www/aria2 \
- && chmod +x /root/aria2c.sh
+ && chmod +x /root/conf/aria2c.sh
 
 EXPOSE 6800 80 443
 
-ENTRYPOINT ["/bin/sh", "/root/aria2c.sh"]
+ENTRYPOINT ["/bin/sh", "/root/conf/aria2c.sh"]
 # CMD ["/bin/sh", "/root/aria2c.sh" ]
 
 
