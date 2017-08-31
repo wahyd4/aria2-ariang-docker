@@ -2,13 +2,16 @@ FROM abiosoft/caddy
 MAINTAINER Junv<wahyd4@gmail.com>
 
 WORKDIR /root
+
+ENV RPC_SECRET=Hello
+
+
 # For build image in local quickly
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 RUN apk update && apk add wget bash curl openrc screen aria2 tar --no-cache
 
 ADD conf /root/conf
-
 
 COPY Caddyfile /usr/local/caddy/Caddyfile
 
