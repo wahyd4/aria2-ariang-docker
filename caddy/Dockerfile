@@ -4,7 +4,10 @@ MAINTAINER Junv<wahyd4@gmail.com>
 WORKDIR /root
 
 ENV RPC_SECRET=Hello
-
+ENV ENABLE_AUTH=false
+ENV DOMAIN=localhost
+ENV ARIA2_USER=user
+ENV ARIA2_PWD=password
 
 # For build image in local quickly
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
@@ -14,6 +17,7 @@ RUN apk update && apk add wget bash curl openrc screen aria2 tar --no-cache
 ADD conf /root/conf
 
 COPY Caddyfile /usr/local/caddy/Caddyfile
+COPY SecureCaddyfile /usr/local/caddy/SecureCaddyfile
 
 RUN mkdir -p /usr/local/www && mkdir -p /usr/local/www/aria2
 

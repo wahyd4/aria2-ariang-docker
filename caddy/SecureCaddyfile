@@ -5,6 +5,8 @@
     gzip
     log stdout
     errors stdout
+
+    basicauth / {$ARIA2_USER} {$ARIA2_PWD}
 }
 
 {$DOMAIN}/aria2 {
@@ -13,4 +15,7 @@
   gzip
   log stdout
   errors stdout
+
+  basicauth / {$ARIA2_USER} {$ARIA2_PWD}
+
 }
