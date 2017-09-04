@@ -5,7 +5,7 @@ WORKDIR /root
 
 ENV RPC_SECRET=Hello
 ENV ENABLE_AUTH=false
-ENV DOMAIN=localhost:80
+ENV DOMAIN=:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 
