@@ -5,7 +5,7 @@ WORKDIR /root
 
 ENV RPC_SECRET=Hello
 ENV ENABLE_AUTH=false
-ENV DOMAIN=localhost
+ENV DOMAIN=localhost:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 
@@ -27,7 +27,12 @@ RUN mkdir /usr/local/www/aria2/Download && cd /usr/local/www/aria2 \
  && chmod -R 755 /usr/local/www/aria2 \
  && chmod +x /root/conf/aria2c.sh
 
+#The folder to store ssl keys
+VOLUME /root/conf/key
+
 EXPOSE 6800 80 443
+
+
 
 ENTRYPOINT ["/bin/sh", "/root/conf/aria2c.sh"]
 # CMD ["/bin/sh", "/root/aria2c.sh" ]
