@@ -1,13 +1,4 @@
 {$DOMAIN} {
-    proxy / file-manager:80 {
-        transparent
-    }
-    gzip
-    log stdout
-    errors stdout
-}
-
-{$DOMAIN}/aria2 {
   root /usr/local/www/aria2
   timeouts none
   gzip
