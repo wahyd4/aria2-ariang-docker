@@ -39,8 +39,8 @@ Aria2 + AriaNg
 
   * ENABLE_AUTH enable Basic auth
   * ARIA2_USER Basic Auth username
-  * ARIA2_PWD Basic Auth
-  * RPC_SECRET The Aria2 RPC secret token
+  * ARIA2_PWD Basic Auth
+  * RPC_SECRET The Aria2 RPC secret token
   * DOMAIN The domain you'd like to bind
 
 
