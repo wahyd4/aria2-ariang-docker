@@ -30,6 +30,9 @@ RUN mkdir /usr/local/www/aria2/Download && cd /usr/local/www/aria2 \
 #The folder to store ssl keys
 VOLUME /root/conf/key
 
+# For user downloaded files
+VOLUME /data
+
 EXPOSE 6800 80 443
 
 
