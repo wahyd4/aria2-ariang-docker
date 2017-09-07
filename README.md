@@ -51,4 +51,4 @@ Aria2 + AriaNg
 
 ## Usage it in Docker compose
 
-  With refer <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
+  Please refer <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
