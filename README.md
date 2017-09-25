@@ -2,6 +2,8 @@ Aria2 + AriaNg
 
 [English](https://github.com/wahyd4/aria2-ariang-docker/blob/master/README.EN.md) | 简体中文
 
+[![](https://images.microbadger.com/badges/image/wahyd4/aria2-ui.svg)](https://microbadger.com/images/wahyd4/aria2-ui "Get your own image badge on microbadger.com")
+
 本镜像包含 Aria2、AriaNg 和File Manager，主要方便那些用户期望只运行一个镜像就能实现图形化下载文件和在线播放文件。（类似离线下载的功能），只使用一个 Docker 镜像也方便用户在群晖NAS 中运行本程序。
 
 <!-- TOC -->
@@ -12,6 +14,7 @@ Aria2 + AriaNg
   - [开启所有功能](#开启所有功能)
   - [支持的 Docker 环境变量](#支持的-docker-环境变量)
   - [支持的 Docker volume 属性](#支持的-docker-volume-属性)
+- [Docker Hub](#docker-hub)
 - [使用 Docker compose 来运行](#使用-docker-compose-来运行)
 
 <!-- /TOC -->
@@ -55,6 +58,10 @@ File Manager
   * `/data` 用来放置所有下载的文件的目录
   * `/root/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`
 
+
+## Docker Hub
+
+  <https://hub.docker.com/r/wahyd4/aria2-ui/>
 
 ## 使用 Docker compose 来运行
 
