@@ -25,7 +25,7 @@ File Manager
   * Aria2 (SSL 支持)
   * AriaNg 通过 UI 来操作，下载文件
   * 自动 HTTPS （Let's Encrypt）
-  * Basic Auth 用户认真
+  * Basic Auth 用户认证
   * 文件管理和视频播放 ([File Manager](https://henriquedias.com/filemanager/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
 
 ## 安装于运行
@@ -47,7 +47,7 @@ File Manager
   * ENABLE_AUTH 启用 Basic auth 用户认证
   * ARIA2_USER Basic Auth 用户认证用户名
   * ARIA2_PWD Basic Auth 密码
-  * RPC_SECRET Aria2 RPC 密匙
+  * RPC_SECRET Aria2 RPC 加密 token
   * DOMAIN 绑定的域名
 
 
