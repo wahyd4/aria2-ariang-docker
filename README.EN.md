@@ -1,6 +1,6 @@
 Aria2 + AriaNg
 
-English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/raw/master/README.md)
+English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/master/README.md)
 
 <!-- TOC -->
 

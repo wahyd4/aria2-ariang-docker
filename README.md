@@ -1,6 +1,6 @@
 Aria2 + AriaNg
 
-[English]((https://github.com/wahyd4/aria2-ariang-docker/raw/master/README.EN.md)) | 简体中文
+[English](https://github.com/wahyd4/aria2-ariang-docker/blob/master/README.EN.md) | 简体中文
 
 本镜像包含 Aria2、AriaNg 和File Manager，主要方便那些用户期望只运行一个镜像就能实现图形化下载文件和在线播放文件。（类似离线下载的功能），只使用一个 Docker 镜像也方便用户在群晖NAS 中运行本程序。
 
