@@ -1,5 +1,6 @@
-FROM abiosoft/caddy
-MAINTAINER Junv<wahyd4@gmail.com>
+FROM alpine:edge
+
+LABEL AUTHOR=Junv<wahyd4@gmail.com>
 
 WORKDIR /root
 
@@ -13,6 +14,8 @@ ENV ARIA2_PWD=password
 RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 RUN apk update && apk add wget bash curl openrc screen aria2 tar --no-cache
+
+RUN curl https://getcaddy.com | bash -s personal http.filemanager
 
 ADD conf /root/conf
 
