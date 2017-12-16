@@ -1,5 +1,5 @@
 {$DOMAIN} {
-    proxy / file-manager:80 {
+    proxy / file-manager:8080 {
         transparent
     }
     gzip

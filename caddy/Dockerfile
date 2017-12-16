@@ -9,8 +9,8 @@ ENV DOMAIN=:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 
-# For build image in local quickly
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+# For build image in local quickly only in China
+# RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
 
 RUN apk update && apk add wget bash curl gnupg openrc screen aria2 tar --no-cache
 
