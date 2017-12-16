@@ -36,7 +36,7 @@ File Manager
 ### 快速运行
 
 ```shell
-  docker run -d --name ariang -p 80:80 -p 6800:6800 wahyd4/aria2-ariang
+  docker run -d --name ariang -p 80:80 -p 6800:6800 wahyd4/aria2-ui
 ```
 
 * Aria2: <http://yourip>
@@ -44,7 +44,7 @@ File Manager
 
 ### 开启所有功能
 ```shell
-  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key wahyd4/aria2-ariang
+  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key wahyd4/aria2-ui
 ```
 
 ### 支持的 Docker 环境变量
