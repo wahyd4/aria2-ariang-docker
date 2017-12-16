@@ -1,10 +1,10 @@
 #!/bin/sh
 echo "Run aria2c and ariaNG"
-echo $ENABLE_AUTH
 if [ "$ENABLE_AUTH" = "true" ]; then
-  echo "using basic auth config file "
+  echo "Using Basic Auth config file "
   CADDY_FILE=/usr/local/caddy/SecureCaddyfile
 else
+  echo "Using caddy without Basic Auth"
   CADDY_FILE=/usr/local/caddy/Caddyfile
 fi
 
