@@ -42,7 +42,7 @@ File Manager
 
 ### Full Usage
 ```shell
-  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key wahyd4/aria2-ui
+  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key -v /<to your aria2.conf>:/root/conf/aria2.conf wahyd4/aria2-ui
 ```
 
 ### Supported Environment Variables
@@ -57,6 +57,7 @@ File Manager
 ### Supported Volumes
   * `/data` The folder of all Aria2 downloaded files.
   * `/root/conf/key` The folder which stored Aria2 SSL `certificate` and `key` file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`
+  * `/root/conf/aria2.conf` The Aria2 configuration file.
 
 
 ## Docker Hub

@@ -44,7 +44,7 @@ File Manager
 
 ### 开启所有功能
 ```shell
-  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key wahyd4/aria2-ui
+  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key -v -v <to your aria2.conf>:/root/conf/aria2.conf wahyd4/aria2-ui
 ```
 
 ### 支持的 Docker 环境变量
@@ -59,6 +59,7 @@ File Manager
 ### 支持的 Docker volume 属性
   * `/data` 用来放置所有下载的文件的目录
   * `/root/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`
+  * `/root/conf/aria2.conf` 为 aria2 的配置文件，你可以映射自己的配置文件。
 
 
 ## Docker Hub
