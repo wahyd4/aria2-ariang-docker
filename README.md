@@ -41,7 +41,7 @@ File Manager
 
 * Aria2: <http://yourip>
 * FileManger: <http://yourip/files>
-
+* 请使用 admin/admin 进行登录
 ### 开启所有功能
 ```shell
   docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key -v -v <to your aria2.conf>:/root/conf/aria2.conf wahyd4/aria2-ui

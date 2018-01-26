@@ -39,6 +39,7 @@ File Manager
 
 * Aria2: <http://yourip>
 * FileManger: <http://yourip/files>
+* Please use admin/admin as username and password to login
 
 ### Full Usage
 ```shell
