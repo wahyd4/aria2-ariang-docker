@@ -1,4 +1,5 @@
-#!/bin/sh
+#! /bin/bash -eu
+
 echo "Run aria2c and ariaNG"
 if [ "$ENABLE_AUTH" = "true" ]; then
   echo "Using Basic Auth config file "
