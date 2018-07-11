@@ -15,6 +15,7 @@ Aria2 + AriaNg
   - [开启所有功能](#开启所有功能)
   - [支持的 Docker 环境变量](#支持的-docker-环境变量)
   - [支持的 Docker volume 属性](#支持的-docker-volume-属性)
+- [自行构建镜像](#自行构建镜像)
 - [Docker Hub](#docker-hub)
 - [使用 Docker compose 来运行](#使用-docker-compose-来运行)
 
@@ -62,6 +63,12 @@ File Manager
   * `/root/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`
   * `/root/conf/aria2.conf` 为 aria2 的配置文件，你可以映射自己的配置文件。
 
+## 自行构建镜像
+
+```
+cd caddy
+docker build -t aria2-ui .
+```
 
 ## Docker Hub
 
