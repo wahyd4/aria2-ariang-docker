@@ -34,7 +34,7 @@ File Manager
 ### Simple Usage
 
 ```shell
-  docker run -d --name ariang -p 80:80 -p 6800:6800 wahyd4/aria2-ui
+  docker run -d --name aria2-ui -p 80:80 -p 6800:6800 wahyd4/aria2-ui
 ```
 
 * Aria2: <http://yourip>
