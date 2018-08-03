@@ -15,5 +15,4 @@
   log stdout
   errors stdout
   filemanager / /data
-  basicauth / {$ARIA2_USER} {$ARIA2_PWD}
 }
