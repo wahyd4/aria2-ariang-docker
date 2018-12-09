@@ -55,7 +55,7 @@ File Manager
   * ARIA2_USER Basic Auth 用户认证用户名
   * ARIA2_PWD Basic Auth 密码
   * RPC_SECRET Aria2 RPC 加密 token
-  * DOMAIN 绑定的域名
+  * DOMAIN 绑定的域名, 当绑定的域名为`HTTPS`时，即为启用`HTTPS`， 例： `DOMAIN=https://toozhao.com`
 
 
 ### 支持的 Docker volume 属性
