@@ -27,7 +27,7 @@ RUN mkdir -p /usr/local/www && mkdir -p /usr/local/www/aria2
 #AriaNg
 RUN mkdir /usr/local/www/aria2/Download && cd /usr/local/www/aria2 \
  && chmod +rw /root/conf/aria2.session \
- && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/1.0.0/aria-ng-1.0.0.zip && unzip aria-ng-1.0.0.zip && rm -rf aria-ng-1.0.0.zip \
+ && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/1.0.0/AriaNg-1.0.0.zip && unzip AriaNg-1.0.0.zip && rm -rf AriaNg-1.0.0.zip \
  && chmod -R 755 /usr/local/www/aria2 \
  && chmod +x /root/aria2c.sh
 
