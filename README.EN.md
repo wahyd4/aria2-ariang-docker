@@ -28,6 +28,7 @@ File Manager
   * Auto HTTPS （Let's Encrypt）
   * Basic Auth
   * File indexing and video playing ([File Manager](https://henriquedias.com/filemanager/))
+  * Add support for ARM CPUs, please choose correct [docker image TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
 
 ## How to run
 
