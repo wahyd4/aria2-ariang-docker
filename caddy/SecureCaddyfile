@@ -14,5 +14,5 @@
   gzip
   log stdout
   errors stdout
-  filemanager / /data
+  filebrowser / /data
 }
