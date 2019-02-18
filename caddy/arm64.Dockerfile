@@ -12,7 +12,7 @@ ENV ARIA2_PWD=password
 
 RUN apk update && apk add wget bash curl openrc gnupg screen aria2 tar --no-cache
 
-RUN curl https://getcaddy.com | bash -s personal http.filemanager
+RUN curl https://getcaddy.com | bash -s personal http.filebrowser
 
 ADD conf /root/conf
 COPY aria2c.sh /root
@@ -36,5 +36,3 @@ VOLUME /data
 EXPOSE 6800 80 443
 
 CMD ["/bin/sh", "/root/aria2c.sh" ]
-
-
