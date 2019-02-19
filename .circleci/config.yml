@@ -1,0 +1,17 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: debian:stretch
+
+    steps:
+      - setup_remote_docker
+      - checkout
+      - run:
+          name: Build latest
+          command: docker build -t wahyd4/aria2-ui:$CIRCLE_BUILD_NUM caddy/.
+      - run:
+          name: Push
+          command: |
+            docker login -u $DOCKER_USER -p $DOCKER_PASS
+            docker push wahyd4/aria2-ui:$CIRCLE_BUILD_NUM
