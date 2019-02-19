@@ -1,9 +1,7 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: debian:stretch
-
+    machine: true
     steps:
       - setup_remote_docker
       - checkout
