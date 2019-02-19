@@ -6,9 +6,11 @@ jobs:
       - checkout
       - run:
           name: Build latest
-          command: docker build -t wahyd4/aria2-ui:$CIRCLE_BUILD_NUM caddy/.
+          command: docker build -t wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM caddy/.
       - run:
           name: Push
           command: |
             docker login -u $DOCKER_USER -p $DOCKER_PASS
-            docker push wahyd4/aria2-ui:$CIRCLE_BUILD_NUM
+            docker tag wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM wahyd4/aria2-ui:latest
+            docker push wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM
+            docker push wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM
