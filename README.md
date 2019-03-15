@@ -43,7 +43,7 @@ File Manager
   docker run -d --name aria2-ui -p 80:80 -p 6800:6800 wahyd4/aria2-ui
 ```
 
-* Aria2: <http://yourip/aria/>   **最后的斜线必须带上!**
+* Aria2: <http://yourip/ui/>   **最后的斜线必须带上!**
 * FileManger: <http://yourip>
 * 请使用 admin/admin 进行登录
 ### 开启所有功能
