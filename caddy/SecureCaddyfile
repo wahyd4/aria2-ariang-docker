@@ -1,4 +1,11 @@
 {$DOMAIN} {
+  gzip
+  log stdout
+  errors stdout
+  filebrowser / /data
+}
+
+{$DOMAIN}/aria {
   root /usr/local/www/aria2
   timeouts none
   gzip
@@ -6,13 +13,4 @@
   errors stdout
 
   basicauth / {$ARIA2_USER} {$ARIA2_PWD}
-
-}
-
-
-{$DOMAIN}/files {
-  gzip
-  log stdout
-  errors stdout
-  filebrowser / /data
 }
