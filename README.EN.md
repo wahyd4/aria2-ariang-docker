@@ -4,8 +4,6 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 
 [![](https://images.microbadger.com/badges/image/wahyd4/aria2-ui.svg)](https://microbadger.com/images/wahyd4/aria2-ui "Get your own image badge on microbadger.com")
 
-<!-- TOC -->
-
 - [Features](#features)
 - [How to run](#how-to-run)
   - [Simple Usage](#simple-usage)
@@ -14,8 +12,8 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
   - [Supported Volumes](#supported-volumes)
 - [Docker Hub](#docker-hub)
 - [Usage it in Docker compose](#usage-it-in-docker-compose)
+- [FAQ](#faq)
 
-<!-- /TOC -->
 Aria2
 ![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.png)
 
@@ -81,3 +79,7 @@ File Browser
 ## Usage it in Docker compose
 
   Please refer <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
+
+## FAQ
+
+  1. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links.
