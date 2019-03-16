@@ -2,7 +2,9 @@
   gzip
   log stdout
   errors stdout
-  filebrowser / /data
+  filebrowser / /data {
+    database /root/filebrowser.db
+  }
 }
 
 {$DOMAIN}/ui {
