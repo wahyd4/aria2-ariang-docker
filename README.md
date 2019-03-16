@@ -25,15 +25,15 @@ Aria2 + AriaNg
 Aria2
 ![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.png)
 
-File Manager
-![Filemanager](https://github.com/wahyd4/aria2-ariang-docker/raw/master/filemanager.png)
+File Browser
+![File Browser](https://github.com/wahyd4/aria2-ariang-docker/raw/master/filemanager.png)
 ## 功能特性
 
   * Aria2 (SSL 支持)
   * AriaNg 通过 UI 来操作，下载文件
   * 自动 HTTPS （Let's Encrypt）
   * Basic Auth 用户认证
-  * 文件管理和视频播放 ([File Manager](https://henriquedias.com/filemanager/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
+  * 文件管理和视频播放 ([File Browser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
   * 支持ARM CPU 架构，因此可以在树莓派中运行，请下载对应的[ARM TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags) 版本, `arm32`或`arm64`
 
 ## 推荐使用的docker image tag

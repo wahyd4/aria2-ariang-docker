@@ -19,15 +19,15 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 Aria2
 ![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.png)
 
-File Manager
-![Filemanager](https://github.com/wahyd4/aria2-ariang-docker/raw/master/filemanager.png)
+File Browser
+![File Browser](https://github.com/wahyd4/aria2-ariang-docker/raw/master/filemanager.png)
 ## Features
 
   * Aria2 (SSL support)
   * AriaNg
   * Auto HTTPS （Let's Encrypt）
   * Basic Auth
-  * File indexing and video playing ([File Manager](https://henriquedias.com/filemanager/))
+  * File indexing and video playing ([File Browser](https://filebrowser.xyz/))
   * Add support for ARM CPUs, please choose correct [docker image TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
 
 ## How to run
