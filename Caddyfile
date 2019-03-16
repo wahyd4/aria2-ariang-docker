@@ -1,5 +1,7 @@
 {$DOMAIN} {
-  filebrowser / /data
+  filebrowser / /data {
+    database /root/filebrowser.db
+  }
   log stdout
   errors stdout
   gzip

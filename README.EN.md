@@ -9,7 +9,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 - [Features](#features)
 - [How to run](#how-to-run)
   - [Simple Usage](#simple-usage)
-  - [Full Usage](#full-usage)
+  - [Fully Usage](#fully-usage)
   - [Supported Environment Variables](#supported-environment-variables)
   - [Supported Volumes](#supported-volumes)
 - [Docker Hub](#docker-hub)
@@ -42,9 +42,20 @@ File Browser
 * FileManger: <http://yourip>
 * Please use admin/admin as username and password to login
 
-### Full Usage
-```shell
-  docker run -d --name ariang -p 80:80 -p 6800:6800 -p 443:443 -e ENABLE_AUTH=true -e RPC_SECRET=Hello -e DOMAIN=example.com -e ARIA2_USER=user -e ARIA2_PWD=pwd -v /yourdata:/data -v /yoursslkeys/:/root/conf/key -v /<to your aria2.conf>:/root/conf/aria2.conf wahyd4/aria2-ui
+### Fully Usage
+```bash
+  docker run -d --name ariang \
+  -p 80:80 -p 6800:6800 -p 443:443 \
+  -e ENABLE_AUTH=true \
+  -e RPC_SECRET=Hello \
+  -e DOMAIN=example.com \
+  -e ARIA2_USER=user \
+  -e ARIA2_PWD=pwd \
+  -v /yourdata:/data \
+  -v /root/a.db:/root/filebrowser.db \
+  -v /yoursslkeys/:/root/conf/key \
+  -v <to your aria2.conf>:/root/conf/aria2.conf \
+  wahyd4/aria2-ui
 ```
 
 ### Supported Environment Variables
@@ -60,6 +71,7 @@ File Browser
   * `/data` The folder of all Aria2 downloaded files.
   * `/root/conf/key` The folder which stored Aria2 SSL `certificate` and `key` file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`
   * `/root/conf/aria2.conf` The Aria2 configuration file.
+  * `/root/filebrowser.db` File Browser settings db, make sure you make a empty file first on your host.
 
 
 ## Docker Hub
