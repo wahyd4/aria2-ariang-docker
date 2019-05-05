@@ -1,27 +1,27 @@
 version: 2.1
 workflows:
   version: 2
-	build-and-push:
-		jobs:
-			- build:
-				steps:
-					- checkout
-					- run:
-							name: Build latest
-							command: docker build -t wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM .
-			- push-docker-image:
+  build-and-push:
+    jobs:
+      - build:
+        steps:
+          - checkout
+          - run:
+              name: Build latest
+              command: docker build -t wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM .
+      - push-docker-image:
           requires:
             - build
-					filters:
+          filters:
             branches:
               only: master
-					steps:
-						- run:
-								name: Push
-								command: |
-									if [ "${CIRCLE_BRANCH}" == "master" ]; then
-										docker login -u $DOCKER_USER -p $DOCKER_PASS
-										docker tag wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM wahyd4/aria2-ui:latest
-										docker push wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM
-										docker push wahyd4/aria2-ui:latest
-									fi
+          steps:
+            - run:
+                name: Push
+                command: |
+                  if [ "${CIRCLE_BRANCH}" == "master" ]; then
+                    docker login -u $DOCKER_USER -p $DOCKER_PASS
+                    docker tag wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM wahyd4/aria2-ui:latest
+                    docker push wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM
+                    docker push wahyd4/aria2-ui:latest
+                  fi
