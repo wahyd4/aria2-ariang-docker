@@ -1,0 +1,16 @@
+services:
+  - docker
+
+jobs:
+  include:
+    - stage: build docker image
+      script: docker build -t wahyd4/aria2-ui:1.0.$TRAVIS_BUILD_NUMBER .
+    - stage: push docker image
+      if: branch = master
+      script: |
+        if [ "${TRAVIS_BRANCH}" == "master" ]; then
+          docker login -u $DOCKER_USER -p $DOCKER_PASS
+          docker tag wahyd4/aria2-ui:1.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
+          docker push wahyd4/aria2-ui:1.0.$TRAVIS_BUILD_NUMBER
+          docker push wahyd4/aria2-ui:latest
+        fi
