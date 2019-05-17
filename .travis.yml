@@ -11,9 +11,9 @@ jobs:
   include:
     - stage: build docker image
       script:
-        - docker build -t wahyd4/aria2-ui:1.0.$TRAVIS_BUILD_NUMBER .
+        - docker build -t wahyd4/aria2-ui:1.0.${TRAVIS_BUILD_NUMBER} .
         - mkdir -p ${CACHE_FOLDER}
-        - docker save wahyd4/aria2-ui:1.0.$TRAVIS_BUILD_NUMBER | gzip -c > ${CACHE_FILE}
+        - docker save wahyd4/aria2-ui:1.0.${TRAVIS_BUILD_NUMBER} | gzip -c > ${CACHE_FILE}
     - stage: push docker image
       if: branch = master
       script: |
