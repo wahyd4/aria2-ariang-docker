@@ -8,7 +8,7 @@ addons:
 
 jobs:
   include:
-    - stage: build and push docker image
+    - stage: "build and push docker image"
       script: |
         docker --version
         docker build -t wahyd4/aria2-ui:2.0.${TRAVIS_BUILD_NUMBER} .
