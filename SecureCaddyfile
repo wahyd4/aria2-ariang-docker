@@ -2,6 +2,7 @@
   proxy / localhost:8080 {
       transparent
   }
+
   gzip
   log stdout
   errors stdout
@@ -15,4 +16,24 @@
   errors stdout
 
   basicauth / {$ARIA2_USER} {$ARIA2_PWD}
+}
+
+{$DOMAIN}/css {
+  root /usr/local/www/aria2/css
+  gzip
+}
+
+{$DOMAIN}/js {
+  root /usr/local/www/aria2/js
+  gzip
+}
+
+{$DOMAIN}/fonts {
+  root /usr/local/www/aria2/fonts
+  gzip
+}
+
+{$DOMAIN}/langs {
+  root /usr/local/www/aria2/langs
+  gzip
 }
