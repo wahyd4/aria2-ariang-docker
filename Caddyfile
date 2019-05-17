@@ -1,6 +1,6 @@
 {$DOMAIN} {
-  filebrowser / /data {
-    database /root/filebrowser.db
+  proxy / localhost:8080 {
+      transparent
   }
   log stdout
   errors stdout
