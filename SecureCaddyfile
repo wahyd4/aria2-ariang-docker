@@ -1,10 +1,10 @@
 {$DOMAIN} {
+  proxy / localhost:8080 {
+      transparent
+  }
   gzip
   log stdout
   errors stdout
-  filebrowser / /data {
-    database /root/filebrowser.db
-  }
 }
 
 {$DOMAIN}/ui {
