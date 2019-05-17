@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Build latest
-          command: docker build -t wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM .
+          command: docker build -t wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM . && export TAG=1.0.$CIRCLE_BUILD_NUM
   push:
     machine:
       docker_layer_caching: true
@@ -17,8 +17,8 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker login -u $DOCKER_USER -p $DOCKER_PASS
-              docker tag wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM wahyd4/aria2-ui:latest
-              docker push wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM
+              docker tag wahyd4/aria2-ui:$TAG wahyd4/aria2-ui:latest
+              docker push wahyd4/aria2-ui:$TAG
               docker push wahyd4/aria2-ui:latest
             fi
 
