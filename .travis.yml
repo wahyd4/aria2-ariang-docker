@@ -1,10 +1,11 @@
+os: osx
 services:
   - docker
 
-addons:
-  apt:
-    packages:
-      - docker-ce
+# addons:
+#   apt:
+#     packages:
+#       - docker-ce
 
 jobs:
   include:
