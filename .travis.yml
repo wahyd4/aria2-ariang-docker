@@ -1,6 +1,10 @@
 services:
   - docker
 
+addons:
+  apt:
+    packages:
+      - docker-ce
 env:
   global:
     - NAME=aria2-ui
@@ -11,6 +15,7 @@ jobs:
   include:
     - stage: build docker image
       script:
+        - docker --version
         - docker build -t wahyd4/aria2-ui:2.0.${TRAVIS_BUILD_NUMBER} .
         - mkdir -p ${CACHE_FOLDER}
         - docker save wahyd4/aria2-ui:2.0.${TRAVIS_BUILD_NUMBER} | gzip -c > ${CACHE_FILE}
