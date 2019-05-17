@@ -37,9 +37,9 @@ File Browser
 
 ## 推荐使用的docker image tag
 
-* latest
-* arm32
-* arm64
+* wahyd4/aria2-ui:latest
+* wahyd4/aria2-ui:arm32
+* wahyd4/aria2-ui:arm64
 
 ## 安装于运行
 
