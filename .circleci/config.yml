@@ -2,6 +2,7 @@ version: 2.1
 jobs:
   build:
     machine: true
+    docker_layer_caching: true
     steps:
       - checkout
       - run:
@@ -9,6 +10,7 @@ jobs:
           command: docker build -t wahyd4/aria2-ui:1.0.$CIRCLE_BUILD_NUM .
   push:
     machine: true
+    docker_layer_caching: true
     steps:
       - run:
           name: Push
