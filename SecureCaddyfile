@@ -8,6 +8,10 @@
 }
 
 {$DOMAIN}/ui {
+  redir / /ui/ 301
+}
+
+{$DOMAIN}/ui/ {
   root /usr/local/www/aria2
   timeouts none
   gzip
