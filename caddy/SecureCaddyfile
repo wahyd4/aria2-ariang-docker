@@ -9,6 +9,10 @@
 }
 
 {$DOMAIN}/aria2 {
+  redir / /aria2/ 301
+}
+
+{$DOMAIN}/aria2/ {
   root /usr/local/www/aria2
   timeouts none
   gzip
