@@ -1,4 +1,4 @@
-Aria2 + AriaNg
+Aria2 + AriaNg + Filebrowser
 
 English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/master/README.CN.md)
 
