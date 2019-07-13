@@ -34,6 +34,6 @@ VOLUME /root/conf/key
 # User downloaded files
 VOLUME /data
 
-EXPOSE 6800 80 443
+EXPOSE 80 443
 
 CMD ["/bin/sh", "/root/aria2c.sh" ]
