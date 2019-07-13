@@ -50,9 +50,9 @@ File Browser
   docker run -d --name aria2-ui -p 80:80 wahyd4/aria2-ui
 ```
 
-* Aria2: <http://yourip/ui/> **The tailling `/` is necessary**
+* Aria2: <http://yourip/ui/> 
 * FileManger: <http://yourip>
-* Please use admin/admin as username and password to login
+* Please use `admin`/`admin` as username and password to login for the first time.
 
 ### Full features run
 
