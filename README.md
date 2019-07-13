@@ -19,7 +19,11 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 - [Usage it in Docker compose](#Usage-it-in-Docker-compose)
 - [FAQ](#FAQ)
 
-One Docker image for all file downloading, managing, playing and evening sharing platforms! Besides, it's small and ARM CPU supported which means you can run it on Raspberry Pi. Last but not least, SSL enabling so easy!
+One Docker image for all file downloading, managing, playing and evening sharing platforms!
+
+Besides, it's small and ARM CPU supported which means you can run it on Raspberry Pi.
+
+Last but not least, SSL enabling so easy!
 
 AriaNG
 ![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.png)
@@ -50,7 +54,7 @@ File Browser
   docker run -d --name aria2-ui -p 80:80 wahyd4/aria2-ui
 ```
 
-* Aria2: <http://yourip/ui/> 
+* Aria2: <http://yourip/ui/>
 * FileManger: <http://yourip>
 * Please use `admin`/`admin` as username and password to login for the first time.
 
@@ -109,5 +113,5 @@ docker build -t aria2-ui .
   Please refer <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
 
 ## FAQ
-
-  1. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links.
+  1. When you running the docker image with non `80` port or you have HTTPS enabled, you will meet the error says `Aria2 Status Disconnected`, then you will need to go to `AriaNg Settings` -> RPC (at the top of the page) to modify the port value in `Aria2 RPC Address` field. Due to AriaNg store all configurations in local browser, so you need to do this per browser.
+  2. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links.

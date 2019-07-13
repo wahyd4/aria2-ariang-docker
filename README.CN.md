@@ -108,5 +108,5 @@ docker build -t aria2-ui .
   请参考 <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
 
 ## 常见问题
-
-  1. 下载的BT或者磁力完全没有速度怎么办？ 建议先下载一个热门的BT种子文件，而不是磁力链接。这样可以帮助缓存DHT文件，渐渐地，速度就会起来了。比如试试下载树莓派操作系统的BT种子？[前往下载](https://www.raspberrypi.org/downloads/raspbian/)
+  1.当你以非其他`80` 端口或以启用了HTTPS`443`端口运行程序时，会出现`Aria2 状态 未连接`的错误，这是因为在最新版本里面，我们去掉aria2的独立6800端口，转而使用和网站同一个端口。因为你需要渠道 `AriaNg设置` -> 页面顶端的 `RPC`页面，将你的Aria2 RPC 地址中的端口从`80`改成你使用的正确端口。因为 AriaNg 仅仅将设置保存在浏览器中，因为当你使用不同的浏览器，或者将浏览器清除缓存后，你都需要重新设置一次。
+  2. 下载的BT或者磁力完全没有速度怎么办？ 建议先下载一个热门的BT种子文件，而不是磁力链接。这样可以帮助缓存DHT文件，渐渐地，速度就会起来了。比如试试下载树莓派操作系统的BT种子？[前往下载](https://www.raspberrypi.org/downloads/raspbian/)
