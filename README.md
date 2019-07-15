@@ -69,7 +69,7 @@ File Browser
   -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
-  -e DOMAIN=example.com \
+  -e DOMAIN=https://example.com \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=pwd \
   -v /yourdata:/data \
@@ -85,7 +85,7 @@ File Browser
   * ARIA2_USER Basic Auth username
   * ARIA2_PWD Basic Auth
   * RPC_SECRET The Aria2 RPC secret token
-  * DOMAIN The domain you'd like to bind
+  * DOMAIN The domain you'd like to bind, when domain is a `https://` thing, then auto SSL feature will be enabled
 
 
 ### Supported Volumes

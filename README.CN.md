@@ -63,7 +63,7 @@ File Browser
   -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
-  -e DOMAIN=example.com \
+  -e DOMAIN=https://example.com \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=pwd \
   -v /yourdata:/data \
