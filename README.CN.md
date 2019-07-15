@@ -35,6 +35,7 @@ File Browser
   * Basic Auth 用户认证
   * 文件管理和视频播放 ([File Browser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
   * 支持ARM CPU 架构，因此可以在树莓派中运行，请下载对应的[ARM TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags) 版本, `arm32`或`arm64`
+  * 使用`PUID`, `PGID`设置运行用户
 
 ## 推荐使用的docker image tag
 
@@ -58,6 +59,8 @@ File Browser
   docker run -d --name ariang \
   -p 80:80 \
   -p 443:443 \
+  -e PUID=1000 \
+  -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
   -e DOMAIN=example.com \

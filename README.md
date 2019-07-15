@@ -39,6 +39,7 @@ File Browser
   * Basic Auth
   * File indexing and video playing ([File Browser](https://filebrowser.xyz/))
   * Add support for ARM CPUs, please choose correct [docker image TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
+  * use `PUID`, `PGID` set user
 
 ## Recommended versions
 
@@ -64,6 +65,8 @@ File Browser
   docker run -d --name ariang \
   -p 80:80 \
   -p 443:443 \
+  -e PUID=1000 \
+  -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
   -e DOMAIN=example.com \
