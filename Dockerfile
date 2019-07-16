@@ -10,10 +10,12 @@ ENV DOMAIN=0.0.0.0:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 ENV SSL=false
+ENV PUID=1000
+ENV PGID=1000
 
 RUN adduser -D -u 1000 junv \
   && apk update \
-  && apk add runit wget bash curl openrc gnupg aria2 tar --no-cache \
+  && apk add runit shadow wget bash curl openrc gnupg aria2 tar --no-cache \
   && curl https://getcaddy.com | bash -s personal \
   && curl -fsSL https://filebrowser.xyz/get.sh | bash \
   && wget -N https://bin.equinox.io/c/ekMN3bCZFUn/forego-stable-linux-amd64.tgz \
