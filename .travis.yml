@@ -13,7 +13,7 @@ jobs:
       script: |
         docker --version
         docker build -t wahyd4/aria2-ui:2.0.${TRAVIS_BUILD_NUMBER} .
-        if [ "${TRAVIS_BRANCH}" == "master" ]; then
+        if [ "${TRAVIS_BRANCH}" = "master" ]; then
           docker login -u $DOCKER_USER -p $DOCKER_PASS
           docker tag wahyd4/aria2-ui:2.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
           docker push wahyd4/aria2-ui:2.0.$TRAVIS_BUILD_NUMBER
