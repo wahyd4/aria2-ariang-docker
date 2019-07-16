@@ -11,8 +11,9 @@ ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 ENV SSL=false
 
-RUN apk update \
-  && apk add wget bash curl openrc gnupg aria2 tar --no-cache \
+RUN adduser -D -u 1000 junv \
+  && apk update \
+  && apk add runit wget bash curl openrc gnupg aria2 tar --no-cache \
   && curl https://getcaddy.com | bash -s personal \
   && curl -fsSL https://filebrowser.xyz/get.sh | bash \
   && wget -N https://bin.equinox.io/c/ekMN3bCZFUn/forego-stable-linux-amd64.tgz \
@@ -21,7 +22,7 @@ RUN apk update \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2
 
-ADD aria2c.sh caddy.sh Procfile /app/
+ADD aria2c.sh caddy.sh Procfile init.sh start.sh /app/
 ADD conf /app/conf
 ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 
@@ -44,4 +45,4 @@ VOLUME /data
 
 EXPOSE 80 443
 
-CMD ["./forego", "start" ]
+CMD ["./start.sh"]
