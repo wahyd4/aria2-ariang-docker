@@ -11,7 +11,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 - [How to run](#How-to-run)
   - [Quick run](#Quick-run)
   - [Full features run](#Full-features-run)
-  - [run with docker-compose](#run-with-docker-compose)
+  - [Run with docker-compose](#Run-with-docker-compose)
   - [Supported Environment Variables](#Supported-Environment-Variables)
   - [Supported Volumes](#Supported-Volumes)
 - [Auto SSL enabling](#Auto-SSL-enabling)
@@ -80,7 +80,7 @@ File Browser
   -v <to your aria2.conf>:/app/conf/aria2.conf \
   wahyd4/aria2-ui
 ```
-### run with docker-compose
+### Run with docker-compose
 
 If you wanna get rid of those annoying command line things, just put the following sample content into `docker-compose.yaml`
 ```yaml
