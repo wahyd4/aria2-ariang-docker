@@ -1,3 +1,3 @@
-filebrowser: /usr/local/bin/filebrowser -p 8080 -d /app/filebrowser.db -r /data
+filebrowser: /app/filebrowser -p 8080 -d /app/filebrowser.db -r /data
 caddy: /app/caddy.sh
 aria2c: /app/aria2c.sh
