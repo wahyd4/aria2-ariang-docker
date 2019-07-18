@@ -1,6 +1,6 @@
 #! /bin/bash -eu
 
-echo "**** update uid and gid to what user set ****"
+echo "**** update uid and gid to ${PUID}:${PGID} ****"
 groupmod -o -g "$PGID" junv
 usermod -o -u "$PUID" junv
 

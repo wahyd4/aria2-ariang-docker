@@ -36,6 +36,7 @@ File Browser
   * Aria2 (SSL support)
   * AriaNg
   * Auto HTTPS （Let's Encrypt）
+  * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth
   * File indexing and video playing ([File Browser](https://filebrowser.xyz/))
   * Add support for ARM CPUs, please choose correct [docker image TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
@@ -64,9 +65,12 @@ File Browser
   docker run -d --name ariang \
   -p 80:80 \
   -p 443:443 \
+  -e PUID=1000 \
+  -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
   -e DOMAIN=https://example.com \
+  -e ARIA2_SSL=false \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=pwd \
   -v /yourdata:/data \
@@ -80,7 +84,9 @@ File Browser
 
   * ENABLE_AUTH whether to enable Basic auth
   * ARIA2_USER Basic Auth username
-  * ARIA2_PWD Basic Auth
+  * ARIA2_PWD Basic Auth password
+  * PUID Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`
+  * PGID Bind Linux GID into container, default GID is 1000
   * RPC_SECRET The Aria2 RPC secret token
   * DOMAIN The domain you'd like to bind, when domain is a `https://` thing, then auto SSL feature will be enabled
 

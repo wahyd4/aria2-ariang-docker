@@ -4,12 +4,12 @@ LABEL AUTHOR=Junv<wahyd4@gmail.com>
 
 WORKDIR /app
 
-ENV RPC_SECRET=Hello
+ENV RPC_SECRET=""
 ENV ENABLE_AUTH=false
 ENV DOMAIN=0.0.0.0:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
-ENV SSL=false
+ENV ARIA2_SSL=false
 
 RUN apk update \
   && apk add wget bash curl openrc gnupg aria2 tar --no-cache
