@@ -5,6 +5,7 @@
 
   proxy /jsonrpc localhost:6800 {
     transparent
+    websocket
   }
 
   gzip
