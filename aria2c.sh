@@ -1,6 +1,6 @@
 #! /bin/bash -eu
 
-if [ "$SSL" = "true" ]; then
+if [ "$ARIA2_SSL" = "true" ]; then
 echo "Start aria2 with secure config"
 
 /usr/bin/aria2c --conf-path="/app/conf/aria2.conf" \

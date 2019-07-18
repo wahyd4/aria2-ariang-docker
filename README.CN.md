@@ -13,6 +13,7 @@ Aria2 + AriaNg
 - [安装于运行](#安装于运行)
   - [快速运行](#快速运行)
   - [开启所有功能](#开启所有功能)
+  - [使用docker-compose 运行](#使用docker-compose-运行)
   - [支持的 Docker 环境变量](#支持的-Docker-环境变量)
   - [支持的 Docker volume 属性](#支持的-Docker-volume-属性)
 - [自动 SSL](#自动-SSL)
@@ -32,6 +33,7 @@ File Browser
   * Aria2 (SSL 支持)
   * AriaNg 通过 UI 来操作，下载文件
   * 自动 HTTPS （Let's Encrypt）
+  * 支持绑定自定义用户ID，可以主机上的非`root`用户，也可以管理下载的文件
   * Basic Auth 用户认证
   * 文件管理和视频播放 ([File Browser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
   * 支持ARM CPU 架构，因此可以在树莓派中运行，请下载对应的[ARM TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags) 版本, `arm32`或`arm64`
@@ -58,9 +60,12 @@ File Browser
   docker run -d --name ariang \
   -p 80:80 \
   -p 443:443 \
+  -e PUID=1000 \
+  -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
   -e DOMAIN=https://example.com \
+  -e ARIA2_SSL=false \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=pwd \
   -v /yourdata:/data \
@@ -69,12 +74,32 @@ File Browser
   -v <to your aria2.conf>:/app/conf/aria2.conf \
   wahyd4/aria2-ui
 ```
+### 使用docker-compose 运行
+
+如果你不想记住那些命令行，你也可以使用docker-compose来将配置放在`docker-compose.yaml`文件中
+```yaml
+version: "3.5"
+services:
+  aria2-ui:
+    restart: unless-stopped
+    image: wahyd4/aria2-ui:latest
+    environment:
+      - ENABLE_AUTH=true
+      - ARIA2_USER=hello
+      - ARIA2_PWD=world
+      - DOMAIN=toozhao.com
+    volumes:
+      - ./data:/data
+```
+然后使用 `docker-compose up -d` 运行即可
 
 ### 支持的 Docker 环境变量
 
-  * ENABLE_AUTH 启用 Basic auth 用户认证
+  * ENABLE_AUTH 启用 Basic auth(网页简单认证) 用户认证
   * ARIA2_USER Basic Auth 用户认证用户名
   * ARIA2_PWD Basic Auth 密码
+  * PUID 需要绑定主机的Linux用户ID，可以通过`cat /etc/passwd` 查看用户列表， 默认UID 是`1000`
+  * PGID 需要绑定的主机的Linux 用户组ID，默认GID 是`1000`
   * RPC_SECRET Aria2 RPC 加密 token
   * DOMAIN 绑定的域名, 当绑定的域名为`HTTPS`时，即为启用`HTTPS`， 例： `DOMAIN=https://toozhao.com`
 
@@ -109,4 +134,4 @@ docker build -t aria2-ui .
 
 ## 常见问题
   1.当你以非其他`80` 端口或以启用了HTTPS`443`端口运行程序时，会出现`Aria2 状态 未连接`的错误，这是因为在最新版本里面，我们去掉aria2的独立6800端口，转而使用和网站同一个端口。因为你需要渠道 `AriaNg设置` -> 页面顶端的 `RPC`页面，将你的Aria2 RPC 地址中的端口从`80`改成你使用的正确端口。因为 AriaNg 仅仅将设置保存在浏览器中，因为当你使用不同的浏览器，或者将浏览器清除缓存后，你都需要重新设置一次。
-  2. 下载的BT或者磁力完全没有速度怎么办？ 建议先下载一个热门的BT种子文件，而不是磁力链接。这样可以帮助缓存DHT文件，渐渐地，速度就会起来了。比如试试下载树莓派操作系统的BT种子？[前往下载](https://www.raspberrypi.org/downloads/raspbian/)
+  1. 下载的BT或者磁力完全没有速度怎么办？ 建议先下载一个热门的BT种子文件，而不是磁力链接。这样可以帮助缓存DHT文件，渐渐地，速度就会起来了。比如试试下载树莓派操作系统的BT种子？[前往下载](https://www.raspberrypi.org/downloads/raspbian/)
