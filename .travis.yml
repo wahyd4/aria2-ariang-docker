@@ -11,6 +11,7 @@ jobs:
   include:
     - stage: "build and push docker image"
       script: |
+        #! /bin/bash -eu
         docker --version
         docker build -t wahyd4/aria2-ui:3.0.${TRAVIS_BUILD_NUMBER} .
         if [ "${TRAVIS_BRANCH}" = "master" ]; then
