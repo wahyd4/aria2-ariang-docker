@@ -13,6 +13,7 @@ Aria2 + AriaNg
 - [安装于运行](#安装于运行)
   - [快速运行](#快速运行)
   - [开启所有功能](#开启所有功能)
+  - [使用docker-compose 运行](#使用docker-compose-运行)
   - [支持的 Docker 环境变量](#支持的-Docker-环境变量)
   - [支持的 Docker volume 属性](#支持的-Docker-volume-属性)
 - [自动 SSL](#自动-SSL)
@@ -73,6 +74,24 @@ File Browser
   -v <to your aria2.conf>:/app/conf/aria2.conf \
   wahyd4/aria2-ui
 ```
+### 使用docker-compose 运行
+
+如果你不想记住那些命令行，你也可以使用docker-compose来将配置放在`docker-compose.yaml`文件中
+```yaml
+version: "3.5"
+services:
+  aria2-ui:
+    restart: unless-stopped
+    image: wahyd4/aria2-ui:latest
+    environment:
+      - ENABLE_AUTH=true
+      - ARIA2_USER=hello
+      - ARIA2_PWD=world
+      - DOMAIN=toozhao.com
+    volumes:
+      - ./data:/data
+```
+然后使用 `docker-compose up -d` 运行即可
 
 ### 支持的 Docker 环境变量
 
