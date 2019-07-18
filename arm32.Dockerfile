@@ -26,7 +26,7 @@ COPY Caddyfile SecureCaddyfile /usr/local/caddy/
 # AriaNg
 RUN mkdir /usr/local/www/aria2/Download && cd /usr/local/www/aria2 \
  && chmod +rw /app/conf/aria2.session \
- && version=1.1.0 \
+ && version=1.1.1 \
  && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${version}/AriaNg-${version}.zip && unzip AriaNg-${version}.zip && rm -rf AriaNg-${version}.zip \
  && chmod -R 755 /usr/local/www/aria2 \
  && sed -i 's/6800/80/g' /usr/local/www/aria2/js/aria-ng*.js
