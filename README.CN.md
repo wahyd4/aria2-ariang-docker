@@ -23,7 +23,7 @@ Aria2 + AriaNg
 - [常见问题](#常见问题)
 
 AriaNG
-![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.png)
+![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.jpg)
 
 File Browser
 ![File Browser](https://github.com/wahyd4/aria2-ariang-docker/raw/master/filemanager.png)
