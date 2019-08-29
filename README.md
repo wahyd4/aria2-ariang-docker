@@ -27,7 +27,7 @@ Besides, it's pretty small and ARM CPU supported which means you can run it on R
 Last but not least, SSL enabling so easy!
 
 AriaNG
-![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.png)
+![Screenshot](https://github.com/wahyd4/aria2-ariang-x-docker-compose/raw/master/images/ariang.jpg)
 
 File Browser
 ![File Browser](https://github.com/wahyd4/aria2-ariang-docker/raw/master/filemanager.png)
