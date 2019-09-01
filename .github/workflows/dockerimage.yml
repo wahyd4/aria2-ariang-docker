@@ -14,11 +14,12 @@ jobs:
       env: # Or as an environment variable
         DOCKER_USER: ${{ secrets.DOCKER_HUB_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
-      run: docker --version && docker build -t wahyd4/aria2-ui:3.0.$(date +%s) .
+        IMAGE_VERSION: 3.0.$(date +%s)
+      run: docker --version && docker build -t wahyd4/aria2-ui:$IMAGE_VERSION .
     - name: Push Docker image
       if: success() && github.event_name == 'push' && contains(github.ref,'master')
       run: |
-        docker login -u $DOCKER_USER -p $DOCKER_PASS
-        docker tag wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
-        docker push wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER
+        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+        docker tag wahyd4/aria2-ui:$IMAGE_VERSION wahyd4/aria2-ui:latest
+        docker push wahyd4/aria2-ui:$IMAGE_VERSION
         docker push wahyd4/aria2-ui:latest
