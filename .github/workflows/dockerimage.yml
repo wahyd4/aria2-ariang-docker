@@ -21,7 +21,7 @@ jobs:
           branches:
             - master
       run: |
-      docker login -u $DOCKER_USER -p $DOCKER_PASS
-      docker tag wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
-      docker push wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER
-      docker push wahyd4/aria2-ui:latest
+        docker login -u $DOCKER_USER -p $DOCKER_PASS
+        docker tag wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
+        docker push wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER
+        docker push wahyd4/aria2-ui:latest
