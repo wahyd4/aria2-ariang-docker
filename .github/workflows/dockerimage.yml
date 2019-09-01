@@ -16,10 +16,7 @@ jobs:
         DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
       run: docker --version && docker build -t wahyd4/aria2-ui:3.0.$(date +%s) .
     - name: Push Docker image
-      on:
-        push:
-          branches:
-            - master
+      if: github.event_name == 'push' && github.ref == 'master'
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASS
         docker tag wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
