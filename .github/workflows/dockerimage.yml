@@ -14,8 +14,8 @@ jobs:
       env: # Or as an environment variable
         DOCKER_USER: ${{ secrets.DOCKER_HUB_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
-      run: docker --version && docker build -t wahyd4/aria2-ui:3.0.$(date +%s) .
-    - name: Push Docker image $(github.event_name)==$(github.ref)
+      run: docker --version && echo "$(github.event_name) $(github.ref)" && docker build -t wahyd4/aria2-ui:3.0.$(date +%s) .
+    - name: Push Docker image
       if: github.event_name == 'push' && github.ref == 'master'
       run: |
         docker login -u $DOCKER_USER -p $DOCKER_PASS
