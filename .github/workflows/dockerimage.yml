@@ -5,10 +5,23 @@ on: [push]
 jobs:
 
   build:
- 
+
     runs-on: ubuntu-latest
- 
+
     steps:
     - uses: actions/checkout@v1
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag aria-ui:$(date +%s)
+      env: # Or as an environment variable
+        DOCKER_USER: ${{ secrets.DOCKER_HUB_USER }}
+        DOCKER_PASS: ${{ secrets.DOCKER_HUB_PASS }}
+      run: docker --version && docker build -t wahyd4/aria2-ui:3.0.$(date +%s) .
+    - name: Push Docker image
+      on:
+        push:
+          branches:
+            - master
+      run: |
+      docker login -u $DOCKER_USER -p $DOCKER_PASS
+      docker tag wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER wahyd4/aria2-ui:latest
+      docker push wahyd4/aria2-ui:3.0.$TRAVIS_BUILD_NUMBER
+      docker push wahyd4/aria2-ui:latest
