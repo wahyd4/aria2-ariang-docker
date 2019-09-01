@@ -1,4 +1,4 @@
-name: Build and Publish main Docker Image
+name: Docker Image CI
 on: [push]
 jobs:
   build:
