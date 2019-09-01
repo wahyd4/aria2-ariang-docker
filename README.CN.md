@@ -71,7 +71,7 @@ File Browser
   -v /yourdata:/data \
   -v /app/a.db:/app/filebrowser.db \
   -v /yoursslkeys/:/app/conf/key \
-  -v <to your aria2.conf>:/app/conf/aria2.conf \
+  -v <the folder of aria2.conf and aria2.session>:/app/conf \
   wahyd4/aria2-ui
 ```
 ### 使用docker-compose 运行
@@ -107,7 +107,7 @@ services:
 ### 支持的 Docker volume 属性
   * `/data` 用来放置所有下载的文件的目录
   * `/app/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`
-  * `/app/conf/aria2.conf` 为 aria2 的配置文件，你可以映射自己的配置文件。
+  * `/app/conf` 该目录下可以放置你的自定义`aria2.conf`配置文件，`aria2.session`，且必须包含这两个文件。第一次使用`aria2.session`时，创建一个空文件即可，该文件会包含aria2当前的下载列表，这样即使容器被销毁也不用担心文件列表丢失了。你也可以直接拷贝当前项目下`conf`目录中的两个文件并使用。
   * `/app/filebrowser.db` File Browser 的内嵌数据库，升级Docker 镜像也不用担心之前的设置丢失。请确保在宿主机先创建一个空文件再使用。
 
 ## 自动 SSL
