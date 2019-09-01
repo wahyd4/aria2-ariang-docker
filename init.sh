@@ -5,7 +5,6 @@ groupmod -o -g "$PGID" junv
 usermod -o -u "$PUID" junv
 
 chown -R junv:junv \
-         /data \
          /app \
          /usr/local \
          /var/log
