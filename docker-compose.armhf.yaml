@@ -1,0 +1,20 @@
+version: "3.5"
+services:
+  aria2-ui:
+    restart: unless-stopped
+    image: wahyd4/aria2-ui:arm32
+    container_name: RpiAria2
+    ports:
+      - "80:80"
+      - "443:443"
+      - "6800:6800"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - ENABLE_AUTH=true
+      - ARIA2_USER=pi
+      - ARIA2_PWD=raspberry
+      - DOMAIN=:80
+    volumes:
+      - /home/pi/data:/data # /home/pi/data owner must be user pi,chown pi:pi /home/pi/data
+      - ./app/filebrowser.db:/database.db
