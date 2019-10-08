@@ -3,7 +3,7 @@ services:
   aria2-ui:
     restart: unless-stopped
     image: wahyd4/aria2-ui:arm32
-    container_name: RpiAria2
+    container_name: rpi_aria2_armhf
     ports:
       - "80:80"
       - "443:443"
