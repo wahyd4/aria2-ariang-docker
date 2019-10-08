@@ -12,6 +12,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
   - [Quick run](#quick-run)
   - [Full features run](#full-features-run)
   - [Run with docker-compose](#run-with-docker-compose)
+  - [Docker-compose example](#docker-compose-example)
   - [Supported Environment Variables](#supported-environment-variables)
   - [Supported Volumes](#supported-volumes)
 - [Auto SSL enabling](#auto-ssl-enabling)
@@ -98,6 +99,35 @@ services:
       - ./data:/data
 ```
 Then just run `docker-compose up -d`, that's it!
+
+### Docker-compose example
+
+In order to make the project easier to understand, I created an example [docker-compose.armhf.yaml](/docker-compose.armhf.yaml)
+
+   `PGID=1000`,`PUID=1000` is for RaspberyPi system user pi
+   
+   when create `/home/pi/data`,cmd we use(you can change pi as what you like,but it must the use name of Raspbian system)
+   ```
+   mkdir /home/pi/data
+   chown pi:pi -R /home/pi/data
+   ```
+   
+  `database.db` corresponds to the `./app/filebrowser.db` file of the Raspbian system.
+   how to create `./app/filebrowser.db`
+   ```
+   mkdir app
+   touch app/filebrowser.db
+   chown pi:pi app/filebrowser.db
+   ```
+   Bring up raspberry aria2ng just use cmd:
+   ```
+   docker-compose -f docker-compose.armhf.yaml up -d
+   ```
+   How to login
+   ```
+   username = pi
+   password = raspberry
+   ```
 
 ### Supported Environment Variables
 
