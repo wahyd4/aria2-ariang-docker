@@ -93,6 +93,29 @@ services:
 ```
 然后使用 `docker-compose up -d` 运行即可
 
+为了能让例子更具体，我建立了一个实例[docker-compose.armhf.yaml](/docker-compose.armhf.yaml)
+
+   其中`PGID=1000`,`PUID=1000`指定了用户组和用户ID，都为1000，这个是在树莓派系统里面，用户pi的属性
+   
+   在建立`/home/pi/data`的时候，需要用到如下命令,其中的用户pi,可以是你自己创建的其它用户名（例如abc)
+   ```
+   mkdir /home/pi/data
+   chown pi:pi -R /home/pi/data
+   ```
+   `database.db`这个是文件管理器需要用到的数据库，用于存放数据，对应当前目录下面的`./app/filebrowser.db`
+   创建./app/filebrowser.db方法比较简单，直接一条touch命令就可以了
+   ```
+   mkdir app
+   touch app/filebrowser.db
+   chown pi:pi app/filebrowser.db
+   ```
+   启动树莓派的实例，需要用到如下命令
+   ```
+   docker-compose -f docker-compose.armhf.yaml up -d
+   ```
+   登陆树莓派Aria2的用户为`pi`,密码`raspberry`
+   
+
 ### 支持的 Docker 环境变量
 
   * ENABLE_AUTH 启用 Basic auth(网页简单认证) 用户认证
