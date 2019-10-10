@@ -7,7 +7,8 @@ usermod -o -u "$PUID" junv
 chown -R junv:junv \
          /app \
          /usr/local \
-         /var/log
+         /var/log \
+         /data
 
 chmod +x /app/caddy.sh \
          /app/aria2c.sh
