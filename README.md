@@ -140,3 +140,4 @@ docker build -t aria2-ui .
 ## FAQ
   1. When you running the docker image with non `80` port or you have HTTPS enabled, you will meet the error says `Aria2 Status Disconnected`, then you will need to go to `AriaNg Settings` -> RPC (at the top of the page) to modify the port value in `Aria2 RPC Address` field. Due to AriaNg store all configurations in local browser, so you need to do this per browser.
   2. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links.
+  3. If you see any errors related to `setcap` which probably means the Linux you are running doesn't support running this application with `non-root` user. So please specify the `PUID` and `PGID` to `0` explicitly to use `root` user to run it.
