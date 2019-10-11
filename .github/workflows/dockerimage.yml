@@ -1,0 +1,14 @@
+name: Docker Image CI
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: Build and Publish main docker image to Registry
+      uses: elgohr/Publish-Docker-Github-Action@master
+      with:
+        name: wahyd4/aria2-ui
+        username: ${{ secrets.DOCKER_HUB_USER }}
+        password: ${{ secrets.DOCKER_HUB_PASS }}
+        snapshot: true
