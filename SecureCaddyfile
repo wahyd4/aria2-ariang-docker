@@ -1,5 +1,5 @@
 {$DOMAIN} {
-  proxy / localhost:8080 {
+  proxy / file-manager {
       transparent
   }
 
