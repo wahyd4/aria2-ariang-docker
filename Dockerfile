@@ -17,12 +17,7 @@ RUN adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar --no-cache \
   && curl https://getcaddy.com | bash -s personal \
-  && filebrowser_version=v2.0.12 \
   && platform=linux-amd64 \
-  && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${platform}-filebrowser.tar.gz \
-  && tar -zxvf ${platform}-filebrowser.tar.gz \
-  && rm -rf ${platform}-filebrowser.tar.gz \
-  && rm LICENSE README.md \
   && wget -N https://bin.equinox.io/c/ekMN3bCZFUn/forego-stable-${platform}.tgz \
   && tar -zxvf forego-stable-${platform}.tgz \
   && rm -rf forego-stable-${platform}.tgz \
