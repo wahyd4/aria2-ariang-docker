@@ -1,4 +1,4 @@
-FROM arm64v8/alpine:3.8
+FROM arm64v8/alpine:latest
 
 LABEL AUTHOR=Junv<wahyd4@gmail.com>
 
@@ -37,7 +37,7 @@ ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 RUN mkdir /usr/local/www/aria2/Download \
   && cd /usr/local/www/aria2 \
   && chmod +rw /app/conf/aria2.session \
-  && version=1.1.1 \
+  && version=1.1.4 \
   && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${version}/AriaNg-${version}.zip \
   && unzip AriaNg-${version}.zip \
   && rm -rf AriaNg-${version}.zip \
