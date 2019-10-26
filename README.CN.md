@@ -89,7 +89,7 @@ services:
       - ENABLE_AUTH=true
       - ARIA2_USER=hello
       - ARIA2_PWD=world
-      - DOMAIN=toozhao.com
+      - DOMAIN=http://toozhao.com
     volumes:
       - ./data:/data
 ```
