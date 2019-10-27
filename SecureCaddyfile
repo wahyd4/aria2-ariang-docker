@@ -1,9 +1,9 @@
 {$DOMAIN} {
-  proxy / localhost:8080 {
+  proxy / 127.0.0.1:8080 {
       transparent
   }
 
-  proxy /jsonrpc localhost:6800 {
+  proxy /jsonrpc 127.0.0.1:6800 {
     transparent
     websocket
   }
