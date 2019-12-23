@@ -10,6 +10,7 @@ ENV DOMAIN=0.0.0.0:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 ENV ARIA2_SSL=false
+ENV ARIA2_OUTSIDE_PORT=80
 ENV PUID=1000
 ENV PGID=1000
 
@@ -42,8 +43,7 @@ RUN mkdir /usr/local/www/aria2/Download \
   && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${version}/AriaNg-${version}.zip \
   && unzip AriaNg-${version}.zip \
   && rm -rf AriaNg-${version}.zip \
-  && chmod -R 755 /usr/local/www/aria2 \
-  && sed -i 's/6800/80/g' /usr/local/www/aria2/js/aria-ng*.js
+  && chmod -R 755 /usr/local/www/aria2
 
 #The folder to store ssl keys
 VOLUME /app/conf/key

@@ -1,5 +1,7 @@
 #! /bin/bash -eu
 
+sed -i 's/6800/'"${ARIA2_OUTSIDE_PORT}"'/g' /usr/local/www/aria2/js/aria-ng*.js
+
 if [ "$ARIA2_SSL" = "true" ]; then
 echo "Start aria2 with secure config"
 
