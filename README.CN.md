@@ -70,7 +70,7 @@ File Browser
   -e ARIA2_SSL=false \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=pwd \
-  -e ARIA2_OUTSIDE_PORT=443 \
+  -e ARIA2_EXTERNAL_PORT=443 \
   -v /yourdata:/data \
   -v /app/a.db:/app/filebrowser.db \
   -v /yoursslkeys/:/app/conf/key \
@@ -101,7 +101,7 @@ services:
   * ENABLE_AUTH 启用 Basic auth(网页简单认证) 用户认证
   * ARIA2_USER Basic Auth 用户认证用户名
   * ARIA2_PWD Basic Auth 密码
-  * ARIA2_OUTSIDE_PORT 从外部可以访问到的ARIA2端口，默认为http的`80`
+  * ARIA2_EXTERNAL_PORT 从外部可以访问到的 Aria2 端口，默认为 HTTP 的`80`
   * PUID 需要绑定主机的Linux用户ID，可以通过`cat /etc/passwd` 查看用户列表， 默认UID 是`1000`
   * PGID 需要绑定的主机的Linux 用户组ID，默认GID 是`1000`
   * RPC_SECRET Aria2 RPC 加密 token
@@ -137,6 +137,6 @@ docker build -t aria2-ui .
   请参考 <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
 
 ## 常见问题
-  1. 当你以非其他`80` 端口或以启用了HTTPS`443`端口运行程序时，会出现`Aria2 状态 未连接`的错误，这是因为在最新版本里面，我们去掉aria2的独立6800端口，转而使用和网站同一个端口。你可以设置`ARIA2_OUTSIDE_PORT`后重建你的容器。
+  1. 当你以非其他`80` 端口或以启用了HTTPS`443`端口运行程序时，会出现`Aria2 状态 未连接`的错误，这是因为在最新版本里面，我们去掉aria2的独立6800端口，转而使用和网站同一个端口。你可以设置`ARIA2_EXTERNAL_PORT`后重建你的容器。
   2. 下载的BT或者磁力完全没有速度怎么办？ 建议先下载一个热门的BT种子文件，而不是磁力链接。这样可以帮助缓存DHT文件，渐渐地，速度就会起来了。比如试试下载树莓派操作系统的BT种子？[前往下载](https://www.raspberrypi.org/downloads/raspbian/)
   3. 如果你遇到了和 `setcap` 相关的错误，很大程度说明你说运行的Linux不支持使用非`root`用户来运行本Docker 镜像，因此请显式地设置环境变量`PUID`  `PGID` 为 `0` ，也就是使用`root` 来运行
