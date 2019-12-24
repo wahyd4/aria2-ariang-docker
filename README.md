@@ -76,7 +76,7 @@ File Browser
   -e ARIA2_SSL=false \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=pwd \
-  -e ARIA2_OUTSIDE_PORT=443 \
+  -e ARIA2_EXTERNAL_PORT=443 \
   -v /yourdata:/data \
   -v /app/a.db:/app/filebrowser.db \
   -v /yoursslkeys/:/app/conf/key \
@@ -97,6 +97,8 @@ services:
       - ARIA2_USER=hello
       - ARIA2_PWD=world
       - DOMAIN=http://toozhao.com
+    ports:
+      - "80:80"
     volumes:
       - ./data:/data
 ```
@@ -107,7 +109,7 @@ Then just run `docker-compose up -d`, that's it!
   * ENABLE_AUTH whether to enable Basic auth
   * ARIA2_USER Basic Auth username
   * ARIA2_PWD Basic Auth password
-  * ARIA2_OUTSIDE_PORT The Aria2 port which accessible from outside
+  * ARIA2_EXTERNAL_PORT The Aria2 port which exposed to public to access to
   * PUID Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`
   * PGID Bind Linux GID into container, default GID is 1000
   * RPC_SECRET The Aria2 RPC secret token
@@ -142,6 +144,6 @@ docker build -t aria2-ui .
   Please refer <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
 
 ## FAQ
-  1. When you running the docker image with non `80` port or you have HTTPS enabled, you will meet the error says `Aria2 Status Disconnected`, then you will need to set `ARIA2_OUTSIDE_PORT` and recreate your container.
+  1. When you running the docker image with non `80` port or you have HTTPS enabled, you will meet the error says `Aria2 Status Disconnected`, then you will need to set `ARIA2_EXTERNAL_PORT` and recreate your container.
   2. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links.
   3. If you see any errors related to `setcap` which probably means the Linux you are running doesn't support running this application with `non-root` user. So please specify the `PUID` and `PGID` to `0` explicitly to use `root` user to run it.
