@@ -104,6 +104,8 @@ services:
 ```
 Then just run `docker-compose up -d`, that's it!
 
+> Warning: if you don't mount `/app/conf`, whenever the container restart, you'll lose your downloading progress.
+
 ### Supported Environment Variables
 
   * ENABLE_AUTH whether to enable Basic auth
