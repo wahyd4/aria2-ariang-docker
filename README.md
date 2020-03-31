@@ -119,7 +119,7 @@ Then just run `docker-compose up -d`, that's it!
 ### Supported Volumes
   * `/data` The folder which contains all the files you download.
   * `/app/conf/key` The folder which stored Aria2 SSL `certificate` and `key` file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`
-  * `/app/conf` The Aria2 configuration and file session folder. Make sure you have `aria2.conf` and `aria2.session` file. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project.
+  * `/app/conf` The Aria2 configuration and file session folder. Make sure you have `aria2.conf` and `aria2.session` file. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. **Warning: if you don't mount `/app/conf`, whenever the container restart, you'll lose your downloading progress.**
   * `/app/filebrowser.db` File Browser settings database, make sure you make a empty file first on your host.
 
 ## Auto SSL enabling
