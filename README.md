@@ -50,6 +50,8 @@ File Browser
 * wahyd4/aria2-ui:arm32
 * wahyd4/aria2-ui:arm64
 
+> ‼️ If you are running this docker image on Raspberry Pi，please use tag `arm32`
+
 ## How to run
 
 ### Quick run

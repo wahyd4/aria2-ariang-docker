@@ -46,6 +46,8 @@ File Browser
 * wahyd4/aria2-ui:arm32
 * wahyd4/aria2-ui:arm64
 
+> ‼️ 如果你在莓派上运行本程序，请使用 `arm32` 版本
+
 ## 安装于运行
 
 ### 快速运行
