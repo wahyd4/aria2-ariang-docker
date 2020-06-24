@@ -13,6 +13,7 @@ ENV ARIA2_SSL=false
 ENV ARIA2_EXTERNAL_PORT=80
 ENV PUID=1000
 ENV PGID=1000
+ENV CADDYPATH=/app
 
 RUN adduser -D -u 1000 junv \
   && apk update \

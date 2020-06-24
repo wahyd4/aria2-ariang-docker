@@ -13,12 +13,13 @@ ENV ARIA2_SSL=false
 ENV ARIA2_EXTERNAL_PORT=80
 ENV PUID=1000
 ENV PGID=1000
+ENV CADDYPATH=/app
 
 RUN adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar --no-cache \
   && curl https://getcaddy.com | bash -s personal \
-  && filebrowser_version=v2.0.16 \
+  && filebrowser_version=v2.2.0 \
   && platform=linux-arm64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${platform}-filebrowser.tar.gz \
   && tar -zxvf ${platform}-filebrowser.tar.gz \
@@ -38,7 +39,7 @@ ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 RUN mkdir /usr/local/www/aria2/Download \
   && cd /usr/local/www/aria2 \
   && chmod +rw /app/conf/aria2.session \
-  && version=1.1.4 \
+  && version=1.1.6 \
   && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${version}/AriaNg-${version}.zip \
   && unzip AriaNg-${version}.zip \
   && rm -rf AriaNg-${version}.zip \
