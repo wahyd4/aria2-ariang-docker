@@ -23,12 +23,12 @@ RUN adduser -D -u 1000 junv \
   && tar -zxvf caddy_${caddy_tag}_linux_amd64.tar.gz \
   && mv caddy /usr/local/bin/ \
   && rm -rf caddy_${caddy_tag}_linux_amd64.tar.gz \
-  && filebrowser_version=v2.2.0 \
+  && filebrowser_version=v2.5.0 \
   && platform=linux-amd64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${platform}-filebrowser.tar.gz \
   && tar -zxvf ${platform}-filebrowser.tar.gz \
   && rm -rf ${platform}-filebrowser.tar.gz \
-  && rm LICENSE README.md \
+  && rm LICENSE README.md CHANGELOG.md \
   && wget -N https://bin.equinox.io/c/ekMN3bCZFUn/forego-stable-${platform}.tgz \
   && tar -zxvf forego-stable-${platform}.tgz \
   && rm -rf forego-stable-${platform}.tgz \
