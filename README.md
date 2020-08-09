@@ -7,6 +7,8 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
 [![Page Views Count](https://badge.home.toozhao.com/svg/aria2-ariang-docker)](https://badge.home.toozhao.com/svg/aria2-ariang-docker "Page Views Count")
 
+**If you like this, please consider support me / 如果喜欢，请考虑打赏，谢谢！**
+
 <img src="https://raw.githubusercontent.com/wahyd4/work-in-australia/766592ac6318027d7b3c334d8c50ca80818eeff8/wepay.jpg" alt="buy me a drink" width="120"/>
 
 - [Features](#features)
