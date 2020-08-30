@@ -7,7 +7,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
 <!-- [![Page Views Count](https://badge.home.toozhao.com/svg/aria2-ariang-docker)](https://badge.home.toozhao.com/svg/aria2-ariang-docker "Page Views Count") -->
 
-<a href="https://badges.toozhao.com" alt="Generate your badge to count for any page views at https://badges.toozhao.com"><img src="https://badge.home.toozhao.com/svg/aria2-ariang-docker" width=500/></a>
+<a href="https://badges.toozhao.com" title="Generate your badge to count for any page views at https://badges.toozhao.com"><img src="https://badge.home.toozhao.com/svg/aria2-ariang-docker" width=500/></a>
 
 
 **If you like this, please consider support me / 如果喜欢，请考虑打赏，谢谢！**
