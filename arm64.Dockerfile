@@ -18,7 +18,11 @@ ENV CADDYPATH=/app
 RUN adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar --no-cache \
-  && curl https://getcaddy.com | bash -s personal \
+  && caddy_tag=v1.0.4 \
+  && wget -N https://github.com/caddyserver/caddy/releases/download/${caddy_tag}/caddy_${caddy_tag}_linux_arm64.tar.gz \
+  && tar -zxvf caddy_*.tar.gz \
+  && mv caddy /usr/local/bin/ \
+  && rm -rf caddy_*.tar.gz \
   && filebrowser_version=v2.2.0 \
   && platform=linux-arm64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${platform}-filebrowser.tar.gz \
@@ -29,9 +33,18 @@ RUN adduser -D -u 1000 junv \
   && tar -zxvf forego-stable-linux-arm64.tgz \
   && rm -rf forego-stable-linux-arm64.tgz \
   && mkdir -p /usr/local/www \
-  && mkdir -p /usr/local/www/aria2
+  && mkdir -p /usr/local/www/aria2 \
+  && rm -rf init /app/*.txt \
+  && curl -O https://downloads.rclone.org/v1.53.0/rclone-v1.53.0-linux-arm.zip \
+  && unzip rclone-*.zip \
+  && cd rclone-* \
+  && cp rclone /usr/local/bin/ \
+  && chown junv:junv /usr/local/bin/rclone \
+  && chmod 755 /usr/local/bin/rclone \
+  && rm /app/rclone-*.zip \
+  && rm -rf /app/rclone-*
 
-ADD aria2c.sh caddy.sh Procfile init.sh start.sh /app/
+ADD aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
 ADD conf /app/conf
 ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 
