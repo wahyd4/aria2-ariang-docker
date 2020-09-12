@@ -34,9 +34,17 @@ RUN adduser -D -u 1000 junv \
   && rm -rf forego-stable-${platform}.tgz \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2 \
-  && rm -rf init /app/*.txt
+  && rm -rf init /app/*.txt \
+  && curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip \
+  && unzip rclone-current-linux-amd64.zip \
+  && cd rclone-*-linux-amd64 \
+  && cp rclone /usr/local/bin/ \
+  && chown junv:junv /usr/local/bin/rclone \
+  && chmod 755 /usr/local/bin/rclone \
+  && rm /app/rclone-current-linux-amd64.zip \
+  && rm -rf /app/rclone-*-linux-amd64
 
-ADD aria2c.sh caddy.sh Procfile init.sh start.sh /app/
+ADD aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
 ADD conf /app/conf
 ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 

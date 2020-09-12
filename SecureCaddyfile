@@ -8,6 +8,10 @@
     websocket
   }
 
+  proxy /rclone 127.0.0.1:5572 {
+    transparent
+  }
+
   gzip
   log stdout
   errors stdout
@@ -25,4 +29,17 @@
   errors stdout
 
   basicauth / {$ARIA2_USER} {$ARIA2_PWD}
+}
+
+{$DOMAIN}/rclone {
+  redir / /rclone/ 301
+}
+
+{$DOMAIN}/rclone/ {
+  proxy / 127.0.0.1:5572/ {
+    transparent
+  }
+
+  log stdout
+  errors stderr
 }

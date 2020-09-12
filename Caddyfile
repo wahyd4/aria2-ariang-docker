@@ -24,3 +24,16 @@
   log stdout
   errors stdout
 }
+
+{$DOMAIN}/rclone {
+  redir / /rclone/ 301
+}
+
+{$DOMAIN}/rclone/ {
+  proxy / 127.0.0.1:5572/ {
+    transparent
+  }
+
+  log stdout
+  errors stderr
+}

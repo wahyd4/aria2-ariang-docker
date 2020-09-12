@@ -11,6 +11,7 @@ chown -R junv:junv \
          /data
 
 chmod +x /app/caddy.sh \
+         /app/rclone.sh \
          /app/aria2c.sh
 
 echo "**** give caddy permissions to use low ports ****"
