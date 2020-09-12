@@ -59,6 +59,7 @@ File Browser
 
 * Aria2: <http://yourip/ui/>
 * FileManger: <http://yourip>
+* Rclone: <http://yourip/rclone>
 * 请使用 admin/admin 进行登录, 在如果没有修改`ARIA2_USER`,`ARIA2_PWD`的情况下，请使用`user`/`password`登录`Rclone`
 ### 开启所有功能
 ```bash
