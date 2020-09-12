@@ -39,8 +39,9 @@ File Browser
 
 ## Features
 
-  * Aria2 (SSL support)
-  * AriaNg
+  * [Aria2 (SSL support)](https://aria2.github.io)
+  * [AriaNg](https://github.com/mayswind/AriaNg)
+  * [Rclone](https://rclone.org/)
   * Auto HTTPS （Let's Encrypt）
   * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth
@@ -65,7 +66,8 @@ File Browser
 
 * Aria2: <http://yourip/ui/>
 * FileManger: <http://yourip>
-* Please use `admin`/`admin` as username and password to login for the first time.
+* Rclone: <http://yourip/rclone>
+* Please use `admin`/`admin` as username and password to login for the first time, and `user`/`password` to login `Rclone` if you don't change `ARIA2_USER` and `ARIA2_PWD`
 
 ### Full features run
 

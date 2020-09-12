@@ -38,7 +38,7 @@ RUN adduser -D -u 1000 junv \
   && rm -rf init /app/*.txt \
   && curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip \
   && unzip rclone-*.zip \
-  && cd rclone-* \
+  && cd rclone-*-linux-amd64 \
   && cp rclone /usr/local/bin/ \
   && chown junv:junv /usr/local/bin/rclone \
   && chmod 755 /usr/local/bin/rclone \
