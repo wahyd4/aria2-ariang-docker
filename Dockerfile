@@ -14,6 +14,7 @@ ENV ARIA2_EXTERNAL_PORT=80
 ENV PUID=1000
 ENV PGID=1000
 ENV CADDYPATH=/app
+ENV RCLONE_CONFIG=/app/conf/rclone.conf
 
 RUN adduser -D -u 1000 junv \
   && apk update \
@@ -34,9 +35,17 @@ RUN adduser -D -u 1000 junv \
   && rm -rf forego-stable-${platform}.tgz \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2 \
-  && rm -rf init /app/*.txt
+  && rm -rf init /app/*.txt \
+  && curl -O https://downloads.rclone.org/rclone-current-linux-amd64.zip \
+  && unzip rclone-*.zip \
+  && cd rclone-*-linux-amd64 \
+  && cp rclone /usr/local/bin/ \
+  && chown junv:junv /usr/local/bin/rclone \
+  && chmod 755 /usr/local/bin/rclone \
+  && rm /app/rclone-*.zip \
+  && rm -rf /app/rclone-*
 
-ADD aria2c.sh caddy.sh Procfile init.sh start.sh /app/
+ADD aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
 ADD conf /app/conf
 ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 

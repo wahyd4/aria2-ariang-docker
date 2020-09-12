@@ -39,8 +39,9 @@ File Browser
 
 ## Features
 
-  * Aria2 (SSL support)
-  * AriaNg
+  * [Aria2 (SSL support)](https://aria2.github.io)
+  * [AriaNg](https://github.com/mayswind/AriaNg)
+  * [Rclone](https://rclone.org/)
   * Auto HTTPS （Let's Encrypt）
   * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth
@@ -65,7 +66,8 @@ File Browser
 
 * Aria2: <http://yourip/ui/>
 * FileManger: <http://yourip>
-* Please use `admin`/`admin` as username and password to login for the first time.
+* Rclone: <http://yourip/rclone>
+* Please use `admin`/`admin` as username and password to login for the first time, and `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
 
 ### Full features run
 
@@ -84,8 +86,8 @@ File Browser
   -e ARIA2_EXTERNAL_PORT=443 \
   -v /yourdata:/data \
   -v /app/a.db:/app/filebrowser.db \
-  -v /yoursslkeys/:/app/conf/key \
-  -v <the folder of aria2.conf and aria2.session>:/app/conf \
+  -v /to_yoursslkeys/:/app/conf/key \
+  -v <conf files folder>:/app/conf \
   wahyd4/aria2-ui
 ```
 ### Run with docker-compose
@@ -112,8 +114,8 @@ Then just run `docker-compose up -d`, that's it!
 ### Supported Environment Variables
 
   * ENABLE_AUTH whether to enable Basic auth
-  * ARIA2_USER Basic Auth username
-  * ARIA2_PWD Basic Auth password
+  * ARIA2_USER Basic Auth username, Rclone GUI uses it as well.
+  * ARIA2_PWD Basic Auth password, Rclone GUI uses it as well.
   * ARIA2_EXTERNAL_PORT The Aria2 port which exposed to public to access to
   * PUID Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`
   * PGID Bind Linux GID into container, default GID is 1000
@@ -124,7 +126,12 @@ Then just run `docker-compose up -d`, that's it!
 ### Supported Volumes
   * `/data` The folder which contains all the files you download.
   * `/app/conf/key` The folder which stored Aria2 SSL `certificate` and `key` file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`
-  * `/app/conf` The Aria2 configuration and file session folder. Make sure you have `aria2.conf` and `aria2.session` file. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. **Warning: if you don't mount `/app/conf`, whenever the container restart, you'll lose your downloading progress.**
+  * `/app/conf` The Aria2 configuration and file session folder. Make sure you have `aria2.conf` and `aria2.session` file. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. Please put your `rclone.conf` in this folder as well if you'd mount it to Rclone. So all the config files supported in this folder are:
+    * aria2.conf
+    * aria2.session
+    * rclone.conf
+
+    **Warning: if you don't mount `/app/conf`, whenever the container restarts, you'll lose your downloading progress.**
   * `/app/filebrowser.db` File Browser settings database, make sure you make a empty file first on your host.
 
 ## Auto SSL enabling

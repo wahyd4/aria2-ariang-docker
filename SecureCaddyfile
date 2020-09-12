@@ -8,9 +8,12 @@
     websocket
   }
 
+  proxy /rclone 127.0.0.1:5572 {
+    transparent
+  }
+
   gzip
-  log stdout
-  errors stdout
+  errors stderr
 }
 
 {$DOMAIN}/ui {
@@ -21,8 +24,19 @@
   root /usr/local/www/aria2
   timeouts none
   gzip
-  log stdout
-  errors stdout
+  errors stderr
 
   basicauth / {$ARIA2_USER} {$ARIA2_PWD}
+}
+
+{$DOMAIN}/rclone {
+  redir / /rclone/ 301
+}
+
+{$DOMAIN}/rclone/ {
+  proxy / 127.0.0.1:5572/ {
+    transparent
+  }
+  gzip
+  errors stderr
 }

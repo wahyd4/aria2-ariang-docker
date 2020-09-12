@@ -32,8 +32,9 @@ File Browser
 
 ## 功能特性
 
-  * Aria2 (SSL 支持)
-  * AriaNg 通过 UI 来操作，下载文件
+  * [Aria2](https://aria2.github.io) 文件下载工具(支持SSL )
+  * [AriaNg](https://github.com/mayswind/AriaNg) 通过 UI 来操作，下载文件
+  * [Rclone](https://rclone.org) 同步文件到云盘
   * 自动 HTTPS （Let's Encrypt）
   * 支持绑定自定义用户ID，可以主机上的非`root`用户，也可以管理下载的文件
   * Basic Auth 用户认证
@@ -58,7 +59,8 @@ File Browser
 
 * Aria2: <http://yourip/ui/>
 * FileManger: <http://yourip>
-* 请使用 admin/admin 进行登录
+* Rclone: <http://yourip/rclone>
+* 请使用 admin/admin 进行登录, 在如果没有修改`ARIA2_USER`,`ARIA2_PWD`的情况下，请使用`user`/`password`登录`Rclone`
 ### 开启所有功能
 ```bash
   docker run -d --name ariang \
@@ -76,7 +78,7 @@ File Browser
   -v /yourdata:/data \
   -v /app/a.db:/app/filebrowser.db \
   -v /yoursslkeys/:/app/conf/key \
-  -v <the folder of aria2.conf and aria2.session>:/app/conf \
+  -v <conf files folder>:/app/conf \
   wahyd4/aria2-ui
 ```
 ### 使用docker-compose 运行
@@ -101,8 +103,8 @@ services:
 ### 支持的 Docker 环境变量
 
   * ENABLE_AUTH 启用 Basic auth(网页简单认证) 用户认证
-  * ARIA2_USER Basic Auth 用户认证用户名
-  * ARIA2_PWD Basic Auth 密码
+  * ARIA2_USER Basic Auth 用户认证用户名，Rclone也使用该参数
+  * ARIA2_PWD Basic Auth 密码，Rclone也使用该参数
   * ARIA2_EXTERNAL_PORT 从外部可以访问到的 Aria2 端口，默认为 HTTP 的`80`
   * PUID 需要绑定主机的Linux用户ID，可以通过`cat /etc/passwd` 查看用户列表， 默认UID 是`1000`
   * PGID 需要绑定的主机的Linux 用户组ID，默认GID 是`1000`
@@ -113,7 +115,10 @@ services:
 ### 支持的 Docker volume 属性
   * `/data` 用来放置所有下载的文件的目录
   * `/app/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`
-  * `/app/conf` 该目录下可以放置你的自定义`aria2.conf`配置文件，`aria2.session`，且必须包含这两个文件。第一次使用`aria2.session`时，创建一个空文件即可，该文件会包含aria2当前的下载列表，这样即使容器被销毁也不用担心文件列表丢失了。你也可以直接拷贝当前项目下`conf`目录中的两个文件并使用。
+  * `/app/conf` 该目录下可以放置你的自定义`aria2.conf`配置文件，`aria2.session`，且必须包含这两个文件。第一次使用`aria2.session`时，创建一个空文件即可，该文件会包含aria2当前的下载列表，这样即使容器被销毁也不用担心文件列表丢失了。你也可以直接拷贝当前项目下`conf`目录中的两个文件并使用。如需映射rclone.conf到容器内，请将其就放置于该目录下。因此配置文件目录支持的所有配置文件为：
+    * aria2.conf
+    * aria2.session
+    * rclone.conf
   * `/app/filebrowser.db` File Browser 的内嵌数据库，升级Docker 镜像也不用担心之前的设置丢失。请确保在宿主机先创建一个空文件再使用。
 
 ## 自动 SSL
