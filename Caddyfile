@@ -8,8 +8,7 @@
     websocket
   }
 
-  log stdout
-  errors stdout
+  errors stderr
   gzip
 }
 

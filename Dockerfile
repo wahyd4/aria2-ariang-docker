@@ -16,6 +16,10 @@ ENV PGID=1000
 ENV CADDYPATH=/app
 ENV RCLONE_CONFIG=/app/conf/rclone.conf
 
+ADD aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
+ADD conf /app/conf
+ADD Caddyfile SecureCaddyfile /usr/local/caddy/
+
 RUN adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar --no-cache \
@@ -43,14 +47,8 @@ RUN adduser -D -u 1000 junv \
   && chown junv:junv /usr/local/bin/rclone \
   && chmod 755 /usr/local/bin/rclone \
   && rm /app/rclone-*.zip \
-  && rm -rf /app/rclone-*
-
-ADD aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
-ADD conf /app/conf
-ADD Caddyfile SecureCaddyfile /usr/local/caddy/
-
-# AriaNg
-RUN mkdir /usr/local/www/aria2/Download \
+  && rm -rf /app/rclone-* \
+  && mkdir /usr/local/www/aria2/Download \
   && cd /usr/local/www/aria2 \
   && chmod +rw /app/conf/aria2.session \
   && version=1.1.6 \
@@ -66,5 +64,8 @@ VOLUME /app/conf/key
 VOLUME /data
 
 EXPOSE 80 443
+
+HEALTHCHECK --interval=1m --timeout=3s \
+  CMD curl -f http://localhost || exit 1
 
 CMD ["./start.sh"]
