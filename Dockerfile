@@ -28,7 +28,7 @@ RUN adduser -D -u 1000 junv \
   && tar -zxvf caddy_${caddy_tag}_linux_amd64.tar.gz \
   && mv caddy /usr/local/bin/ \
   && rm -rf caddy_${caddy_tag}_linux_amd64.tar.gz \
-  && filebrowser_version=v2.5.0 \
+  && filebrowser_version=v2.7.0 \
   && platform=linux-amd64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${platform}-filebrowser.tar.gz \
   && tar -zxvf ${platform}-filebrowser.tar.gz \
@@ -51,7 +51,7 @@ RUN adduser -D -u 1000 junv \
   && mkdir /usr/local/www/aria2/Download \
   && cd /usr/local/www/aria2 \
   && chmod +rw /app/conf/aria2.session \
-  && version=1.1.6 \
+  && version=1.1.7 \
   && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${version}/AriaNg-${version}.zip \
   && unzip AriaNg-${version}.zip \
   && rm -rf AriaNg-${version}.zip \
