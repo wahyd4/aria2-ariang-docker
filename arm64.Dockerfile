@@ -24,7 +24,7 @@ RUN adduser -D -u 1000 junv \
   && tar -zxvf caddy_*.tar.gz \
   && mv caddy /usr/local/bin/ \
   && rm -rf caddy_*.tar.gz \
-  && filebrowser_version=v2.2.0 \
+  && filebrowser_version=v2.7.0 \
   && platform=linux-arm64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${platform}-filebrowser.tar.gz \
   && tar -zxvf ${platform}-filebrowser.tar.gz \
