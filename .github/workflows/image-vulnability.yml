@@ -8,8 +8,8 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag local/aria-ui:latest
     - name: Scan image
-      uses: anchore/scan-action@master
+      uses: anchore/scan-action@v1
       with:
         image-reference: "local/aria-ui:latest"
-        dockerfile-path: "./Dockerfile"
         fail-build: true
+        severity-cutoff: high
