@@ -36,7 +36,7 @@ RUN adduser -D -u 1000 junv \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2 \
   && rm -rf init /app/*.txt \
-  && curl -O https://downloads.rclone.org/v1.53.0/rclone-v1.53.0-linux-arm.zip \
+  && curl -O https://downloads.rclone.org/v1.53.1/rclone-v1.53.1-linux-arm.zip \
   && unzip rclone-*.zip \
   && cd rclone-* \
   && cp rclone /usr/local/bin/ \
