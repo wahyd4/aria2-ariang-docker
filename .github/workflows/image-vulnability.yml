@@ -11,5 +11,5 @@ jobs:
       uses: anchore/scan-action@v2
       with:
         image-reference: "local/aria-ui:latest"
-        dockerfile-path: "./Dockerfile"
         fail-build: true
+        severity-cutoff: high
