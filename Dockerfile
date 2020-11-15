@@ -6,7 +6,7 @@ WORKDIR /app
 
 ENV RPC_SECRET=""
 ENV ENABLE_AUTH=false
-ENV DOMAIN=0.0.0.0:80
+ENV DOMAIN=http://localhost
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 ENV ARIA2_SSL=false
@@ -23,8 +23,8 @@ ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 RUN adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap --no-cache \
-  && caddy_tag=v1.0.4 \
-  && wget -N https://github.com/caddyserver/caddy/releases/download/${caddy_tag}/caddy_${caddy_tag}_linux_amd64.tar.gz \
+  && caddy_tag=2.2.1 \
+  && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_tag}/caddy_${caddy_tag}_linux_amd64.tar.gz \
   && tar -zxvf caddy_${caddy_tag}_linux_amd64.tar.gz \
   && mv caddy /usr/local/bin/ \
   && rm -rf caddy_${caddy_tag}_linux_amd64.tar.gz \

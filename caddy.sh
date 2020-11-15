@@ -9,4 +9,4 @@ else
   export CADDY_FILE=/usr/local/caddy/Caddyfile
 fi
 
-/usr/local/bin/caddy -quic --conf ${CADDY_FILE}
+/usr/local/bin/caddy run --config ${CADDY_FILE}
