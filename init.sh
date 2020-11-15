@@ -4,8 +4,8 @@ echo "**** update uid and gid to ${PUID}:${PGID} ****"
 groupmod -o -g "$PGID" junv
 usermod -o -u "$PUID" junv
 
-mkdir /app/.caddy
-mkdir /app/.cache
+mkdir -p /app/.caddy
+mkdir -p /app/.cache
 
 chown -R junv:junv \
          /app \

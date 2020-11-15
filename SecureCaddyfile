@@ -1,42 +1,31 @@
-{$DOMAIN} {
-  proxy / 127.0.0.1:8080 {
-      transparent
-  }
-
-  proxy /jsonrpc 127.0.0.1:6800 {
-    transparent
-    websocket
-  }
-
-  proxy /rclone 127.0.0.1:5572 {
-    transparent
-  }
-
-  gzip
-  errors stderr
+{
+  auto_https off
 }
 
-{$DOMAIN}/ui {
-  redir / /ui/ 301
+{$DOMAIN}
+
+redir /ui /ui/ 301
+redir /rclone /rclone/ 301
+
+route /rclone/* {
+  uri strip_prefix /rclone
+  reverse_proxy http://localhost:5572
 }
 
-{$DOMAIN}/ui/ {
-  root /usr/local/www/aria2
-  timeouts none
-  gzip
-  errors stderr
-
-  basicauth / {$ARIA2_USER} {$ARIA2_PWD}
+route /ui/* {
+  uri strip_prefix /ui
+  root * /usr/local/www/aria2
+  file_server
 }
 
-{$DOMAIN}/rclone {
-  redir / /rclone/ 301
+basicauth /ui/* {
+  ARIA2_USER ARIA2_PWD_ENCRYPT
 }
 
-{$DOMAIN}/rclone/ {
-  proxy / 127.0.0.1:5572/ {
-    transparent
-  }
-  gzip
-  errors stderr
+reverse_proxy 127.0.0.1:8080
+reverse_proxy /jsonrpc 127.0.0.1:6800
+
+encode gzip
+log {
+  output stderr
 }
