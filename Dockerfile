@@ -15,6 +15,8 @@ ENV PUID=1000
 ENV PGID=1000
 ENV CADDYPATH=/app
 ENV RCLONE_CONFIG=/app/conf/rclone.conf
+ENV XDG_DATA_HOME=/app/.caddy/data
+ENV XDG_CONFIG_HOME=/app/.caddy/config
 
 ADD aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
 ADD conf /app/conf
