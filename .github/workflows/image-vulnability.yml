@@ -10,7 +10,7 @@ jobs:
     - name: Scan image
       uses: anchore/scan-action@v2
       with:
-        image-reference: "local/aria-ui:latest"
+        image: "local/aria-ui:latest"
         fail-build: true
         severity-cutoff: high
     - name: grype scan JSON results
