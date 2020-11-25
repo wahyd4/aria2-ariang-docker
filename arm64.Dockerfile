@@ -22,7 +22,7 @@ RUN adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar --no-cache \
   && caddy_tag=2.2.1 \
-  && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_tag}/caddy_${caddy_tag}_linux_amd64.tar.gz \
+  && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_tag}/caddy_${caddy_tag}_linux_arm64.tar.gz \
   && tar -zxvf caddy_*.tar.gz \
   && mv caddy /usr/local/bin/ \
   && rm -rf caddy_*.tar.gz \
