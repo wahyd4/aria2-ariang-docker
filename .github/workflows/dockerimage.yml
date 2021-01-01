@@ -63,5 +63,6 @@ jobs:
         docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args }}
     -
       name: Inspect image
+      if: github.ref == 'refs/heads/master'
       run: |
         docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
