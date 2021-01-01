@@ -9,7 +9,7 @@ on:
       - v*
 jobs:
   build:
-    if: github.event_name == 'release' || github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'wahyd4/aria2-ariang-docker'
+    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'wahyd4/aria2-ariang-docker'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
@@ -53,18 +53,18 @@ jobs:
         docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
     -
       name: Login to DockerHub
-      if: github.ref == 'refs/heads/master'
+      if: contains(github.ref, '/heads/master') || contains(github.ref, '/tags/v')
       uses: docker/login-action@v1
       with:
         username: ${{ secrets.DOCKER_HUB_USER }}
         password: ${{ secrets.DOCKER_HUB_PASS }}
     -
       name: Push docker images to Dockerhub
-      if: github.ref == 'refs/heads/master'
+      if: contains(github.ref, '/heads/master') || contains(github.ref, '/tags/v')
       run: |
         docker buildx build --output "type=image,push=true" ${{ steps.prepare.outputs.buildx_args }}
     -
       name: Inspect image
-      if: github.ref == 'refs/heads/master'
+      if: contains(github.ref, '/heads/master') || contains(github.ref, '/tags/v')
       run: |
         docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
