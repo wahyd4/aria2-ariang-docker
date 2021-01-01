@@ -42,16 +42,16 @@ adduser -D -u 1000 junv \
   && apk update \
   && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap --no-cache \
   && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_version}/${caddy_file} \
-  && tar -zxvf ${caddy_file} \
+  && tar -zxf ${caddy_file} \
   && mv caddy /usr/local/bin/ \
   && rm -rf ${caddy_file} \
   && platform=linux-amd64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${filebrowser_file} \
-  && tar -zxvf ${filebrowser_file} \
+  && tar -zxf ${filebrowser_file} \
   && rm -rf ${filebrowser_file} \
   && rm LICENSE README.md CHANGELOG.md \
   && wget -N https://bin.equinox.io/c/ekMN3bCZFUn/${forego_file} \
-  && tar -zxvf ${forego_file} \
+  && tar -zxf ${forego_file} \
   && rm -rf ${forego_file} \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2 \
@@ -70,4 +70,4 @@ adduser -D -u 1000 junv \
   && wget -N --no-check-certificate https://github.com/mayswind/AriaNg/releases/download/${ariang_version}/${ariang_file} \
   && unzip ${ariang_file} \
   && rm -rf ${ariang_file} \
-  && chmod -R 755 /usr/local/www/aria2
+  && chmod -R 755 /usr/local/www/aria2 \

@@ -142,8 +142,8 @@ docker run -d --name aria2-ui -p 80:80 -p 443:443 -e DOMAIN=https://toozhao.com 
 ```
 ## Build the image by yourself
 
-```
-docker build -t aria2-ui .
+```bash
+ docker buildx build --platform linux/arm/v7,linux/arm64,linux/amd64 -t aria2-ui .
 ```
 
 ## Docker Hub
