@@ -53,8 +53,8 @@ File Browser
 
 ### 快速运行
 
-```shell
-  docker run -d --name aria2-ui -p 80:80 wahyd4/aria2-ui
+```bash
+  docker buildx build --platform linux/arm/v7,linux/arm64,linux/amd64 -t aria2-ui .
 ```
 
 * Aria2: <http://yourip/ui/>
