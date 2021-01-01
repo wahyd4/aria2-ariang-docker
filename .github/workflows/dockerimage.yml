@@ -9,7 +9,7 @@ on:
       - v*
 jobs:
   build:
-    if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'wahyd4/aria2-ariang-docker'
+    if: github.event_name == 'release' || github.event_name == 'push' || github.event.pull_request.head.repo.full_name != 'wahyd4/aria2-ariang-docker'
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
