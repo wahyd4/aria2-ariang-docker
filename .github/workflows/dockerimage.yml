@@ -17,7 +17,7 @@ jobs:
       run: |
         DOCKER_IMAGE=wahyd4/aria2-ui
         DOCKER_PLATFORMS=linux/amd64,linux/arm/v7,linux/arm64
-        VERSION=latest
+        VERSION=edge
 
         if [[ $GITHUB_REF == refs/tags/* ]]; then
           VERSION=${GITHUB_REF#refs/tags/v}

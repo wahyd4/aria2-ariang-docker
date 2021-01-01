@@ -27,7 +27,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 
 One Docker image for file downloading, managing, sharing, as well as video playing and evening cloud storage synchronization.
 
-Furthermore, it's pretty small and ARM CPU compatible which means you can also run it on Raspberry Pi🍓. (**with proper arm docker image tag**)
+Furthermore, it's pretty small and ARM CPU compatible which means you can also run it on Raspberry Pi🍓.
 
 Last but not least, Auto HTTPS can't be more easy!
 
@@ -52,10 +52,8 @@ File Browser
 ## Recommended versions
 
 * wahyd4/aria2-ui:latest
-* wahyd4/aria2-ui:arm32
-* wahyd4/aria2-ui:arm64
 
-> ‼️ If you plan to run this docker image on Raspberry Pi，please use tag `arm32`
+> Docker will pick the the proper ARCH for you. e.g. arm64v8 or x86_64
 
 ## How to run
 

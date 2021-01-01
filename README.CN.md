@@ -14,7 +14,7 @@ Aria2 + AriaNg
 
 - [功能特性](#功能特性)
 - [推荐使用的docker image tag](#推荐使用的docker-image-tag)
-- [安装于运行](#安装于运行)
+- [安装与运行](#安装与运行)
   - [快速运行](#快速运行)
   - [开启所有功能](#开启所有功能)
   - [使用docker-compose 运行](#使用docker-compose-运行)
@@ -41,17 +41,15 @@ File Browser
   * 支持绑定自定义用户ID，可以主机上的非`root`用户，也可以管理下载的文件
   * Basic Auth 用户认证
   * 文件管理和视频播放 ([File Browser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
-  * 支持ARM CPU 架构，因此可以在树莓派中运行，请下载对应的[ARM TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags) 版本, `arm32`或`arm64`
+  * 支持ARM CPU 架构，因此可以在树莓派等设备上运行，
 
 ## 推荐使用的docker image tag
 
 * wahyd4/aria2-ui:latest
-* wahyd4/aria2-ui:arm32
-* wahyd4/aria2-ui:arm64
 
-> ‼️ 如果你在莓派上运行本程序，请使用 `arm32` 版本
+> Docker会为你自动选择对应CPU平台的image. e.g. arm64v8 或者 x86_64 平台
 
-## 安装于运行
+## 安装与运行
 
 ### 快速运行
 
