@@ -4,8 +4,6 @@
 
 {$DOMAIN}
 
-forwarded
-
 redir /ui /ui/ 301
 redir /rclone /rclone/ 301
 
