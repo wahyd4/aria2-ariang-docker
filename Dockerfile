@@ -6,6 +6,7 @@ WORKDIR /app
 
 ENV RPC_SECRET=""
 ENV ENABLE_AUTH=false
+ENV ENABLE_RCLONE=true
 ENV DOMAIN=http://localhost
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password

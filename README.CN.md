@@ -103,6 +103,7 @@ services:
 ### 支持的 Docker 环境变量
 
   * ENABLE_AUTH 启用 Basic auth(网页简单认证) 用户认证
+  * ENABLE_RCLONE 是否启用 RCLONE，由于Rclone 的初次运行需要从Github 下载文件，由于你懂的原因，可能文件下载失败，进而导致整个程序崩溃,这时你需要设置为`false`
   * ARIA2_USER Basic Auth 用户认证用户名，Rclone也使用该参数
   * ARIA2_PWD Basic Auth 密码，Rclone也使用该参数
   * ARIA2_EXTERNAL_PORT 从外部可以访问到的 Aria2 端口，默认为 HTTP 的`80`
