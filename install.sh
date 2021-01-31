@@ -55,7 +55,7 @@ adduser -D -u 1000 junv \
   && rm -rf ${forego_file} \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2 \
-  && rm -rf /app/*.txt \
+  && rm -rf init /app/*.txt \
   && curl -O https://downloads.rclone.org/${rclone_version}/${rclone_file} \
   && unzip ${rclone_file} \
   && cd rclone-* \
