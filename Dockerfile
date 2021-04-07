@@ -1,4 +1,4 @@
-FROM alpine:latest
+FROM alpine:edge
 
 LABEL AUTHOR=Junv<wahyd4@gmail.com>
 
