@@ -46,7 +46,7 @@ File Browser
   * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth
   * File indexing and video playing ([File Browser](https://filebrowser.xyz/))
-  * Support ARM CPUs, but please choose a proper [docker image TAG](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
+  * Support ARM CPUs as well, all supported CPU platforms can be found [here](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
   * Cloud Storage platforms synchronization
 
 ## Recommended versions
