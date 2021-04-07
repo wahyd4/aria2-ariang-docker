@@ -42,10 +42,10 @@ File Browser
   * [Aria2 (SSL support)](https://aria2.github.io)
   * [AriaNg](https://github.com/mayswind/AriaNg)
   * [Rclone](https://rclone.org/)
+  * [File Browser](https://filebrowser.xyz/): Files mangement and videos playing 
   * Auto HTTPS （Let's Encrypt）
   * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth
-  * File indexing and video playing ([File Browser](https://filebrowser.xyz/))
   * Support ARM CPUs as well, all supported CPU platforms can be found [here](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
   * Cloud Storage platforms synchronization
 
