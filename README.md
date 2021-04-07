@@ -63,10 +63,10 @@ File Browser
   docker run -d --name aria2-ui -p 80:80 wahyd4/aria2-ui
 ```
 
-* Aria2: <http://yourip/ui/>
-* FileManger: <http://yourip>
+* Aria2: <http://yourip>
+* FileManger: <http://yourip/files>
 * Rclone: <http://yourip/rclone>
-* Please use `admin`/`admin` as username and password to login for the first time, and `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
+* Please use `admin`/`admin` as username and password to login `Filebrowser` for the first time. And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
 
 ### Full features run
 
@@ -81,7 +81,7 @@ File Browser
   -e DOMAIN=https://example.com \
   -e ARIA2_SSL=false \
   -e ARIA2_USER=user \
-  -e ARIA2_PWD=pwd \
+  -e ARIA2_PWD=password \
   -e ARIA2_EXTERNAL_PORT=443 \
   -v /yourdata:/data \
   -v /app/a.db:/app/filebrowser.db \

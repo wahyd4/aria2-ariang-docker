@@ -40,7 +40,7 @@ File Browser
   * 自动 HTTPS （Let's Encrypt）
   * 支持绑定自定义用户ID，可以主机上的非`root`用户，也可以管理下载的文件
   * Basic Auth 用户认证
-  * 文件管理和视频播放 ([File Browser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
+  * 文件管理和视频播放 ([FileBrowser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
   * 支持ARM CPU 架构，因此可以在树莓派等设备上运行，
 
 ## 推荐使用的docker image tag
@@ -57,10 +57,10 @@ File Browser
   docker buildx build --platform linux/arm/v7,linux/arm64,linux/amd64 -t aria2-ui .
 ```
 
-* Aria2: <http://yourip/ui/>
-* FileManger: <http://yourip>
+* Aria2: <http://yourip>
+* Filebrowser: <http://yourip/files>
 * Rclone: <http://yourip/rclone>
-* 请使用 admin/admin 进行登录, 在如果没有修改`ARIA2_USER`,`ARIA2_PWD`的情况下，请使用`user`/`password`登录`Rclone`
+* 请使用 admin/admin 进行登录Filebrowser, 在如果没有修改`ARIA2_USER`,`ARIA2_PWD`的情况下，请使用`user`/`password`登录`Rclone`
 ### 开启所有功能
 ```bash
   docker run -d --name ariang \

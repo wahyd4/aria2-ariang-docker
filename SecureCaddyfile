@@ -4,26 +4,29 @@
 
 {$DOMAIN}
 
-redir /ui /ui/ 301
-redir /rclone /rclone/ 301
-
-route /rclone/* {
-  uri strip_prefix /rclone
-  reverse_proxy http://localhost:5572
-}
-
-route /ui/* {
-  uri strip_prefix /ui
-  root * /usr/local/www/aria2
-  file_server
-}
-
-basicauth /ui/* {
+basicauth /* {
   ARIA2_USER ARIA2_PWD_ENCRYPT
 }
 
-reverse_proxy 127.0.0.1:8080
+redir /ui / 301
+redir /ui/ / 301
+redir /rclone /rclone/ 301
+redir /files /files/ 301
+
 reverse_proxy /jsonrpc 127.0.0.1:6800
+
+route /rclone/* {
+  uri strip_prefix /rclone
+  reverse_proxy 127.0.0.1:5572
+}
+
+route /files/* {
+  uri strip_prefix /files
+  reverse_proxy 127.0.0.1:8080
+}
+
+root * /usr/local/www/aria2
+file_server
 
 encode gzip
 log {
