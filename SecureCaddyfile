@@ -4,7 +4,7 @@
 
 {$DOMAIN}
 
-basicauth /* {
+basicauth / {
   ARIA2_USER ARIA2_PWD_ENCRYPT
 }
 
