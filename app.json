@@ -1,0 +1,30 @@
+{
+  "name": "wahyd4/aria2-ariang-docker demo",
+  "description": "A demo of Aria2 + AriaNg + Filebrowser + Rclone",
+  "repository": "https://github.com/wahyd4/aria2-ariang-docker",
+  "keywords": ["docker", "aria2", "rclone", "fllebrowser", "ariang"],
+  "stack": "container",
+  "success_url": "/",
+  "env": {
+    "ENABLE_AUTH": {
+      "description": "If to Enable Basic Auth to gain some basic security confidence",
+      "value": "true",
+      "required": false
+    },
+    "ARIA2_USER": {
+      "description": "Username to login to AriaNg",
+      "value": "user",
+      "required": false
+    },
+    "ARIA2_PWD": {
+      "description": "Password to login to AriaNg",
+      "value": "password",
+      "required": false
+    },
+    "ARIA2_EXTERNAL_PORT": {
+      "description": "External port for apps",
+      "value": "80",
+      "required": false
+    }
+  }
+}
