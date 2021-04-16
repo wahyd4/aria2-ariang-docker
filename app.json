@@ -26,12 +26,12 @@
       "value": "80",
       "required": false
     },
-    "P_UID": {
+    "PUID": {
       "description": "The Linux user's ID that to run the app",
       "value": "0",
       "required": false
     },
-    "P_GID": {
+    "PGID": {
       "description": "The Linux group's ID that to run the app",
       "value": "0",
       "required": false
