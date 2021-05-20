@@ -6,7 +6,7 @@ Aria2 + AriaNg
 [![Docker Pulls](https://img.shields.io/docker/pulls/wahyd4/aria2-ui.svg)](https://hub.docker.com/r/wahyd4/aria2-ui/)
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wahyd4/aria2-ariang-docker/tree/heroku)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wahyd4/aria2-ariang-docker/tree/master)
 
 
 [![Page Views Count](https://badges.toozhao.com/badges/01EJ791D8BB43PDS8D7PP7H0YE/green.svg)](https://badges.toozhao.com/stats/01EJ791D8BB43PDS8D7PP7H0YE "Get your own page views count badge on badges.toozhao.com")
