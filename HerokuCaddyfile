@@ -1,5 +1,10 @@
+{
+  debug
+  admin off
+  auto_https off
+}
 
-{$DOMAIN}
+:CADDY_HTTP_PORT
 
 basicauth / {
   ARIA2_USER ARIA2_PWD_ENCRYPT

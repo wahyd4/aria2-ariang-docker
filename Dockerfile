@@ -21,7 +21,7 @@ ENV XDG_CONFIG_HOME=/app/.caddy/config
 
 ADD install.sh aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh /app/
 ADD conf /app/conf
-ADD Caddyfile SecureCaddyfile /usr/local/caddy/
+ADD Caddyfile SecureCaddyfile HerokuCaddyfile /usr/local/caddy/
 
 RUN ./install.sh
 

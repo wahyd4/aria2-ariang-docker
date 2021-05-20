@@ -1,17 +1,31 @@
 #! /bin/bash -eu
 
 echo "Run aria2c and ariaNG"
-if [ "$ENABLE_AUTH" = "true" ]; then
+
+echo "**** Generate basic auth password for caddy ****"
+ARIA2_PWD_ENCRYPT=$(caddy hash-password -plaintext ${ARIA2_PWD})
+
+case $ENABLE_AUTH in
+true)
   echo "Using Basic Auth config file "
   export CADDY_FILE=/usr/local/caddy/SecureCaddyfile
+  sed -i 's/ARIA2_USER/'"${ARIA2_USER}"'/g' ${CADDY_FILE}
+  sed -i 's/ARIA2_PWD_ENCRYPT/'"${ARIA2_PWD_ENCRYPT}"'/g' ${CADDY_FILE}
+  ;;
 
-  echo "**** generate basic auth password for caddy ****"
-  ARIA2_PWD_ENCRYPT=`caddy hash-password -plaintext ${ARIA2_PWD}`
-  sed -i 's/ARIA2_USER/'"${ARIA2_USER}"'/g' /usr/local/caddy/SecureCaddyfile
-  sed -i 's/ARIA2_PWD_ENCRYPT/'"${ARIA2_PWD_ENCRYPT}"'/g' /usr/local/caddy/SecureCaddyfile
-else
+heroku)
+  echo "Running in Heroku mode"
+  export CADDY_FILE=/usr/local/caddy/HerokuCaddyfile
+  sed -i 's/ARIA2_USER/'"${ARIA2_USER}"'/g' ${CADDY_FILE}
+  sed -i 's/ARIA2_PWD_ENCRYPT/'"${ARIA2_PWD_ENCRYPT}"'/g' ${CADDY_FILE}
+
+  sed -i 's/CADDY_HTTP_PORT/'"${CADDY_HTTP_PORT}"'/g' ${CADDY_FILE}
+
+  ;;
+*)
   echo "Using caddy without Basic Auth"
   export CADDY_FILE=/usr/local/caddy/Caddyfile
-fi
+  ;;
+esac
 
 /usr/local/bin/caddy run -config ${CADDY_FILE} -adapter=caddyfile
