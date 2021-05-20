@@ -5,7 +5,12 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 [![](https://images.microbadger.com/badges/image/wahyd4/aria2-ui.svg)](https://microbadger.com/images/wahyd4/aria2-ui "Get your own image badge on microbadger.com")
 [![Docker Pulls](https://img.shields.io/docker/pulls/wahyd4/aria2-ui.svg)](https://hub.docker.com/r/wahyd4/aria2-ui/)
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wahyd4/aria2-ariang-docker/tree/heroku)
+
 [![Page Views Count](https://badges.toozhao.com/svg/aria2-ariang-docker)](https://badges.toozhao.com/stats/aria2-ariang-docker "Page Views Count")
+
+
 
 **If you like this project, please consider support me / 如果喜欢本项目，请考虑打赏，谢谢！**
 
@@ -42,7 +47,7 @@ File Browser
   * [Aria2 (SSL support)](https://aria2.github.io)
   * [AriaNg](https://github.com/mayswind/AriaNg)
   * [Rclone](https://rclone.org/)
-  * [File Browser](https://filebrowser.xyz/): Files mangement and videos playing 
+  * [File Browser](https://filebrowser.xyz/): Files mangement and videos playing
   * Auto HTTPS （Let's Encrypt）
   * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth

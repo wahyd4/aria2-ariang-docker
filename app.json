@@ -7,8 +7,8 @@
   "success_url": "/",
   "env": {
     "ENABLE_AUTH": {
-      "description": "If to Enable Basic Auth to gain some basic security confidence",
-      "value": "true",
+      "description": "This value must be heroku when running in Heroku",
+      "value": "heroku",
       "required": false
     },
     "ARIA2_USER": {
@@ -22,8 +22,8 @@
       "required": false
     },
     "ARIA2_EXTERNAL_PORT": {
-      "description": "External port for apps",
-      "value": "80",
+      "description": "External port for apps, it should be 443 when running in Heroku",
+      "value": "443",
       "required": false
     },
     "PUID": {
