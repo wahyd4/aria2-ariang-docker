@@ -125,7 +125,7 @@ Then simply run `docker-compose up -d`, that's it!
   * PUID Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`
   * PGID Bind Linux GID into container, default GID is 1000
   * RPC_SECRET The Aria2 RPC secret token
-  * DOMAIN The domain you'd like to bind, when domain is a `https://` thing, then auto SSL feature will be enabled
+  * DOMAIN The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled
 
 
 ### Supported Volumes
