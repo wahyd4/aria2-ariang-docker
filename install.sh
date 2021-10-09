@@ -3,7 +3,7 @@
 echo "Set variables for $(arch)"
 
 caddy_version=2.4.1
-filebrowser_version=v2.15.0
+filebrowser_version=v2.17.2
 rclone_version=v1.56.2
 ariang_version=1.2.1
 
