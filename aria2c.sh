@@ -5,7 +5,7 @@ RPC_SECRET_BASE64=$(echo -n ${RPC_SECRET}|base64)
 sed -i 's/secret:\"\"/secret:\"'"${RPC_SECRET_BASE64}"'\"/g' /usr/local/www/aria2/js/aria-ng*.js
 
 if [ "$ARIA2_SSL" = "true" ]; then
-echo "Start aria2 with secure config"
+echo "[INFO] Start aria2 with secure config"
 
 /usr/bin/aria2c --conf-path="/app/conf/aria2.conf" \
 --enable-rpc --rpc-listen-all \
@@ -15,7 +15,7 @@ echo "Start aria2 with secure config"
 
 else
 
-echo "Start aria2 with standard mode"
+echo "[INFO] Start aria2 with standard mode"
 /usr/bin/aria2c --conf-path="/app/conf/aria2.conf" --enable-rpc --rpc-listen-all
 
 fi

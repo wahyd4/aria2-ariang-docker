@@ -1,6 +1,6 @@
 #! /bin/sh -eux
 
-echo "Set variables for $(arch)"
+echo "[INFO] Set variables for $(arch)"
 
 caddy_version=2.4.5
 filebrowser_version=v2.17.2
@@ -30,7 +30,7 @@ case "$(arch)" in
      ;;
 
    *)
-     echo "unsupported arch $(arch), exit now"
+     echo "[ERROR] unsupported arch $(arch), exit now"
      exit 1
      ;;
 esac
@@ -40,7 +40,7 @@ ariang_file=AriaNg-${ariang_version}.zip
 
 adduser -D -u 1000 junv \
   && apk update \
-  && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap --no-cache \
+  && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap fuse vim --no-cache \
   && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_version}/${caddy_file} \
   && tar -zxf ${caddy_file} \
   && mv caddy /usr/local/bin/ \
@@ -71,3 +71,5 @@ adduser -D -u 1000 junv \
   && unzip ${ariang_file} \
   && rm -rf ${ariang_file} \
   && chmod -R 755 /usr/local/www/aria2 \
+  && mkdir -p /data/cloud \
+  && chown junv:junv /data/cloud

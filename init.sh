@@ -1,6 +1,6 @@
 #! /bin/bash -eu
 
-echo "**** update uid and gid to ${PUID}:${PGID} ****"
+echo "[INFO] Update uid and gid to ${PUID}:${PGID}"
 groupmod -o -g "$PGID" junv
 usermod -o -u "$PUID" junv
 
@@ -19,7 +19,7 @@ chmod +x /app/caddy.sh \
          /app/rclone.sh \
          /app/aria2c.sh
 
-echo "**** give caddy permissions to use low ports ****"
+echo "[INFO] Give caddy permissions to use low ports"
 setcap cap_net_bind_service=+ep /usr/local/bin/caddy
 
 "${@-sh}"

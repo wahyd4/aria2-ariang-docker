@@ -106,16 +106,16 @@ services:
 
 ### 支持的 Docker 环境变量
 
-  * ENABLE_AUTH 启用 Basic auth(网页简单认证) 用户认证
-  * ENABLE_RCLONE 是否启用 RCLONE，由于Rclone 的初次运行需要从Github 下载文件，由于你懂的原因，可能文件下载失败，进而导致整个程序崩溃,这时你需要设置为`false`
-  * ARIA2_USER Basic Auth 用户认证用户名，Rclone也使用该参数
-  * ARIA2_PWD Basic Auth 密码，Rclone也使用该参数
-  * ARIA2_EXTERNAL_PORT 从外部可以访问到的 Aria2 端口，默认为 HTTP 的`80`
-  * PUID 需要绑定主机的Linux用户ID，可以通过`cat /etc/passwd` 查看用户列表， 默认UID 是`1000`
-  * PGID 需要绑定的主机的Linux 用户组ID，默认GID 是`1000`
-  * RPC_SECRET Aria2 RPC 加密 token
-  * DOMAIN 绑定的域名, 当绑定的域名为`HTTPS`时，即为启用`HTTPS`， 例： `DOMAIN=https://toozhao.com`
-
+  * `ENABLE_AUTH` 启用 Basic auth(网页简单认证) 用户认证
+  * `ENABLE_RCLONE` 是否启用 RCLONE，由于Rclone 的初次运行需要从Github 下载文件，由于你懂的原因，可能文件下载失败，进而导致整个程序崩溃,这时你需要设置为`false`
+  * `ARIA2_USER` Basic Auth 用户认证用户名，Rclone也使用该参数
+  * `ARIA2_PWD` Basic Auth 密码，Rclone也使用该参数
+  * `ARIA2_EXTERNAL_PORT` 从外部可以访问到的 Aria2 端口，默认为 HTTP 的`80`
+  * `PUID` 需要绑定主机的Linux用户ID，可以通过`cat /etc/passwd` 查看用户列表， 默认UID 是`1000`
+  * `PGID` 需要绑定的主机的Linux 用户组ID，默认GID 是`1000`
+  * `RPC_SECRET` Aria2 RPC 加密 token
+  * `DOMAIN` 绑定的域名, 当绑定的域名为`HTTPS`时，即为启用`HTTPS`， 例： `DOMAIN=https://toozhao.com`
+  * `RCLONE_CONFIG_BASE64` 通过`base64` 字符串的形式配置rclone.conf。主要给在Heroku平台上运行时使用，请使用命令行 `cat /app/conf/rclone.conf | base64` 或者其他任何在线base64在线工具 [比如这个](https://www.base64encode.org/)来把`rclone.conf`的内容生成`base64`字符串。在使用本环境变量的同时，请确保`ENABLE_RCLONE`设置为`true`。
 
 ### 支持的 Docker volume 属性
   * `/data` 用来放置所有下载的文件的目录
