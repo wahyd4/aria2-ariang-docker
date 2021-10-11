@@ -11,6 +11,11 @@
       "value": "heroku",
       "required": false
     },
+    "RCLONE_CONFIG_BASE64": {
+      "description": "This value is the base64 string of your preconfigured /app/conf/rclone.conf content",
+      "value": "",
+      "required": false
+    },
     "ARIA2_USER": {
       "description": "Username to login to AriaNg",
       "value": "user",
