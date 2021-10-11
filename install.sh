@@ -72,4 +72,5 @@ adduser -D -u 1000 junv \
   && rm -rf ${ariang_file} \
   && chmod -R 755 /usr/local/www/aria2 \
   && mkdir -p /data/cloud \
-  && chown junv:junv /data/cloud
+  && chown junv:junv /data/cloud \
+  && ln -s /data/cloud /app
