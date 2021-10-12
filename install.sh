@@ -13,20 +13,17 @@ case "$(arch)" in
       platform=linux-amd64
       caddy_file=caddy_${caddy_version}_linux_amd64.tar.gz
       rclone_file=rclone-${rclone_version}-${platform}.zip
-      forego_file=forego-stable-${platform}.tgz
      ;;
    armv7l)
      platform=linux-armv7
      caddy_file=caddy_${caddy_version}_linux_armv7.tar.gz
      rclone_file=rclone-${rclone_version}-linux-arm-v7.zip
-     forego_file=forego-stable-linux-arm.tgz
      ;;
 
    aarch64)
      platform=linux-arm64
      caddy_file=caddy_${caddy_version}_linux_arm64.tar.gz
      rclone_file=rclone-${rclone_version}-${platform}.zip
-     forego_file=forego-stable-${platform}.tgz
      ;;
 
    *)
@@ -50,9 +47,6 @@ adduser -D -u 1000 junv \
   && tar -zxf ${filebrowser_file} \
   && rm -rf ${filebrowser_file} \
   && rm LICENSE README.md CHANGELOG.md \
-  && wget -N https://bin.equinox.io/c/ekMN3bCZFUn/${forego_file} \
-  && tar -zxf ${forego_file} \
-  && rm -rf ${forego_file} \
   && mkdir -p /usr/local/www \
   && mkdir -p /usr/local/www/aria2 \
   && rm -rf init /app/*.txt \
