@@ -14,6 +14,12 @@ jobs:
     steps:
     - uses: actions/checkout@master
     -
+      name: Update APP VERSION
+      if: contains(github.ref, '/tags/v')
+      run: |
+        VERSION=${GITHUB_REF#refs/tags/v}
+        echo $VERSION > APP_VERSION
+    -
       name: Prepare
       id: prepare
       run: |
@@ -72,12 +78,6 @@ jobs:
       if: contains(github.ref, '/heads/master') || contains(github.ref, '/tags/v')
       run: |
         docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
-    -
-      name: Update APP VERSION
-      if: contains(github.ref, '/tags/v')
-      run: |
-        VERSION=${GITHUB_REF#refs/tags/v}
-        echo $VERSION > APP_VERSION
     -
       name: Commit changes
       if: contains(github.ref, '/tags/v')
