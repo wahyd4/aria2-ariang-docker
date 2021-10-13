@@ -88,6 +88,7 @@ jobs:
         message: 'Update version'
         add: 'APP_VERSION'
         push: true
+        branch: master
     -
       name: Update tag
       if: contains(github.ref, '/tags/v')
