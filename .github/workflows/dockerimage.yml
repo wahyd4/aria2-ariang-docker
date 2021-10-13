@@ -82,4 +82,4 @@ jobs:
         curl -XPUT -D- 'https://badges.toozhao.com/val/aria2-ui-docker' \
         -H 'Content-Type: application/json' \
         -H 'API_KEY': ${API_KEY} \
-        -d '{"value": "'${VERSION}'"}'
+        -d '{"value": "'${VERSION}'"}' || true
