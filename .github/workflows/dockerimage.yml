@@ -72,3 +72,13 @@ jobs:
       if: contains(github.ref, '/heads/master') || contains(github.ref, '/tags/v')
       run: |
         docker buildx imagetools inspect ${{ steps.prepare.outputs.docker_image }}:${{ steps.prepare.outputs.version }}
+
+    - name: Update tag
+      if: contains(github.ref, '/tags/v')
+      env:
+        API_KEY: ${{ secrets.BadgeAPIKey }}
+      run: |
+        curl -XPUT -D- 'https://badges.toozhao.com/val/aria2-ui-docker' \
+        -H 'Content-Type: application/json' \
+        -H 'API_KEY': ${API_KEY} \
+        -d '{"value": "${GITHUB_REF#refs/tags/v}"}'
