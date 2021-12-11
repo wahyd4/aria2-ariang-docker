@@ -116,6 +116,8 @@ services:
   * `RPC_SECRET` Aria2 RPC 加密 token
   * `DOMAIN` 绑定的域名, 当绑定的域名为`HTTPS`时，即为启用`HTTPS`， 例： `DOMAIN=https://toozhao.com`
   * `RCLONE_CONFIG_BASE64` 通过`base64` 字符串的形式配置rclone.conf。主要给在Heroku平台上运行时使用，请使用命令行 `cat /app/conf/rclone.conf | base64` 或者其他任何在线base64在线工具 [比如这个](https://www.base64encode.org/)来把`rclone.conf`的内容生成`base64`字符串。在使用本环境变量的同时，请确保`ENABLE_RCLONE`设置为`true`。
+  * `ENABLE_APP_CHECKER`，默认情况下本程序会每天向远程服务器发送一次GET请求，以检查是否有新版本的镜像。该功能可以让你及时获取新功能和相关安全隐患的修复的推送提醒。你也可以选择将该环境变量设置为`false`来禁用该功能。注意该功能启用下，依然需要手动更新镜像来完成升级。
+
 
 ### 支持的 Docker volume 属性
   * `/data` 用来放置所有下载的文件的目录
