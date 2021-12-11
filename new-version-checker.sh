@@ -1,6 +1,13 @@
 #! /bin/bash -u
 sleep 5
 
+if [ "$ENABLE_APP_CHECKER" = "false" ]; then
+  echo "[INFO] Skip checking new version"
+  # Do nothing and just sleep 10 years
+  sleep 315360000
+  exit 0
+fi
+
 set -e
 APP_VERSION=$(cat APP_VERSION)
 set +e
@@ -19,6 +26,6 @@ while true; do
     sleep 86400
     continue
   fi
-  echo "[INFO] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Good job, you are using the latest version docker image"
+  echo "[INFO] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Congrats, you are using the latest version docker image"
   sleep 86400
 done

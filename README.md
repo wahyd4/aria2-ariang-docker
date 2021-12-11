@@ -127,6 +127,7 @@ Then simply run `docker-compose up -d`, that's it!
   * `RPC_SECRET` The Aria2 RPC secret token
   * `DOMAIN` The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled
   * `RCLONE_CONFIG_BASE64` Inject and config Rclone through `base64` string, which is the only way to use Rclone on Heroku. Please use `cat /app/conf/rclone.conf | base64` or any base64 online tools such as [this](https://www.base64encode.org/) to encode your `rclone.conf` as bse64 string. Note, you need to set `ENABLE_RCLONE` to true as well.
+  * `ENABLE_APP_CHECKER`, by default it's set to `true` to check if any new docker image version release on daily basis, which can help you get notification when new features released as well as some security vulnerabilities get fixed. You can set it to `false` to disable this feature. Note: you still need to manually pull the new image version and re run the docker container to complete upgrading.
 
 
 ### Supported Volumes
