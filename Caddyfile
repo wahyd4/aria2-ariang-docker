@@ -21,6 +21,10 @@ route /files/* {
   reverse_proxy 127.0.0.1:8080
 }
 
+route /ping {
+  respond "pong"
+}
+
 root * /usr/local/www/aria2
 file_server
 
