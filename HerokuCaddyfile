@@ -1,13 +1,12 @@
 {
-  debug
-  admin off
-  auto_https off
+	admin off
+	auto_https off
 }
 
 :PORT
 
 basicauth / {
-  ARIA2_USER ARIA2_PWD_ENCRYPT
+	ARIA2_USER ARIA2_PWD_ENCRYPT
 }
 
 redir /ui / 301
@@ -18,17 +17,17 @@ redir /files /files/ 301
 reverse_proxy /jsonrpc 127.0.0.1:6800
 
 route /rclone/* {
-  uri strip_prefix /rclone
-  reverse_proxy 127.0.0.1:5572
+	uri strip_prefix /rclone
+	reverse_proxy 127.0.0.1:5572
 }
 
 route /files/* {
-  uri strip_prefix /files
-  reverse_proxy 127.0.0.1:8080
+	uri strip_prefix /files
+	reverse_proxy 127.0.0.1:8080
 }
 
 route /ping {
-  respond "pong"
+	respond "app version: {env.APP_VERSION}"
 }
 
 root * /usr/local/www/aria2
@@ -36,5 +35,5 @@ file_server
 
 encode gzip
 log {
-  output stderr
+	output stderr
 }
