@@ -12,7 +12,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 
 
 
-**If you like this project, please consider support me / 如果喜欢本项目，请考虑打赏，谢谢！**
+**If you like this project, please consider [sponsoring me](https://github.com/sponsors/wahyd4) / 如果喜欢本项目，请考虑打赏，谢谢！**
 
 <img src="https://raw.githubusercontent.com/wahyd4/work-in-australia/766592ac6318027d7b3c334d8c50ca80818eeff8/wepay.jpg" alt="buy me a drink" width="120"/>
 
