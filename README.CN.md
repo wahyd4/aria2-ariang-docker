@@ -11,6 +11,8 @@ Aria2 + AriaNg
 
 [![Page Views Count](https://badges.toozhao.com/badges/01EJ791D8BB43PDS8D7PP7H0YE/green.svg)](https://badges.toozhao.com/stats/01EJ791D8BB43PDS8D7PP7H0YE "Get your own page views count badge on badges.toozhao.com")
 
+**如果你喜欢这个项目，请考虑微信打赏，让我更有动力来不断更新，谢谢！**
+
 <img src="https://raw.githubusercontent.com/wahyd4/work-in-australia/766592ac6318027d7b3c334d8c50ca80818eeff8/wepay.jpg" alt="buy me a drink" width="120"/>
 
 
