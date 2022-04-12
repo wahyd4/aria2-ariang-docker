@@ -6,8 +6,6 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 [![Docker Pulls](https://img.shields.io/docker/pulls/wahyd4/aria2-ui.svg)](https://hub.docker.com/r/wahyd4/aria2-ui/)
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/wahyd4/aria2-ariang-docker/tree/master)
-
 [![Page Views Count](https://badges.toozhao.com/svg/aria2-ariang-docker)](https://badges.toozhao.com/stats/aria2-ariang-docker "Page Views Count")
 
 
