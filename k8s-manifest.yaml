@@ -1,0 +1,161 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: files
+spec:
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      app: files
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: files
+    spec:
+      volumes:
+        # - name: config
+        #   persistentVolumeClaim:
+        #     claimName: configs-pv
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads-pv
+      containers:
+        - name: files
+          image: wahyd4/aria2-ui:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: files-port
+              protocol: TCP
+          env:
+           ## Update this to the final port you would use in the browser
+            - name: ARIA2_EXTERNAL_PORT
+              value: "443"
+            - name: PUID
+              value: "1000"
+            - name: PGID
+              value: "1000"
+          volumeMounts:
+            # - name: config
+            #   subPath: aria
+            #   mountPath: /app/conf
+            # - name: config
+            #   subPath: files/filebrowser.db
+            #   mountPath: /app/filebrowser.db
+            - name: downloads
+              mountPath: /data
+          resources:
+            requests:
+              cpu: 150m
+              memory: 256Mi
+            limits:
+              cpu: 400m
+              memory: 1024Mi
+        # An example of encrypting the traffic with some vpn providerm, please update the configurations accordingly
+        # - name: openvpn
+        #   image: qmcgaw/gluetun:latest
+        #   securityContext:
+        #     runAsUser: 0
+        #     privileged: true
+        #     capabilities:
+        #       add: ["NET_ADMIN"]
+        #   imagePullPolicy: Always
+        #   env:
+        #     - name: OPENVPN_USER
+        #       value: xxxx
+        #     - name: OPENVPN_PASSWORD
+        #       valueFrom:
+        #         secretKeyRef:
+        #           name: openvpn-password
+        #           key: password
+        #     - name: VPNSP
+        #       value: "private internet access"
+        #     - name: PIA_ENCRYPTION
+        #       value: normal
+        #     - name: REGION
+        #       value: "AU Sydney"
+        #     - name: TZ
+        #       value: Australia/Melbourne
+        #   resources:
+        #     requests:
+        #       cpu: 100m
+        #       memory: 126Mi
+        #     limits:
+        #       cpu: 100m
+        #       memory: 126Mi
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: files
+  labels:
+    app: files
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: files-port
+      protocol: TCP
+      name: web
+  selector:
+    app: files
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: downloads-pv
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/data"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: "downloads-pv"
+spec:
+  storageClassName: "manual"
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+
+
+# ---
+# ingress example
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: files-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: "nginx"
+#     kubernetes.io/tls-acme: "true"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+#     nginx.ingress.kubernetes.io/proxy-body-size: 10240m
+# spec:
+#   tls:
+#   - hosts:
+#     - xx.example.com
+#     secretName: files-tls
+#   rules:
+#   - host: xx.example.com
+#     http:
+#       paths:
+#       - path: /
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: files
+#             port:
+#               number: 80

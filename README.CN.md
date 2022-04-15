@@ -27,6 +27,7 @@ Aria2 + AriaNg
 - [自动 SSL](#自动-ssl)
 - [自行构建镜像](#自行构建镜像)
 - [Docker Hub](#docker-hub)
+- [在 Kubernetes 里面运行 (我的最爱)](#在-kubernetes-里面运行-我的最爱)
 - [使用 Docker compose 来运行](#使用-docker-compose-来运行)
 - [常见问题](#常见问题)
 
@@ -145,6 +146,16 @@ docker build -t aria2-ui .
 ## Docker Hub
 
   <https://hub.docker.com/r/wahyd4/aria2-ui/>
+
+## 在 Kubernetes 里面运行 (我的最爱)
+
+首先，在Kubernetes 里面运行本Docker 镜像比在Docker 里面更加复杂，需要更多的相关知识，但是也更加有意思，给你带来更多的折腾之后的满足。
+你可以使用`minikube`，Docker 桌面应用自带Kubernetes 或者 使用`kubeadm`来安装Kubernetes，然后你需要根据自己的需要修改 [k8s-manifest.yaml](k8s-manifest.yaml) 来满足你的需要的需求。比如：
+
+* NFS PV provider(使用NAS 作为容器存储)
+* Ingress 访问, Oauth 登录灯其他访问控制
+* VPN (让数据访问更加安全)
+* 其他的一些 Sidecars
 
 ## 使用 Docker compose 来运行
 

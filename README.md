@@ -25,7 +25,8 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 - [Auto HTTPS enabling](#auto-https-enabling)
 - [Build the image by yourself](#build-the-image-by-yourself)
 - [Docker Hub](#docker-hub)
-- [Usage it in Docker compose](#usage-it-in-docker-compose)
+- [Running it on Kubernetes (My favorite)](#running-it-on-kubernetes-my-favorite)
+- [Running it with Docker compose](#running-it-with-docker-compose)
 - [FAQ](#faq)
 
 One Docker image for file downloading, managing, sharing, as well as video playing and evening cloud storage synchronization.
@@ -156,9 +157,21 @@ docker run -d --name aria2-ui -p 80:80 -p 443:443 -e DOMAIN=https://toozhao.com 
 
   <https://hub.docker.com/r/wahyd4/aria2-ui/>
 
-## Usage it in Docker compose
+## Running it on Kubernetes (My favorite)
+
+First of all, I have to say running this docker image on Kubernetes is more challenging and requires more knowledges than running it in raw Docker, but which is more powerful.
+I couldn't tell you how to run it in Kubernetes step by step, but once you have a running Kubernetes cluster(You can install Kubernetes via `minikube`, `Docker desktop app`, `kubeadm` and many other tools.), then you can modify the [k8s-manifest.yaml](k8s-manifest.yaml) to satisfy all your requirements. Such as:
+
+* NFS PV provider(Use your NAS as storage)
+* Ingress access, Oauth login, more access controls via Nginx etc.
+* VPN tunnel (Secure your traffic)
+* Sidecars and so on.
+
+## Running it with Docker compose
 
   Please refer <https://github.com/wahyd4/aria2-ariang-x-docker-compose>
+
+
 
 ## FAQ
   1. When you running the docker image with non `80` port or you have HTTPS enabled, you will meet the error says `Aria2 Status Disconnected`, then you will need to set `ARIA2_EXTERNAL_PORT` and recreate your container.
