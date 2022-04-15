@@ -45,7 +45,7 @@ File Browser
   * [Aria2 (SSL support)](https://aria2.github.io)
   * [AriaNg](https://github.com/mayswind/AriaNg)
   * [Rclone](https://rclone.org/)
-  * [File Browser](https://filebrowser.xyz/): Files mangement and videos playing
+  * [File Browser](https://filebrowser.org/): Files mangement and videos playing
   * Auto HTTPS （Let's Encrypt）
   * Bind non root user into container, so non root user can also manage downloaded files.
   * Basic Auth

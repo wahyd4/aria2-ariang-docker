@@ -44,7 +44,7 @@ File Browser
   * 自动 HTTPS （Let's Encrypt）
   * 支持绑定自定义用户ID，可以主机上的非`root`用户，也可以管理下载的文件
   * Basic Auth 用户认证
-  * 文件管理和视频播放 ([FileBrowser](https://filebrowser.xyz/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
+  * 文件管理和视频播放 ([FileBrowser](https://filebrowser.org/)，注意默认情况下，只能访问和管理 `/data` 目录下的文件)
   * 支持ARM CPU 架构，因此可以在树莓派等设备上运行，
 
 ## 推荐使用的docker image tag
