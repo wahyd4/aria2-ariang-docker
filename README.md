@@ -87,7 +87,9 @@ File Browser
   -e ARIA2_USER=user \
   -e ARIA2_PWD=password \
   -e ARIA2_EXTERNAL_PORT=443 \
+  -e CADDY_LOG_LEVEL=ERROR \
   -v /yourdata:/data \
+  -v /app/.cache:/app/.cache \
   -v /app/a.db:/app/filebrowser.db \
   -v /to_yoursslkeys/:/app/conf/key \
   -v <conf files folder>:/app/conf \
@@ -132,15 +134,17 @@ Then simply run `docker-compose up -d`, that's it!
 
 
 ### Supported Volumes
-  * `/data` The folder contains all the files you download.
-  * `/app/conf/key` The folder which stores Aria2 SSL `certificate` and `key` file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`
-  * `/app/conf` The Aria2 configuration and file session folder. Make sure you have `aria2.conf` and `aria2.session` file. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. Please put your `rclone.conf` in this folder as well if you'd mount it to Rclone. So all the config files supported in this folder are:
-    * aria2.conf
-    * aria2.session
-    * rclone.conf
 
-    **Warning: if you don't mount `/app/conf`, whenever the container restarts, you'll lose your downloading progress.**
-  * `/app/filebrowser.db` File Browser settings database, make sure you make a empty file first on your host.
+| Mountable folder | Description|
+|:---|:---|
+| `/data` | The folder contains all the files you download. |
+| `/app/conf/key` | The folder which stores Aria2 SSL `certificate` and `key` |file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key` |
+| `/app/conf` | The Aria2 configuration and file session folder. Make sure you have `aria2.conf` and `aria2.session` file. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. Please put your `rclone.conf` in this folder as well if you'd mount it to Rclone. So all the config files supported in this folder are: `aria2.conf`, `aria2.session`, `rclone.conf`. 🚨Warning🚨: if you don't mount `/app/conf`, whenever the container restarts, you'll lose your downloading progress. |
+|`/app/conf/aria2.conf` | See description above👆🏼 |
+|`/app/conf/aria2.session` | See description above👆🏼 |
+|`/app/conf/rclone.conf` | See description above👆🏼 |
+| `/app/filebrowser.db` | File Browser settings database, make sure you make a empty file first on your host. |
+| `/app/.cache` | The folder for storing rclone caches and [aria2 DHT files](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-dht-file-path) |
 
 ## Auto HTTPS enabling
 
