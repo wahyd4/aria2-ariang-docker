@@ -2,6 +2,8 @@ Aria2 + AriaNg
 
 [English](https://github.com/wahyd4/aria2-ariang-docker/blob/master/README.md) | 简体中文
 
+> 🚨 注意：由于本人精力有限，现决定将主要精力放在更新功能，和英文版本文档。中文版本文档即日起暂停更新，欢迎志愿者对英文说明进行翻译或者赞助本项目，助力我投入更多时间。谢谢。（2022年4月19日）
+
 [![](https://images.microbadger.com/badges/image/wahyd4/aria2-ui.svg)](https://microbadger.com/images/wahyd4/aria2-ui "Get your own image badge on microbadger.com")
 [![Docker Pulls](https://img.shields.io/docker/pulls/wahyd4/aria2-ui.svg)](https://hub.docker.com/r/wahyd4/aria2-ui/)
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
