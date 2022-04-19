@@ -31,9 +31,10 @@ ENV CADDYPATH=/app
 ENV RCLONE_CONFIG=/app/conf/rclone.conf
 ENV XDG_DATA_HOME=/app/.caddy/data
 ENV XDG_CONFIG_HOME=/app/.caddy/config
+ENV XDG_CACHE_HOME=/app/.cache
 ENV RCLONE_CONFIG_BASE64=""
 ENV ENABLE_APP_CHECKER=true
-ENV XDG_CACHE_HOME=/app/.cache
+ENV CADDY_LOG_LEVEL=INFO
 
 ADD install.sh aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh new-version-checker.sh APP_VERSION /app/
 ADD conf /app/conf

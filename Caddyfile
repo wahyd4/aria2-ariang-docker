@@ -1,7 +1,7 @@
 {$DOMAIN}
 
-log{
-	level ERROR
+log {
+	level {env.CADDY_LOG_LEVEL}
 	output stderr
 }
 
