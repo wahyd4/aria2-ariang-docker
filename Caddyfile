@@ -1,8 +1,9 @@
-#{
-#  auto_https off
-#}
-
 {$DOMAIN}
+
+log{
+	level ERROR
+	output stderr
+}
 
 redir /ui / 301
 redir /ui/ / 301
@@ -29,6 +30,3 @@ root * /usr/local/www/aria2
 file_server
 
 encode gzip
-log {
-	output stderr
-}

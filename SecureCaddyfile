@@ -1,5 +1,10 @@
 {$DOMAIN}
 
+log {
+	level ERROR
+	output stderr
+}
+
 basicauth / {
 	ARIA2_USER ARIA2_PWD_ENCRYPT
 }
@@ -29,6 +34,3 @@ root * /usr/local/www/aria2
 file_server
 
 encode gzip
-log {
-	output stderr
-}
