@@ -115,18 +115,20 @@ services:
 Then simply run `docker-compose up -d`, that's it!
 
 ### Supported Environment Variables
-
-  * `ENABLE_AUTH` whether to enable Basic auth
-  * `ENABLE_RCLONE` whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please set to `false`
-  * `ARIA2_USER` Basic Auth username, Rclone GUI uses it as well.
-  * `ARIA2_PWD` Basic Auth password, Rclone GUI uses it as well.
-  * `ARIA2_EXTERNAL_PORT` The Aria2 port which exposed to public to access to
-  * `PUID` Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`
-  * `PGID` Bind Linux GID into container, default GID is 1000
-  * `RPC_SECRET` The Aria2 RPC secret token
-  * `DOMAIN` The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled
-  * `RCLONE_CONFIG_BASE64` Inject and config Rclone through `base64` string, which is the only way to use Rclone on Heroku. Please use `cat /app/conf/rclone.conf | base64` or any base64 online tools such as [this](https://www.base64encode.org/) to encode your `rclone.conf` as bse64 string. Note, you need to set `ENABLE_RCLONE` to true as well.
-  * `ENABLE_APP_CHECKER`, by default it's set to `true` to check if any new docker image version release on daily basis, which can help you get notification when new features released as well as some security vulnerabilities get fixed. You can set it to `false` to disable this feature. Note: you still need to manually pull the new image version and re run the docker container to complete upgrading.
+| ENV | Description|
+|:---|:---|
+| `ENABLE_AUTH` | whether to enable Basic auth|
+| `ENABLE_RCLONE` | whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please |set to `false`
+| `ARIA2_USER` | Basic Auth username, Rclone GUI uses it as well.|
+| `ARIA2_PWD` | Basic Auth password, Rclone GUI uses it as well.|
+| `ARIA2_EXTERNAL_PORT` | The Aria2 port which exposed to public to access to|
+| `PUID` | Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`|
+| `PGID` | Bind Linux GID into container, default GID is 1000|
+| `RPC_SECRET` | The Aria2 RPC secret token|
+| `DOMAIN` | The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled|
+| `RCLONE_CONFIG_BASE64` | Inject and config Rclone through `base64` string, which is the only way to use Rclone on Heroku. Please use |`cat /app/conf/rclone.conf | base64` or any base64 online tools such as [this](https://www.base64encode.org/) to encode your `rclone.conf` as bse64 string. Note, you need to set `ENABLE_RCLONE` to true as well.
+| `ENABLE_APP_CHECKER` |, by default it's set to `true` to check if any new docker image version release on daily basis, which can help |you get notification when new features released as well as some security vulnerabilities get fixed. You can set it to `false` to disable this feature. Note: you still need to manually pull the new image version and re run the docker container to complete upgrading.|
+| CADDY_LOG_LEVEL | For specifying the log level of Caddy, set it to `ERROR` to reduce logs. Default: `INFO` |
 
 
 ### Supported Volumes
