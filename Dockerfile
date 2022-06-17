@@ -39,6 +39,7 @@ ENV CADDY_LOG_LEVEL=INFO
 ADD install.sh aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh new-version-checker.sh APP_VERSION /app/
 ADD conf /app/conf
 ADD Caddyfile SecureCaddyfile HerokuCaddyfile /usr/local/caddy/
+ADD up.sh /app/conf
 
 COPY --from=build-forego /app/forego/forego /app
 
