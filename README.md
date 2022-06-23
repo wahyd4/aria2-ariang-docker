@@ -52,7 +52,7 @@ File Browser
   * Basic Auth
   * Support ARM CPUs as well, all supported CPU platforms can be found [here](https://cloud.docker.com/repository/docker/wahyd4/aria2-ui/tags)
   * Cloud Storage platforms synchronization
-  * Auto uploading files to 3rd party Cloud storage providers via Rclone after files downloaded.
+  * Auto uploading files to 3rd party Cloud storage providers via Rclone after files been downloaded.
 
 ## Recommended versions
 
