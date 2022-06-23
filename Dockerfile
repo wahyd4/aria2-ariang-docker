@@ -35,11 +35,14 @@ ENV XDG_CACHE_HOME=/app/.cache
 ENV RCLONE_CONFIG_BASE64=""
 ENV ENABLE_APP_CHECKER=true
 ENV CADDY_LOG_LEVEL=INFO
+ENV RCLONE_AUTO_UPLOAD_PROVIDER=
+ENV RCLONE_AUTO_UPLOAD_REMOTE_PATH=/downloads
+ENV RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE=1K
+ENV RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE=100G
 
 ADD install.sh aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh new-version-checker.sh APP_VERSION /app/
 ADD conf /app/conf
 ADD Caddyfile SecureCaddyfile HerokuCaddyfile /usr/local/caddy/
-ADD up.sh /app/conf
 
 COPY --from=build-forego /app/forego/forego /app
 
