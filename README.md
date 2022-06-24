@@ -148,8 +148,10 @@ Then simply run `docker-compose up -d`, that's it!
 |`/app/conf/aria2.conf` | See description above👆🏼 |
 |`/app/conf/aria2.session` | See description above👆🏼 |
 |`/app/conf/rclone.conf` | See description above👆🏼 |
+| `/app/conf/auto-upload.sh` | The bash script to be used for uploading downloaded files to remote storage provider via Rclone, mount your own script if you want to have custom logic. |
 | `/app/filebrowser.db` | File Browser settings database, make sure you make a empty file first on your host. |
 | `/app/.cache` | The folder for storing rclone caches and [aria2 DHT files](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-dht-file-path) |
+
 
 ## Auto HTTPS enabling
 
