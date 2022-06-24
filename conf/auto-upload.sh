@@ -22,7 +22,14 @@ if [ "${folder}" == "" ]; then # Not the actual file, or no files downloaded.
     echo "[WARN] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Fail to find files ${file_path}"
     exit 0
 else
-    # Copy files to remote
-    rclone copy "${file_path}" ${RCLONE_AUTO_UPLOAD_PROVIDER}:${RCLONE_AUTO_UPLOAD_REMOTE_PATH}${folder}/ --min-size ${RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE} --max-size ${RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE} -P
+    if [[ "$(ls -A "$folder/")" != "" ]] && [[ ${folder} != ${downloadsFolder} ]] ; then
+        # Copy files to remote
+        echo "[INFO] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Start uploading entire folder ${folder}"
+        rclone copy "${folder}" ${RCLONE_AUTO_UPLOAD_PROVIDER}:${RCLONE_AUTO_UPLOAD_REMOTE_PATH}${folder}/ --min-size ${RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE} --max-size ${RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE} -P
+    else
+        #Handle single file
+        echo "[INFO] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Start uploading file file_path"
+        rclone copy "${file_path}" ${RCLONE_AUTO_UPLOAD_PROVIDER}:${RCLONE_AUTO_UPLOAD_REMOTE_PATH}${folder}/ --min-size ${RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE} --max-size ${RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE} -P
+    fi
     echo "[INFO] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Successfully uploaded ${file_count} files ${file_path}"
 fi
