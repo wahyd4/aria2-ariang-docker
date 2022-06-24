@@ -9,7 +9,7 @@ file_count=$2
 file_path=$3
 downloadsFolder='/data'
 
-if [ $file_count -eq 0 ]; then
+if [ ${file_count} -eq 0 ]; then
     echo "[WARN] $(date -u +'%Y-%m-%dT%H:%M:%SZ') No files detected. Original parameters: Files Count: ${file_count}, Files Path: ${file_path}"
     exit 0
 fi
