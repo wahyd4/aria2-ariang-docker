@@ -1,4 +1,4 @@
-#!/bin/bash -eux
+#!/bin/bash -eu
 
 if [[ ${RCLONE_AUTO_UPLOAD_PROVIDER} == "" ]]; then
     echo "[INFO] $(date -u +'%Y-%m-%dT%H:%M:%SZ') Auto upload isn't enabled"
