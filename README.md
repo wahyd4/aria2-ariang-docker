@@ -131,11 +131,11 @@ Then simply run `docker-compose up -d`, that's it!
 | `DOMAIN` | The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled |
 | `RCLONE_CONFIG_BASE64` | Inject and config Rclone through `base64` string, which is the only way to use Rclone on Heroku. Please use `cat /app/conf/rclone.conf \| base64` or any base64 online tools such as [this](https://www.base64encode.org/) to encode your `rclone.conf` as bse64 string. Note, you need to set `ENABLE_RCLONE` to true as well. |
 | `ENABLE_APP_CHECKER` | By default it's set to `true` to check if any new docker image version release on daily basis, which can help you get notification when new features released as well as some security vulnerabilities get fixed. You can set it to `false` to disable this feature. Note: you still need to manually pull the new image version and re run the docker container to complete upgrading. |
-| CADDY_LOG_LEVEL | For specifying the log level of Caddy, set it to `ERROR` to reduce logs. Default: `INFO` |
-| RCLONE_AUTO_UPLOAD_PROVIDER | The Rclone remote storage provider name, which can be found under `Rclone -> Configs`, default `""`, which means auto upload is disabled. When the value is not empty, then the files will be attempted to be uploaded.|
-| RCLONE_AUTO_UPLOAD_REMOTE_PATH | The file folder in remote cloud storage provider, default `/downloads`|
-| RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE | Set the minimum file size of auto uploader, files smaller than it won't be uploaded, default `1K`  |
-| RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE | Set the limit of the Max file can be uploaded to 3rd party storage provider, default `100G`. |
+| `CADDY_LOG_LEVEL` | For specifying the log level of Caddy, set it to `WARN` or`ERROR` to reduce logs. Default: `INFO` |
+| `RCLONE_AUTO_UPLOAD_PROVIDER` | The Rclone remote storage provider name, which can be found under `Rclone -> Configs`, default `""`, which means auto upload is disabled. When the value is not empty, then the files will be attempted to be uploaded.|
+| `RCLONE_AUTO_UPLOAD_REMOTE_PATH` | The file folder in remote cloud storage provider, default `/downloads`|
+| `RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE` | Set the minimum file size of auto uploader, files smaller than it won't be uploaded, default `1K`  |
+| `RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE` | Set the limit of the Max file can be uploaded to 3rd party storage provider, default `100G`. |
 
 
 ### Supported Volumes
