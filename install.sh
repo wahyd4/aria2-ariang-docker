@@ -2,10 +2,10 @@
 
 echo "[INFO] Set variables for $(arch)"
 
-caddy_version=2.4.6
-filebrowser_version=v2.21.1
-rclone_version=v1.58.0
-ariang_version=1.2.3
+caddy_version=2.6.2
+filebrowser_version=v2.23.0
+rclone_version=v1.61.1
+ariang_version=1.3.2
 
 case "$(arch)" in
 
