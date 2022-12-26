@@ -3,7 +3,7 @@
 echo "[INFO] Run aria2c and ariaNG"
 
 echo "[INFO] Generate basic auth password for caddy"
-ARIA2_PWD_ENCRYPT=$(caddy hash-password -plaintext ${ARIA2_PWD})
+ARIA2_PWD_ENCRYPT=$(caddy hash-password --plaintext ${ARIA2_PWD})
 
 case $ENABLE_AUTH in
 true)
@@ -28,4 +28,4 @@ heroku)
   ;;
 esac
 
-/usr/local/bin/caddy run -config ${CADDY_FILE} -adapter=caddyfile
+/usr/local/bin/caddy run --config ${CADDY_FILE} --adapter=caddyfile

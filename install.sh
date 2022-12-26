@@ -37,7 +37,7 @@ ariang_file=AriaNg-${ariang_version}.zip
 
 adduser -D -u 1000 junv \
   && apk update \
-  && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap fuse vim --no-cache \
+  && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap fuse vim libcap --no-cache \
   && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_version}/${caddy_file} \
   && tar -zxf ${caddy_file} \
   && mv caddy /usr/local/bin/ \
