@@ -10,6 +10,7 @@ redir /ui/ / 301
 redir /rclone /rclone/ 301
 redir /files /files/ 301
 
+reverse_proxy /rpc 127.0.0.1:6800
 reverse_proxy /jsonrpc 127.0.0.1:6800
 
 route /rclone/* {
