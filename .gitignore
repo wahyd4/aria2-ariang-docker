@@ -1,2 +1,3 @@
 conf/rclone.conf
 .devcontainer
+.idea
