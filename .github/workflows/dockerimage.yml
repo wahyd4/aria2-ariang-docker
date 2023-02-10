@@ -66,6 +66,7 @@ jobs:
         docker buildx build --output "type=image,push=false" ${{ steps.prepare.outputs.buildx_args }}
     -
       name: Login to Docker Hub
+      if: contains(github.ref, '/heads/master') || contains(github.ref, '/tags/v')
       uses: docker/login-action@master
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
