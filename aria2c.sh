@@ -1,4 +1,4 @@
-#! /bin/bash -euo
+#! /bin/bash -eu
 
 sed -i 's/6800/'"${ARIA2_EXTERNAL_PORT}"'/g' /usr/local/www/aria2/js/aria-ng*.js
 RPC_SECRET_BASE64=$(echo -n ${RPC_SECRET} | base64)
