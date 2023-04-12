@@ -23,6 +23,9 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
   - [Supported Environment Variables](#supported-environment-variables)
   - [Supported Volumes](#supported-volumes)
 - [Auto HTTPS enabling](#auto-https-enabling)
+- [Download Automation 🤖](#download-automation-)
+  - [Download file through iPhone/Mac Shortcuts app.](#download-file-through-iphonemac-shortcuts-app)
+  - [Download file through cURL](#download-file-through-curl)
 - [Build the image by yourself](#build-the-image-by-yourself)
 - [Docker Hub](#docker-hub)
 - [Running it on Kubernetes (My favorite)](#running-it-on-kubernetes-my-favorite)
@@ -160,6 +163,18 @@ Make sure you have added proper `A` record point to the host you running to your
 ```bash
 docker run -d --name aria2-ui -p 80:80 -p 443:443 -e DOMAIN=https://toozhao.com wahyd4/aria2-ui
 ```
+## Download Automation 🤖
+
+### Download file through iPhone/Mac Shortcuts app.
+
+First [Download Shortcut](https://www.icloud.com/shortcuts/7483b8cec7484c0f98b72882d0f1e3e2), then follow the promots to setup aria2-ui URL and RPC_SECRET. Then you are all ready to go, just to run the shortcut and provide the file URL which you want to download or the magnet/torrent file URL.
+
+### Download file through cURL
+
+```bash
+curl http://<ip>:<port>/jsonrpc -d "{\"jsonrcp\":\"2.0\",\"id\":\"someID\",\"method\":\"aria2.addUri\",\"params\":[\"token:someToken\",[\"http://some_file_url\"],{\"dir\":\"/data/downloads\"}]}"
+```
+
 ## Build the image by yourself
 
 ```bash
