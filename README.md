@@ -139,6 +139,7 @@ Then simply run `docker-compose up -d`, that's it!
 | `RCLONE_AUTO_UPLOAD_REMOTE_PATH` | The file folder in remote cloud storage provider, default `/downloads`|
 | `RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE` | Set the minimum file size of auto uploader, files smaller than it won't be uploaded, default `1K`  |
 | `RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE` | Set the limit of the Max file can be uploaded to 3rd party storage provider, default `100G`. |
+| `FIX_DATA_VOLUME_PERMISSIONS` | Default value is `false`. When set to `true`, the container will run `chown -R` command against `/data` folder and `PUID` and `PGID` you set. Please set it to `true` when container complains you don't have enough permissions to manage the files and folders you mounted.|
 
 
 ### Supported Volumes
