@@ -39,6 +39,7 @@ ENV RCLONE_AUTO_UPLOAD_PROVIDER=
 ENV RCLONE_AUTO_UPLOAD_REMOTE_PATH=/downloads
 ENV RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE=1K
 ENV RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE=100G
+ENV FIX_DATA_VOLUME_PERMISSIONS=false
 
 ADD install.sh aria2c.sh caddy.sh Procfile init.sh start.sh rclone.sh new-version-checker.sh APP_VERSION /app/
 ADD conf /app/conf
