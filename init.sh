@@ -8,6 +8,8 @@ mkdir -p /app/.caddy
 mkdir -p /app/.cache
 mkdir -p /app/.cache/aria2
 
+echo "[INFO] Run chown against app related folders and user ${PUID}"
+
 chown -R junv:junv \
          /app \
          /app/.caddy \
