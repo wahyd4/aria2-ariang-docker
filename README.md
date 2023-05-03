@@ -68,12 +68,12 @@ File Browser
 ### Quick run
 
 ```shell
-  docker run -d --name aria2-ui -p 80:80 wahyd4/aria2-ui
+  docker run -d --name aria2-ui -p 8000:80 wahyd4/aria2-ui
 ```
 
-* Aria2: <http://yourip>
-* FileManger: <http://yourip/files>
-* Rclone: <http://yourip/rclone>
+* Aria2: <http://yourip:8000>
+* FileManger: <http://yourip:8000/files>
+* Rclone: <http://yourip:8000/rclone>
 * Please use `admin`/`admin` as username and password to login `Filebrowser` for the first time. And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
 
 ### Full features run
