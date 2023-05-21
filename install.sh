@@ -34,10 +34,10 @@ esac
 
 filebrowser_file=${platform}-filebrowser.tar.gz
 ariang_file=AriaNg-${ariang_version}.zip
-
-adduser -D -u 1000 junv \
-  && apk update \
-  && apk add runit shadow wget bash curl openrc gnupg aria2 tar mailcap fuse vim libcap --no-cache \
+groupadd junv \
+  && useradd -g junv -m -s /bin/bash junv \
+  && apt update \
+  && apt install -y runit wget curl openrc gnupg aria2 tar mailcap fuse vim unzip libcap2-bin\
   && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_version}/${caddy_file} \
   && tar -zxf ${caddy_file} \
   && mv caddy /usr/local/bin/ \
@@ -65,6 +65,7 @@ adduser -D -u 1000 junv \
   && unzip ${ariang_file} \
   && rm -rf ${ariang_file} \
   && chmod -R 755 /usr/local/www/aria2 \
+  && mkdir -p /data && chown junv:junv /data \
   && mkdir -p /data/cloud \
   && chown junv:junv /data/cloud \
   && ln -s /data/cloud /app
