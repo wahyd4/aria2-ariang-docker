@@ -1,6 +1,6 @@
-FROM golang:alpine AS build-forego
+FROM golang AS build-forego
 
-RUN apk add --no-cache git openssh
+RUN apt update && apt install -y git
 
 WORKDIR /app
 
@@ -11,7 +11,7 @@ RUN git clone https://github.com/wahyd4/forego.git \
     && go build -o forego \
     && chmod +x forego
 
-FROM alpine:edge
+FROM debian:stable-slim
 
 LABEL AUTHOR=Junv<wahyd4@gmail.com>
 
