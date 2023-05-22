@@ -37,7 +37,7 @@ ariang_file=AriaNg-${ariang_version}.zip
 groupadd junv \
   && useradd -g junv -m -s /bin/bash junv \
   && apt update \
-  && apt install -y wget curl aria2 tar unzip libcap2-bin\
+  && apt install -y wget curl aria2 tar unzip libcap2-bin runit\
   && wget -N https://github.com/caddyserver/caddy/releases/download/v${caddy_version}/${caddy_file} \
   && tar -zxf ${caddy_file} \
   && mv caddy /usr/local/bin/ \
