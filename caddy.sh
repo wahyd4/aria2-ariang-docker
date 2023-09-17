@@ -9,15 +9,15 @@ case $ENABLE_AUTH in
 true)
   echo "[INFO] Use Basic Auth config file "
   export CADDY_FILE=/usr/local/caddy/SecureCaddyfile
-  sed -i 's/ARIA2_USER/'"${ARIA2_USER}"'/g' ${CADDY_FILE}
-  sed -i 's/ARIA2_PWD_ENCRYPT/'"${ARIA2_PWD_ENCRYPT}"'/g' ${CADDY_FILE}
+  sed -i "s#ARIA2_USER#${ARIA2_USER}#g" ${CADDY_FILE}
+  sed -i "s#ARIA2_PWD_ENCRYPT#${ARIA2_PWD_ENCRYPT}#g" ${CADDY_FILE}
   ;;
 
 heroku)
   echo "[INFO] Run Caddy with Heroku mode"
   export CADDY_FILE=/usr/local/caddy/HerokuCaddyfile
-  sed -i 's/ARIA2_USER/'"${ARIA2_USER}"'/g' ${CADDY_FILE}
-  sed -i 's/ARIA2_PWD_ENCRYPT/'"${ARIA2_PWD_ENCRYPT}"'/g' ${CADDY_FILE}
+  sed -i "s#ARIA2_USER#${ARIA2_USER}#g" ${CADDY_FILE}
+  sed -i "s#ARIA2_PWD_ENCRYPT#${ARIA2_PWD_ENCRYPT}#g" ${CADDY_FILE}
 
   sed -i 's/PORT/'"${PORT}"'/g' ${CADDY_FILE}
 
