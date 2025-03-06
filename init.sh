@@ -24,7 +24,8 @@ fi
 
 chmod +x /app/caddy.sh \
          /app/rclone.sh \
-         /app/aria2c.sh
+         /app/aria2c.sh \
+         /app/filebrowser.sh
 
 echo "[INFO] Give caddy permissions to use low ports"
 setcap cap_net_bind_service=+ep /usr/local/bin/caddy
