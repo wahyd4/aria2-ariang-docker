@@ -124,7 +124,8 @@ Then simply run `docker-compose up -d`, that's it!
 | ENV | Description|
 |:---|:---|
 | `ENABLE_AUTH` | Whether to enable Basic auth |
-| `ENABLE_RCLONE` | Whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please set to `false`
+| `ENABLE_RCLONE` | Whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please set to `false` |
+| `ENABLE_FILEBROWSER` | Whether to disable Filebrowser, set it to `false` to disable it, by default it's enabled |
 | `ARIA2_USER` | Basic Auth username, Rclone GUI uses it as well. |
 | `ARIA2_PWD` | Basic Auth password, Rclone GUI uses it as well. |
 | `ARIA2_EXTERNAL_PORT` | The Aria2 port which exposed to public to access to |
