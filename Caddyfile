@@ -9,6 +9,7 @@ redir /ui / 301
 redir /ui/ / 301
 redir /rclone /rclone/ 301
 redir /files /files/ 301
+redir /ro /ro/ 301
 
 reverse_proxy /rpc 127.0.0.1:6800
 reverse_proxy /jsonrpc 127.0.0.1:6800
@@ -21,6 +22,12 @@ route /rclone/* {
 route /files/* {
 	uri strip_prefix /files
 	reverse_proxy 127.0.0.1:8080
+}
+
+route /ro/* {
+	uri strip_prefix /ro
+	root * /data
+	file_server browse
 }
 
 route /ping {

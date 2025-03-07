@@ -27,6 +27,12 @@ route /files/* {
 	reverse_proxy 127.0.0.1:8080
 }
 
+route /ro/* {
+	uri strip_prefix /ro
+	root * /data
+	file_server browse
+}
+
 route /ping {
 	respond "app version: {env.APP_VERSION}"
 }
