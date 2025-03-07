@@ -42,6 +42,7 @@ groupadd junv \
   && tar -zxf ${caddy_file} \
   && mv caddy /usr/local/bin/ \
   && rm -rf ${caddy_file} \
+  && wget -P /app -N https://raw.githubusercontent.com/glowinthedark/caddy-file-server-browse-extension/39e997c91539d0f04fcce53a3cb6605b2ae9e50c/browse.html \
   && platform=linux-amd64 \
   && wget -N https://github.com/filebrowser/filebrowser/releases/download/${filebrowser_version}/${filebrowser_file} \
   && tar -zxf ${filebrowser_file} \
