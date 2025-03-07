@@ -72,6 +72,7 @@ File Browser
 ```
 
 * Aria2: <http://yourip:8000>
+* Caddy File Server(Read Only) <http://yourip:8000/ro>
 * FileManger: <http://yourip:8000/files>
 * Rclone: <http://yourip:8000/rclone>
 * Please use `admin`/`admin` as username and password to login `Filebrowser` for the first time. And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
