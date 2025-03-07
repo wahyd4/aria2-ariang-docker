@@ -31,7 +31,7 @@ route /ro/* {
 	uri strip_prefix /ro
 	root * /data
 	file_server {
-		browse {env.CADDY_FILE_SERVER_BROWSE_HTML}
+		browse "{$CADDY_FILE_SERVER_BROWSE_HTML}"
 	}
 }
 
