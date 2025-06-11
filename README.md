@@ -61,7 +61,7 @@ File Browser
 
 * wahyd4/aria2-ui:latest
 
-> Docker will pick the the proper ARCH for you. e.g. arm64v8 or x86_64
+> Docker will pick proper CPU ARCH for you. e.g. arm64v8 or x86_64
 
 ## How to run
 
