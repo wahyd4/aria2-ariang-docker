@@ -1,0 +1,11 @@
+# Reduce build context size
+.git
+.gitignore
+*.md
+LICENSE
+*.png
+*.json
+heroku.yml
+k8s-manifest.yaml
+Dockerfile.optimized
+.dockerignore
