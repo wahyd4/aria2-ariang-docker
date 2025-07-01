@@ -6,7 +6,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
 [![Docker Pulls](https://img.shields.io/docker/pulls/wahyd4/aria2-ui.svg)](https://hub.docker.com/r/wahyd4/aria2-ui/)
 [![Github Build](https://github.com/wahyd4/aria2-ariang-docker/actions/workflows/dockerimage.yml/badge.svg)](https://github.com/wahyd4/aria2-ariang-docker/actions)
 
-[![Page Views Count](https://badges.toozhao.com/svg/aria2-ariang-docker)](https://badges.toozhao.com/stats/aria2-ariang-docker "Page Views Count")
+![Page Views Count](https://badges.toozhao.com/svg/aria2-ariang-docker)
 
 
 
