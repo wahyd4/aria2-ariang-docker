@@ -17,17 +17,53 @@ redir /rclone /rclone/ 301
 redir /files /files/ 301
 redir /ro /ro/ 301
 
-reverse_proxy /rpc 127.0.0.1:6800
-reverse_proxy /jsonrpc 127.0.0.1:6800
+# Aria2 RPC with WebSocket support and timeouts
+reverse_proxy /rpc 127.0.0.1:6800 {
+	transport http {
+		read_timeout 300s
+		write_timeout 300s
+		dial_timeout 30s
+		keepalive 90s
+		keepalive_idle_conns 10
+		max_conns_per_host 0
+	}
+	header_up X-Real-IP {remote_host}
+	header_up X-Forwarded-For {remote_host}
+}
+
+reverse_proxy /jsonrpc 127.0.0.1:6800 {
+	transport http {
+		read_timeout 300s
+		write_timeout 300s
+		dial_timeout 30s
+		keepalive 90s
+		keepalive_idle_conns 10
+		max_conns_per_host 0
+	}
+	header_up X-Real-IP {remote_host}
+	header_up X-Forwarded-For {remote_host}
+}
 
 route /rclone/* {
 	uri strip_prefix /rclone
-	reverse_proxy 127.0.0.1:5572
+	reverse_proxy 127.0.0.1:5572 {
+		transport http {
+			read_timeout 120s
+			write_timeout 120s
+			keepalive 60s
+		}
+	}
 }
 
 route /files/* {
 	uri strip_prefix /files
-	reverse_proxy 127.0.0.1:8080
+	reverse_proxy 127.0.0.1:8080 {
+		transport http {
+			read_timeout 120s
+			write_timeout 120s
+			keepalive 60s
+		}
+	}
 }
 
 route /ro/* {

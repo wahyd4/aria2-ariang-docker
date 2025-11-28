@@ -75,7 +75,8 @@ File Browser
 * Caddy File Server(Read Only) <http://yourip:8000/ro>
 * FileManger: <http://yourip:8000/files>
 * Rclone: <http://yourip:8000/rclone>
-* Please use `admin`/`admin` as username and password to login `Filebrowser` for the first time. And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
+* For the initial `admin` password of Filebrowser, please check the docker logs you should see something like `User 'admin' initialized with randomly generated password: xxx`, then use that password to login Filebrowser.
+* And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
 
 ### Full features run
 
@@ -111,8 +112,8 @@ services:
     image: wahyd4/aria2-ui:latest
     environment:
       - ENABLE_AUTH=true
-      - ARIA2_USER=hello
-      - ARIA2_PWD=world
+      - ARIA2_USER=user
+      - ARIA2_PWD=password
       - DOMAIN=http://toozhao.com
     ports:
       - "80:80"
@@ -127,8 +128,8 @@ Then simply run `docker-compose up -d`, that's it!
 | `ENABLE_AUTH` | Whether to enable Basic auth |
 | `ENABLE_RCLONE` | Whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please set to `false` |
 | `ENABLE_FILEBROWSER` | Whether to disable Filebrowser, set it to `false` to disable it, by default it's enabled |
-| `ARIA2_USER` | Basic Auth username, Rclone GUI uses it as well. |
-| `ARIA2_PWD` | Basic Auth password, Rclone GUI uses it as well. |
+| `ARIA2_USER` | Basic Auth username, Rclone GUI uses it as well. Default value: `user` |
+| `ARIA2_PWD` | Basic Auth password, Rclone GUI uses it as well. Default value: `password` |
 | `ARIA2_EXTERNAL_PORT` | The Aria2 port which exposed to public to access to |
 | `PUID` | Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000` |
 | `PGID` | Bind Linux GID into container, default GID is 1000 |
