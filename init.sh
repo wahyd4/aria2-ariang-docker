@@ -14,7 +14,7 @@ chown -R junv:junv \
          /app \
          /app/.caddy \
          /app/.cache \
-         /usr/local \
+         /usr/local/www \
          /var/log
 
 if [[ "${FIX_DATA_VOLUME_PERMISSIONS}" = "true" ]]; then

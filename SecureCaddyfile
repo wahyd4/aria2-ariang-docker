@@ -1,3 +1,8 @@
+{
+	admin off
+	persist_config off
+}
+
 {$DOMAIN}
 
 log {
@@ -5,10 +10,10 @@ log {
 	output stderr
 }
 
-@protected path / /index.html /css/* /js/* /ro /ro/* /jsonrpc
+@protected path / /index.html /css/* /js/* /ro /ro/* /jsonrpc /rpc
 
-basicauth @protected {
-	ARIA2_USER ARIA2_PWD_ENCRYPT
+basic_auth @protected {
+	{$ARIA2_USER} {$ARIA2_PWD_ENCRYPT}
 }
 
 redir /ui / 301

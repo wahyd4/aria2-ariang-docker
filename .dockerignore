@@ -1,0 +1,12 @@
+# Only ship the files this build needs. In particular, never bake local
+# rclone credentials or TLS private keys into a public image.
+.git
+.gitignore
+.github
+.devcontainer
+.DS_Store
+filemanager.png
+*.md
+LICENSE
+conf/rclone.conf
+conf/key

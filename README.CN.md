@@ -68,6 +68,10 @@ File Browser
 * Filebrowser: <http://yourip/files>
 * Rclone: <http://yourip/rclone>
 * 请使用 admin/admin 进行登录Filebrowser, 在如果没有修改`ARIA2_USER`,`ARIA2_PWD`的情况下，请使用`user`/`password`登录`Rclone`
+
+> **安全提示：** 上面的快速运行命令会在无任何认证的情况下暴露 AriaNg、FileBrowser 和 Rclone。如果要暴露到公网，请设置 `ENABLE_AUTH=true`、足够强的 `ARIA2_PWD`、`RPC_SECRET`，并通过 HTTPS 提供服务（例如 `DOMAIN=https://example.com`）。AriaNg 应与 RPC 接口同源访问（默认的 Caddy 配置已满足）；跨源自建前端需要在自己的 `aria2.conf` 中设置 `rpc-allow-origin-all=true`。
+>
+> **注意：** File Browser 上游已于 2026-09-01 归档，不再提供安全修复。本镜像固定使用其最后一个版本（`v2.63.23`），长期使用请评估替代方案。
 ### 开启所有功能
 ```bash
   docker run -d --name ariang \
@@ -124,7 +128,7 @@ services:
 
 ### 支持的 Docker volume 属性
   * `/data` 用来放置所有下载的文件的目录
-  * `/app/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`
+  * `/app/conf/key` 用户来放置 Aria2 SSL `certificate`证书和 `key` 文件. `注意`: 证书的名字必须是 `aria2.crt`， Key 文件的名字必须是 `aria2.key`。镜像不再内置私钥，使用 `ARIA2_SSL=true` 时请自行挂载。
   * `/app/conf` 该目录下可以放置你的自定义`aria2.conf`配置文件，`aria2.session`，且必须包含这两个文件。第一次使用`aria2.session`时，创建一个空文件即可，该文件会包含aria2当前的下载列表，这样即使容器被销毁也不用担心文件列表丢失了。你也可以直接拷贝当前项目下`conf`目录中的两个文件并使用。如需映射rclone.conf到容器内，请将其就放置于该目录下。因此配置文件目录支持的所有配置文件为：
     * aria2.conf
     * aria2.session

@@ -1,2 +1,4 @@
 conf/rclone.conf
+conf/key/
 .devcontainer
+.DS_Store

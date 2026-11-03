@@ -1,18 +1,20 @@
 #! /bin/bash -eu
 
-if [ "$RCLONE_CONFIG_BASE64" != "" ]; then
+if [ "${RCLONE_CONFIG_BASE64}" != "" ]; then
   echo "[INFO] Config Rclone from RCLONE_CONFIG_BASE64 env"
-  echo $RCLONE_CONFIG_BASE64 | base64 -d > /app/conf/rclone.conf
+  umask 077
+  printf '%s' "${RCLONE_CONFIG_BASE64}" | base64 -d > /app/conf/rclone.conf
+  chmod 600 /app/conf/rclone.conf
   echo "[INFO] Config Rclone from RCLONE_CONFIG_BASE64 completed"
 fi
 
-if [ "$ENABLE_RCLONE" = "true" ]; then
+if [ "${ENABLE_RCLONE}" = "true" ]; then
   echo "[INFO] Start Rclone, please make sure you can connect to Github website. if not, please set docker env ENABLE_RCLONE=false"
   rclone rcd --rc-web-gui \
     --rc-web-gui-no-open-browser \
-    --rc-addr :5572 \
-    --rc-user $ARIA2_USER \
-    --rc-pass $ARIA2_PWD \
+    --rc-addr 127.0.0.1:5572 \
+    --rc-user "${ARIA2_USER}" \
+    --rc-pass "${ARIA2_PWD}" \
     --cache-dir /app/.cache
 else
   echo "[INFO] Skip starting Rclone as it has been disabled"
