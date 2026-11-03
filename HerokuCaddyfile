@@ -1,14 +1,15 @@
 {
 	admin off
 	auto_https off
+	persist_config off
 }
 
-:PORT
+:{$PORT}
 
-@protected path / /index.html /css/* /js/* /ro /ro/* /jsonrpc
+@protected path / /index.html /css/* /js/* /ro /ro/* /jsonrpc /rpc
 
-basicauth @protected {
-	ARIA2_USER ARIA2_PWD_ENCRYPT
+basic_auth @protected {
+	{$ARIA2_USER} {$ARIA2_PWD_ENCRYPT}
 }
 
 redir /ui / 301

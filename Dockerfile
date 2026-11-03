@@ -1,17 +1,20 @@
-FROM golang AS build-forego
+FROM golang:1.27.3-trixie AS build-forego
 
-RUN apt update && apt install -y git
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends git ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
+# Pin the cloned dependency to a commit SHA instead of a floating branch name.
 RUN git clone https://github.com/wahyd4/forego.git \
     && cd forego \
-    && git checkout fix-go-mod \
+    && git checkout 9d06db3253778cd0780e38901e4eefd2ea3824fc \
     && go mod download \
-    && go build -o forego \
+    && go build -trimpath -o forego . \
     && chmod +x forego
 
-FROM debian:stable-slim
+FROM debian:trixie-slim
 
 LABEL AUTHOR=Junv<wahyd4@gmail.com>
 

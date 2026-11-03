@@ -78,6 +78,10 @@ File Browser
 * For the initial `admin` password of Filebrowser, please check the docker logs you should see something like `User 'admin' initialized with randomly generated password: xxx`, then use that password to login Filebrowser.
 * And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
 
+> **Security notice:** the quick run command above exposes AriaNg, FileBrowser and Rclone without authentication. For anything reachable from the internet, set `ENABLE_AUTH=true`, a strong `ARIA2_PWD`, a `RPC_SECRET`, and serve it over HTTPS (for example `DOMAIN=https://example.com`). AriaNg should be loaded from the same origin as the RPC endpoints (the default Caddy setup does this); cross-origin frontends need `rpc-allow-origin-all=true` in their own `aria2.conf`.
+>
+> **Note:** File Browser was archived upstream on 2026-09-01 and no longer receives security fixes. This image pins its final release (`v2.63.23`); evaluate an alternative for long-term use.
+
 ### Full features run
 
 ```bash
@@ -150,7 +154,7 @@ Then simply run `docker-compose up -d`, that's it!
 | Mountable folder | Description|
 |:---|:---|
 | `/data` | The folder contains all the files you download. |
-| `/app/conf/key` | The folder which stores Aria2 SSL `certificate` and `key` |file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key` |
+| `/app/conf/key` | The folder which stores Aria2 SSL `certificate` and `key` |file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`. This image no longer bundles a private key: mount your own when `ARIA2_SSL=true`. |
 | `/app/conf` | The Aria2 configuration and file session folder. 🚨Please make sure you have `aria2.conf` and `aria2.session` file exist on your host, when yout mount /app/conf. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. Please put your `rclone.conf` in this folder as well if you'd mount it to Rclone. So all the config files supported in this folder are: `aria2.conf`, `aria2.session`, `rclone.conf`. 🚨Warning🚨: if you don't mount `/app/conf`, whenever the container restarts, you'll lose your downloading progress. |
 |`/app/conf/aria2.conf` | See description above👆🏼 |
 |`/app/conf/aria2.session` | See description above👆🏼 |
