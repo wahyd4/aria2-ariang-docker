@@ -129,6 +129,7 @@ services:
 
   * `ENABLE_AUTH` 启用 Basic auth（网页简单认证），只保护 AriaNg、只读的 `/ro` 和 aria2 RPC 接口；`/files`（File Browser）和 `/rclone`（Rclone）使用各自的登录，不受影响。可选值为 `true`、`false`、`heroku`；在 Heroku 上运行时必须设为 `heroku`，并使用 Heroku 提供的 `PORT` 环境变量。
   * `ENABLE_RCLONE` 是否启用 Rclone，默认 `true`。Rclone 首次运行需要从 GitHub 下载文件；如果下载失败，只有 `/rclone/` 不可用，程序其它部分仍会正常运行，此时可以将其设为 `false`。
+  * `ENABLE_FILEBROWSER` 是否启用 File Browser，默认 `true`；设为 `false` 可关闭。
   * `ARIA2_USER` Basic Auth 用户认证用户名，Rclone也使用该参数
   * `ARIA2_PWD` Basic Auth 密码，Rclone也使用该参数
   * `ARIA2_EXTERNAL_PORT` 可选。浏览器访问 AriaNg 的公网端口。不设置时，AriaNg 会从页面自身的 URL 推导 RPC 端口；只有当浏览器访问应用的端口与页面所在端口不同时，才需要设置。
@@ -141,6 +142,12 @@ services:
   * `DOMAIN` 绑定的域名, 当绑定的域名为`HTTPS`时，即为启用`HTTPS`， 例： `DOMAIN=https://toozhao.com`
   * `RCLONE_CONFIG_BASE64` 通过`base64` 字符串的形式配置rclone.conf。主要给在Heroku平台上运行时使用，请使用命令行 `cat /app/conf/rclone.conf | base64` 或者其他任何在线base64在线工具 [比如这个](https://www.base64encode.org/)来把`rclone.conf`的内容生成`base64`字符串。在使用本环境变量的同时，请确保`ENABLE_RCLONE`设置为`true`。
   * `ENABLE_APP_CHECKER`，默认情况下本程序会每天向远程服务器发送一次GET请求，以检查是否有新版本的镜像。该功能可以让你及时获取新功能和相关安全隐患的修复的推送提醒。你也可以选择将该环境变量设置为`false`来禁用该功能。注意该功能启用下，依然需要手动更新镜像来完成升级。
+  * `CADDY_LOG_LEVEL` Caddy 的日志级别，设为 `WARN` 或 `ERROR` 可减少日志输出，默认 `INFO`。
+  * `RCLONE_AUTO_UPLOAD_PROVIDER` 自动上传使用的 rclone 远端名（在 `Rclone -> Configs` 中可查），默认 `""`，即关闭自动上传；设置后下载完成的文件会尝试上传。
+  * `RCLONE_AUTO_UPLOAD_REMOTE_PATH` 远端存储中的目标目录，默认 `/downloads`。
+  * `RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE` 自动上传的最小文件大小，小于该值的文件不上传，默认 `1K`。
+  * `RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE` 自动上传允许的最大文件大小，默认 `100G`。
+  * `FIX_DATA_VOLUME_PERMISSIONS` 默认 `false`；设为 `true` 时容器会对 `/data` 执行 `chown -R` 到 `PUID`/`PGID`。当容器提示没有权限管理挂载的文件和目录时，把它设为 `true`。
 
 配置错误（例如 `ENABLE_AUTH` 值非法，或 `ENABLE_AUTH=true` 但 `ARIA2_PWD` 为空）会让容器以非零状态退出，而不是带着错误配置继续运行。
 
