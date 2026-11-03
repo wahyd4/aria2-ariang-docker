@@ -27,7 +27,9 @@ ENV DOMAIN=:80
 ENV ARIA2_USER=user
 ENV ARIA2_PWD=password
 ENV ARIA2_SSL=false
-ENV ARIA2_EXTERNAL_PORT=80
+# ARIA2_EXTERNAL_PORT is intentionally left unset: when it is empty, AriaNg
+# derives the RPC port from the page's own URL, which is correct for any
+# published port and for HTTPS. Setting it overrides that derivation.
 ENV PUID=1000
 ENV PGID=1000
 ENV CADDYPATH=/app
@@ -64,6 +66,10 @@ VOLUME /data
 
 # For rclone cache and aria2 DHT files
 VOLUME /app/.cache
+
+# For Caddy ACME certificates and account keys, so container recreation
+# does not throw them away and trigger repeated certificate issuance.
+VOLUME /app/.caddy
 
 EXPOSE 80 443 6881
 

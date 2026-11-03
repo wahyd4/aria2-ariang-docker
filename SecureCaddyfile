@@ -10,6 +10,9 @@ log {
 	output stderr
 }
 
+# Basic auth covers AriaNg and the aria2 RPC endpoints only.
+# /files (File Browser) and /rclone authenticate through the applications
+# themselves, so they intentionally get no second Basic auth prompt.
 @protected path / /index.html /css/* /js/* /ro /ro/* /jsonrpc /rpc
 
 basic_auth @protected {
@@ -61,7 +64,6 @@ route /rclone/* {
 }
 
 route /files/* {
-	uri strip_prefix /files
 	reverse_proxy 127.0.0.1:8080 {
 		transport http {
 			read_timeout 120s
