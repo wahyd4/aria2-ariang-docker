@@ -50,7 +50,7 @@ ENV CADDY_FILE_SERVER_BROWSE_HTML=/app/browse.html
 
 ADD install.sh aria2c.sh caddy.sh filebrowser.sh Procfile init.sh start.sh rclone.sh new-version-checker.sh APP_VERSION /app/
 ADD conf /app/conf
-ADD Caddyfile SecureCaddyfile HerokuCaddyfile /usr/local/caddy/
+ADD Caddyfile SecureCaddyfile /usr/local/caddy/
 
 COPY --from=build-forego /app/forego/forego /app
 
