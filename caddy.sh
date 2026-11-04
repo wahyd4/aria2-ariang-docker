@@ -24,9 +24,8 @@ true)
   ;;
 
 heroku)
-  echo "[INFO] Run Caddy with Heroku mode"
-  hash_password
-  CADDY_FILE=/usr/local/caddy/HerokuCaddyfile
+  echo "[ERROR] ENABLE_AUTH=heroku is no longer supported: Heroku deployment was removed. Use 'true' or 'false' instead."
+  exit 1
   ;;
 
 false)
@@ -35,7 +34,7 @@ false)
   ;;
 
 *)
-  echo "[ERROR] Invalid ENABLE_AUTH value '${ENABLE_AUTH}'. Expected 'true', 'false' or 'heroku'."
+  echo "[ERROR] Invalid ENABLE_AUTH value '${ENABLE_AUTH}'. Expected 'true' or 'false'."
   exit 1
   ;;
 esac

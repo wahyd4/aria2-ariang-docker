@@ -139,7 +139,7 @@ Then simply run `docker-compose up -d`, that's it!
 ### Supported Environment Variables
 | ENV | Description|
 |:---|:---|
-| `ENABLE_AUTH` | Whether to enable Basic auth for AriaNg, the read-only `/ro` browser, and the aria2 RPC endpoints. Values: `true`, `false`, or `heroku`. Set it to `heroku` when running on Heroku, which also supplies the `PORT` variable. It does **not** protect `/files` (File Browser) or `/rclone` (Rclone); those keep their own logins. Default: `false` |
+| `ENABLE_AUTH` | Whether to enable Basic auth for AriaNg, the read-only `/ro` browser, and the aria2 RPC endpoints. Values: `true` or `false`. It does **not** protect `/files` (File Browser) or `/rclone` (Rclone); those keep their own logins. Default: `false` |
 | `ENABLE_RCLONE` | Whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please set to `false` |
 | `ENABLE_FILEBROWSER` | Whether to disable Filebrowser, set it to `false` to disable it, by default it's enabled |
 | `ARIA2_USER` | Basic Auth username, Rclone GUI uses it as well. Default value: `user` |
@@ -150,11 +150,10 @@ Then simply run `docker-compose up -d`, that's it!
 | `PGID` | Bind Linux GID into container, default GID is 1000 |
 | `RPC_SECRET` | The Aria2 RPC secret token. Must not contain newlines or start/end with whitespace (aria2 trims config values, which would desynchronise AriaNg and the RPC). |
 | `DOMAIN` | The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled |
-| `RCLONE_CONFIG_BASE64` | Inject and config Rclone through `base64` string, which is the only way to use Rclone on Heroku. Please use `cat /app/conf/rclone.conf \| base64` or any base64 online tools such as [this](https://www.base64encode.org/) to encode your `rclone.conf` as bse64 string. Note, you need to set `ENABLE_RCLONE` to true as well. |
+| `RCLONE_CONFIG_BASE64` | Inject `rclone.conf` as a `base64` string, for platforms that only accept environment variables and cannot mount `/app/conf`. Encode it with `cat /path/to/rclone.conf \| base64` or any base64 tool such as [this](https://www.base64encode.org/). Set `ENABLE_RCLONE=true` as well. |
 | `ENABLE_APP_CHECKER` | By default it's set to `true` to check if any new docker image version release on daily basis, which can help you get notification when new features released as well as some security vulnerabilities get fixed. You can set it to `false` to disable this feature. Note: you still need to manually pull the new image version and re run the docker container to complete upgrading. |
 | `CADDY_LOG_LEVEL` | For specifying the log level of Caddy, set it to `WARN` or`ERROR` to reduce logs. Default: `INFO` |
 | `CADDY_FILE_SERVER_BROWSE_HTML` | The HTML template Caddy uses for the read-only file browser at `/ro`. Default: `/app/browse.html` |
-| `PORT` | Heroku only. The port Heroku assigns to the app; Caddy binds it when `ENABLE_AUTH=heroku`. Do not set it in other environments. |
 | `RCLONE_AUTO_UPLOAD_PROVIDER` | The Rclone remote storage provider name, which can be found under `Rclone -> Configs`, default `""`, which means auto upload is disabled. When the value is not empty, then the files will be attempted to be uploaded.|
 | `RCLONE_AUTO_UPLOAD_REMOTE_PATH` | The file folder in remote cloud storage provider, default `/downloads`|
 | `RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE` | Set the minimum file size of auto uploader, files smaller than it won't be uploaded, default `1K`  |
