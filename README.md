@@ -78,33 +78,43 @@ File Browser
 * For the initial `admin` password of Filebrowser, please check the docker logs you should see something like `User 'admin' initialized with randomly generated password: xxx`, then use that password to login Filebrowser.
 * And use `user`/`password` to login `Rclone` if you don't update `ARIA2_USER` and `ARIA2_PWD`
 
-> **Security notice:** the quick run command above exposes AriaNg, FileBrowser and Rclone without authentication. For anything reachable from the internet, set `ENABLE_AUTH=true`, a strong `ARIA2_PWD`, a `RPC_SECRET`, and serve it over HTTPS (for example `DOMAIN=https://example.com`). AriaNg should be loaded from the same origin as the RPC endpoints (the default Caddy setup does this); cross-origin frontends need `rpc-allow-origin-all=true` in their own `aria2.conf`.
+> **Port note:** this command works without setting `ARIA2_EXTERNAL_PORT`. AriaNg derives the aria2 RPC port from the page's own URL. Set `ARIA2_EXTERNAL_PORT` only when the browser reaches the app through a different port than the one serving the page.
+
+> **Security notice:** the quick run command above exposes AriaNg, FileBrowser and Rclone without authentication. For anything reachable from the internet, set `ENABLE_AUTH=true`, a strong `ARIA2_PWD`, a `RPC_SECRET`, and serve it over HTTPS (for example `DOMAIN=https://example.com`). AriaNg should be loaded from the same origin as the RPC endpoints (the default Caddy setup does this); cross-origin frontends need `rpc-allow-origin-all=true` in their own `aria2.conf`. Note that `ENABLE_AUTH` protects AriaNg, the read-only `/ro` browser, and the aria2 RPC endpoints only: `/files` keeps File Browser's own admin login, and `/rclone` keeps its `ARIA2_USER`/`ARIA2_PWD` login.
 >
 > **Note:** File Browser was archived upstream on 2026-09-01 and no longer receives security fixes. This image pins its final release (`v2.63.23`); evaluate an alternative for long-term use.
 
 ### Full features run
 
+Create the host folders and files first. In particular, create an empty file for the File Browser database: if the host path does not exist, Docker creates a directory at `/app/filebrowser.db` and the container fails to start. Copy the whole `conf/` folder from a checkout of this repository — `aria2.conf` calls `/app/conf/auto-upload.sh` and `/app/conf/aria2-sample-hook.sh`, so copying only `aria2.conf` and `aria2.session` leaves those hooks missing.
+
 ```bash
+  mkdir -p /yourdata /yourcache /yourcaddy /yourconf
+  cp -r conf/. /yourconf/
+  touch /yourdata/filebrowser.db
+
   docker run -d --name ariang \
   -p 80:80 \
   -p 443:443 \
+  -p 6881-6999:6881-6999/tcp \
+  -p 6881-6999:6881-6999/udp \
   -e PUID=1000 \
   -e PGID=1000 \
   -e ENABLE_AUTH=true \
   -e RPC_SECRET=Hello \
   -e DOMAIN=https://example.com \
-  -e ARIA2_SSL=false \
   -e ARIA2_USER=user \
   -e ARIA2_PWD=password \
-  -e ARIA2_EXTERNAL_PORT=443 \
   -e CADDY_LOG_LEVEL=ERROR \
   -v /yourdata:/data \
-  -v /app/.cache:/app/.cache \
-  -v /app/a.db:/app/filebrowser.db \
-  -v /to_yoursslkeys/:/app/conf/key \
-  -v <conf files folder>:/app/conf \
+  -v /yourcache:/app/.cache \
+  -v /yourdata/filebrowser.db:/app/filebrowser.db \
+  -v /yourcaddy:/app/.caddy \
+  -v /yourconf:/app/conf \
   wahyd4/aria2-ui
 ```
+
+`ARIA2_SSL` is deprecated and ignored, so this example no longer mounts `/app/conf/key`: Caddy terminates TLS and aria2's RPC binds to `127.0.0.1` only. `ARIA2_EXTERNAL_PORT` is also omitted because AriaNg derives `443` from `https://example.com`; set it only when the browser reaches the app through a different port than the one serving the page.
 ### Run with docker-compose
 
 If you would like to get rid of those annoying command line commands, then just put the following sample content into `docker-compose.yaml`
@@ -129,24 +139,29 @@ Then simply run `docker-compose up -d`, that's it!
 ### Supported Environment Variables
 | ENV | Description|
 |:---|:---|
-| `ENABLE_AUTH` | Whether to enable Basic auth |
+| `ENABLE_AUTH` | Whether to enable Basic auth for AriaNg, the read-only `/ro` browser, and the aria2 RPC endpoints. Values: `true`, `false`, or `heroku`. Set it to `heroku` when running on Heroku, which also supplies the `PORT` variable. It does **not** protect `/files` (File Browser) or `/rclone` (Rclone); those keep their own logins. Default: `false` |
 | `ENABLE_RCLONE` | Whether to disable Rclone, if you running this container offline or do not have stable connection to Github, please set to `false` |
 | `ENABLE_FILEBROWSER` | Whether to disable Filebrowser, set it to `false` to disable it, by default it's enabled |
 | `ARIA2_USER` | Basic Auth username, Rclone GUI uses it as well. Default value: `user` |
 | `ARIA2_PWD` | Basic Auth password, Rclone GUI uses it as well. Default value: `password` |
-| `ARIA2_EXTERNAL_PORT` | The Aria2 port which exposed to public to access to |
-| `PUID` | Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000` |
+| `ARIA2_EXTERNAL_PORT` | Optional. The public port the browser uses to reach AriaNg. When unset, AriaNg derives the RPC port from the page's own URL. Setting it overrides the derived value; only set it when the browser reaches the app through a different port than the one serving the page. Default: unset |
+| `ARIA2_SSL` | **Deprecated and ignored.** aria2's RPC binds to `127.0.0.1` and Caddy terminates TLS, so the old certificate setup (`/app/conf/key`) has no effect. Setting it only logs a warning. |
+| `PUID` | Bind Linux UID into container which means you can use non `root` user to manage downloaded files, default UID is `1000`. Must be consistent with `PGID`: either both are `0` (run as root) or both are non-zero (run as the user); mixed values abort startup. |
 | `PGID` | Bind Linux GID into container, default GID is 1000 |
-| `RPC_SECRET` | The Aria2 RPC secret token |
+| `RPC_SECRET` | The Aria2 RPC secret token. Must not contain newlines or start/end with whitespace (aria2 trims config values, which would desynchronise AriaNg and the RPC). |
 | `DOMAIN` | The domain you'd like to bind, when domain is a `https://` thing, then auto TLS feature will be enabled |
 | `RCLONE_CONFIG_BASE64` | Inject and config Rclone through `base64` string, which is the only way to use Rclone on Heroku. Please use `cat /app/conf/rclone.conf \| base64` or any base64 online tools such as [this](https://www.base64encode.org/) to encode your `rclone.conf` as bse64 string. Note, you need to set `ENABLE_RCLONE` to true as well. |
 | `ENABLE_APP_CHECKER` | By default it's set to `true` to check if any new docker image version release on daily basis, which can help you get notification when new features released as well as some security vulnerabilities get fixed. You can set it to `false` to disable this feature. Note: you still need to manually pull the new image version and re run the docker container to complete upgrading. |
 | `CADDY_LOG_LEVEL` | For specifying the log level of Caddy, set it to `WARN` or`ERROR` to reduce logs. Default: `INFO` |
+| `CADDY_FILE_SERVER_BROWSE_HTML` | The HTML template Caddy uses for the read-only file browser at `/ro`. Default: `/app/browse.html` |
+| `PORT` | Heroku only. The port Heroku assigns to the app; Caddy binds it when `ENABLE_AUTH=heroku`. Do not set it in other environments. |
 | `RCLONE_AUTO_UPLOAD_PROVIDER` | The Rclone remote storage provider name, which can be found under `Rclone -> Configs`, default `""`, which means auto upload is disabled. When the value is not empty, then the files will be attempted to be uploaded.|
 | `RCLONE_AUTO_UPLOAD_REMOTE_PATH` | The file folder in remote cloud storage provider, default `/downloads`|
 | `RCLONE_AUTO_UPLOAD_FILE_MIN_SIZE` | Set the minimum file size of auto uploader, files smaller than it won't be uploaded, default `1K`  |
 | `RCLONE_AUTO_UPLOAD_FILE_MAX_SIZE` | Set the limit of the Max file can be uploaded to 3rd party storage provider, default `100G`. |
 | `FIX_DATA_VOLUME_PERMISSIONS` | Default value is `false`. When set to `true`, the container will run `chown -R` command against `/data` folder and `PUID` and `PGID` you set. Please set it to `true` when container complains you don't have enough permissions to manage the files and folders you mounted.|
+
+Invalid configuration now stops the container with a non-zero exit code instead of letting it run in a broken state — for example an unsupported `ENABLE_AUTH` value, or `ENABLE_AUTH=true` with an empty `ARIA2_PWD`.
 
 
 ### Supported Volumes
@@ -154,13 +169,14 @@ Then simply run `docker-compose up -d`, that's it!
 | Mountable folder | Description|
 |:---|:---|
 | `/data` | The folder contains all the files you download. |
-| `/app/conf/key` | The folder which stores Aria2 SSL `certificate` and `key` |file. `Notice`: The certificate file should be named `aria2.crt` and the key file should be named `aria2.key`. This image no longer bundles a private key: mount your own when `ARIA2_SSL=true`. |
-| `/app/conf` | The Aria2 configuration and file session folder. 🚨Please make sure you have `aria2.conf` and `aria2.session` file exist on your host, when yout mount /app/conf. For the first time `aria2.session` just need to be a empty file can be appended. You can also user the templates for these two file in the `conf` folder of this project. Please put your `rclone.conf` in this folder as well if you'd mount it to Rclone. So all the config files supported in this folder are: `aria2.conf`, `aria2.session`, `rclone.conf`. 🚨Warning🚨: if you don't mount `/app/conf`, whenever the container restarts, you'll lose your downloading progress. |
+| `/app/conf/key` | **Deprecated.** Previously stored the aria2 RPC certificate (`aria2.crt`) and key (`aria2.key`). aria2's RPC now binds to `127.0.0.1` and Caddy terminates TLS, so this mount no longer has any effect. |
+| `/app/conf` | aria2 configuration, the download session, rclone config, and the hook scripts. Mount the **whole** `conf/` folder from this project: `aria2.conf` calls `/app/conf/auto-upload.sh` (on download complete) and `/app/conf/aria2-sample-hook.sh` (on download error), so copying only `aria2.conf` and `aria2.session` breaks those hooks. For the first run `aria2.session` can be an empty file. If you don't mount `/app/conf`, download progress survives a container restart but is lost when the container is recreated or upgraded. Supported files: `aria2.conf`, `aria2.session`, `rclone.conf`, `auto-upload.sh`, `aria2-sample-hook.sh`. |
 |`/app/conf/aria2.conf` | See description above👆🏼 |
 |`/app/conf/aria2.session` | See description above👆🏼 |
 |`/app/conf/rclone.conf` | See description above👆🏼 |
 | `/app/conf/auto-upload.sh` | The bash script to be used for uploading downloaded files to remote storage provider via Rclone, mount your own script if you want to have custom logic. |
-| `/app/filebrowser.db` | File Browser settings database, make sure you make a empty file first on your host. |
+| `/app/filebrowser.db` | File Browser's settings database, including the `admin` account and its password. Create an empty file on the host first; otherwise Docker creates a directory and File Browser cannot start. It is lost when the container is recreated or upgraded unless mounted. |
+| `/app/.caddy` | Caddy's data directory, including the Let's Encrypt certificates and keys it obtains. Mount it to keep certificates across container recreation and avoid re-issuing them. |
 | `/app/.cache` | The folder for storing rclone caches and [aria2 DHT files](https://aria2.github.io/manual/en/html/aria2c.html#cmdoption-dht-file-path) |
 
 
@@ -180,14 +196,19 @@ First [Download Shortcut](https://www.icloud.com/shortcuts/7483b8cec7484c0f98b72
 ### Download file through cURL
 
 ```bash
-curl http://<ip>:<port>/jsonrpc -d "{\"jsonrcp\":\"2.0\",\"id\":\"someID\",\"method\":\"aria2.addUri\",\"params\":[\"token:someToken\",[\"http://some_file_url\"],{\"dir\":\"/data/downloads\"}]}"
+curl -u user:password https://example.com/jsonrpc \
+  -d '{"jsonrpc":"2.0","id":"someID","method":"aria2.addUri","params":["token:Hello",["http://some_file_url"],{"dir":"/data"}]}'
 ```
+
+Replace `example.com` with the host and published web port from your run command (`https://` implies 443; otherwise include `:port`). The credentials above match the full-features example: `ENABLE_AUTH=true`, `ARIA2_USER=user`, `ARIA2_PWD=password`, and `RPC_SECRET=Hello`.
 
 ## Build the image by yourself
 
 ```bash
- docker buildx build --platform linux/arm/v7,linux/arm64,linux/amd64 -t aria2-ui .
+ docker build -t aria2-ui .
 ```
+
+`docker build` builds for your host architecture and loads the image into your local Docker. For a multi-platform image, add `--push` (or `--load` for a single platform) to `docker buildx build`; without either flag the result only stays in the build cache and is not available to `docker run`.
 
 ## Docker Hub
 
@@ -210,8 +231,8 @@ I couldn't tell you how to run it in Kubernetes step by step, but once you have 
 
 
 ## FAQ
-  1. When you running the docker image with non `80` port or you have HTTPS enabled, you will meet the error says `Aria2 Status Disconnected`, then you will need to set `ARIA2_EXTERNAL_PORT` and recreate your container.
-  2. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links.
+  1. `Aria2 Status Disconnected` usually means the browser cannot reach the RPC endpoint on the port AriaNg assumed. By default AriaNg derives the port from the page URL, so `-p 8000:80` or an HTTPS reverse proxy works without extra settings. Set `ARIA2_EXTERNAL_PORT` only when the browser reaches the app through a different port than the one serving the page, then recreate the container.
+  2. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links. Also publish the BitTorrent port range (`-p 6881-6999:6881-6999/tcp -p 6881-6999:6881-6999/udp`); without inbound peers DHT and peer counts stay low, so downloads are slow.
   3. If you see any errors related to `setcap` which probably means the Linux you are running doesn't support running this application with `non-root` user. So please specify the `PUID` and `PGID` to `0` explicitly to use `root` user to run it.
   4. How can I get `Rclone` authenticated? Due to Rclone is running in this docker image only as a component rather than an application, you can only interact with it via `/rclone` endpoint, and no other ports. So the web browser authentication mechanism doesn't work here. Please configure Rclone through command line within the container. You can follow the official doc [Configuring rclone on a remote / headless machine](https://rclone.org/remote_setup) or this [issue](https://github.com/wahyd4/aria2-ariang-docker/issues/118)
-  5. Why the app stopped working when I have `- v /<some-folder>:/app/conf` mounted. It happens when you mount the entire `/app/conf` folder but you don't have any files under that folder on your host. To fix this issue, please simply copy all files under [`conf`](https://github.com/wahyd4/aria2-ariang-docker/tree/master/conf) folder to your local folder that you mount to `/app/conf` and then rerun the container.
+  5. Why the app stopped working when I have `- v /<some-folder>:/app/conf` mounted. It happens when you mount the entire `/app/conf` folder but you don't have any files under that folder on your host. Copy the **whole** [`conf`](https://github.com/wahyd4/aria2-ariang-docker/tree/master/conf) folder to your local folder and rerun the container — not just `aria2.conf` and `aria2.session`. `aria2.conf` invokes `/app/conf/auto-upload.sh` and `/app/conf/aria2-sample-hook.sh`, so those scripts must be present too.

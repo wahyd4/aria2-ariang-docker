@@ -10,11 +10,13 @@ fi
 
 if [ "${ENABLE_RCLONE}" = "true" ]; then
   echo "[INFO] Start Rclone, please make sure you can connect to Github website. if not, please set docker env ENABLE_RCLONE=false"
+  # Keep the GUI credentials out of the process list; rclone reads these
+  # environment variables as defaults for --rc-user/--rc-pass.
+  export RCLONE_RC_USER="${ARIA2_USER}"
+  export RCLONE_RC_PASS="${ARIA2_PWD}"
   rclone rcd --rc-web-gui \
     --rc-web-gui-no-open-browser \
     --rc-addr 127.0.0.1:5572 \
-    --rc-user "${ARIA2_USER}" \
-    --rc-pass "${ARIA2_PWD}" \
     --cache-dir /app/.cache
 else
   echo "[INFO] Skip starting Rclone as it has been disabled"
