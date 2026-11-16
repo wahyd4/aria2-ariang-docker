@@ -24,6 +24,7 @@ Aria2 + AriaNg
   - [快速运行](#快速运行)
   - [开启所有功能](#开启所有功能)
   - [使用docker-compose 运行](#使用docker-compose-运行)
+  - [Rootless Podman](#rootless-podman)
   - [支持的 Docker 环境变量](#支持的-docker-环境变量)
   - [支持的 Docker volume 属性](#支持的-docker-volume-属性)
 - [自动 SSL](#自动-ssl)
@@ -125,6 +126,25 @@ services:
 ```
 然后使用 `docker-compose up -d` 运行即可
 
+### Rootless Podman
+
+只要容器进程在 **user namespace 内以 uid 0 启动**，本镜像就可以用 rootless Podman 运行。无根模式默认就是这种映射：宿主机用户 ID 被映射为容器内的 uid 0，因此启动时的 `PUID`/`PGID`、`chown`、`setcap` 都能在该 namespace 内成功执行。
+
+```bash
+podman run -d --name aria2-ui \
+  -p 8000:80 \
+  -e PUID=0 -e PGID=0 \
+  --security-opt label=disable \
+  -v /yourdata:/data \
+  -v /yourconf:/app/conf \
+  wahyd4/aria2-ui
+```
+
+* 不要使用 `--userns=keep-id` 或 `--user`：它们会让入口脚本以非 root 用户启动，`PUID`/`PGID`、`chown`、`setcap` 都无法执行（报 `groupmod: Permission denied`）。如果配置里必须保留 `userns_mode=keep-id`，请加上 `--userns=keep-id:uid=0,gid=0`（Podman >= 4.3）并保持 `PUID=0`、`PGID=0`。
+* 无根模式下用户不能发布 1024 以下的宿主机端口，请映射高端口（如 `-p 8000:80`），容器内部仍然监听 `:80`。
+* Linux 上建议设 `PUID=0`、`PGID=0`：默认 `PUID=1000` 会让服务以容器内 uid 1000 运行，在无根宿主机上它对应 subuid（如 `100999`），因此写不了挂载的 `/data`。设 `FIX_DATA_VOLUME_PERMISSIONS=true` 虽然能写，但会把你的文件 chown 成该 subuid，你反而无法管理。`PUID=0`/`PGID=0` 时容器内 uid 0 就是你，下载文件属主仍是你。不要把这个组合照搬到 rootful Docker 或 Kubernetes 的 `runAsNonRoot`。
+* SELinux 强制模式的主机（Fedora/RHEL）需要给挂载加 `--security-opt label=disable`，否则容器会以 `mkdir ... Permission denied` 退出。
+
 ### 支持的 Docker 环境变量
 
   * `ENABLE_AUTH` 启用 Basic auth（网页简单认证），只保护 AriaNg、只读的 `/ro` 和 aria2 RPC 接口；`/files`（File Browser）和 `/rclone`（Rclone）使用各自的登录，不受影响。可选值为 `true`、`false`。
@@ -201,6 +221,6 @@ docker build -t aria2-ui .
 ## 常见问题
   1. 出现`Aria2 状态 未连接`通常表示浏览器无法连到 AriaNg 推导出的 RPC 端口。默认情况下 AriaNg 会从页面 URL 推导端口，因此 `-p 8000:80` 或 HTTPS 反向代理无需额外设置。只有当浏览器访问应用的端口与页面所在端口不同时，才需要设置`ARIA2_EXTERNAL_PORT`并重建容器。
   2. 下载的BT或者磁力完全没有速度怎么办？ 建议先下载一个热门的BT种子文件，而不是磁力链接。这样可以帮助缓存DHT文件，渐渐地，速度就会起来了。比如试试下载树莓派操作系统的BT种子？[前往下载](https://www.raspberrypi.org/downloads/raspbian/)。另外请发布 BT 监听端口范围（`-p 6881-6999:6881-6999/tcp -p 6881-6999:6881-6999/udp`）；没有入站 peer 时 DHT 和 peer 数量都会很少，下载会很慢。
-  3. 如果你遇到了和 `setcap` 相关的错误，很大程度说明你说运行的Linux不支持使用非`root`用户来运行本Docker 镜像，因此请显式地设置环境变量`PUID`  `PGID` 为 `0` ，也就是使用`root` 来运行
+  3. 遇到和 `setcap` 相关的错误，说明你的平台不让普通用户拿到绑定低端口的能力（常见于某些 NAS 内核和特殊存储驱动），把 `PUID`、`PGID` 显式设为 `0` 用 `root` 运行即可。注意这和 rootless Podman 无关：rootless 容器在 user namespace 内仍以 uid 0 启动，详见 [Rootless Podman](#rootless-podman)。
   4. 如何配置`Rclone`? 如果你想连接`Google Drive` 类似的云存储平台，很遗憾你不能通过浏览器配置，因为网页版本`Oauth` 方式在这里是用不了的，你只能通过命令行的形式来配置，即`rclone config`. 详请请参考官网 [Configuring rclone on a remote / headless machine](https://rclone.org/remote_setup) 以及详细步骤请参考 [issue](https://github.com/wahyd4/aria2-ariang-docker/issues/118)
   5. 挂载了 `-v /<some-folder>:/app/conf` 之后应用无法启动？这是把整个 `/app/conf` 挂载过去、但宿主机目录是空的导致的。请把本项目 [`conf`](https://github.com/wahyd4/aria2-ariang-docker/tree/master/conf) 目录下的**所有文件**都复制到该目录再重新运行容器——不要只复制 `aria2.conf` 和 `aria2.session`，`aria2.conf` 还会调用 `/app/conf/auto-upload.sh` 和 `/app/conf/aria2-sample-hook.sh`。

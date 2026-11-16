@@ -23,6 +23,23 @@ trap forward_signal TERM INT
 
 export APP_VERSION="$(cat /app/APP_VERSION)"
 
+# The container has to start as uid 0 inside its user namespace: init.sh runs
+# groupmod/usermod, chown and setcap before dropping privileges to junv, and the
+# root path (PUID=PGID=0) binds :80 as root. Plain rootless Podman maps the
+# invoking host user to container uid 0, so this stays unprivileged on the host;
+# but an engine or flag that starts the container as a non-root uid
+# (--userns=keep-id, --user, compose user:/userns_mode) cannot work. Fail with a
+# hint instead of the raw "groupmod: Permission denied" from init.sh.
+if [[ "$(id -u)" != "0" ]]; then
+  echo "[ERROR] This container must start as uid 0 inside its user namespace, got uid $(id -u)."
+  echo "[ERROR] Starting it as a non-root uid (--userns=keep-id, --user, compose 'user:'/'userns_mode') is not supported:"
+  echo "[ERROR] init.sh has to run groupmod/usermod, chown and setcap before dropping privileges to junv."
+  echo "[ERROR] Rootless Podman: use plain rootless Podman (it maps uid 0 to your host user),"
+  echo "[ERROR] or --userns=keep-id:uid=0,gid=0 (Podman >= 4.3) together with PUID=0 and PGID=0."
+  echo "[ERROR] See the 'Rootless Podman' section in the README."
+  exit 1
+fi
+
 # Only two combinations are supported: both 0 (run as root without init) and
 # both non-zero (drop privileges through init.sh/chpst).
 if [[ ! "${PUID:-}" =~ ^[0-9]+$ || ! "${PGID:-}" =~ ^[0-9]+$ ]]; then
