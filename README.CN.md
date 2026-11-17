@@ -141,7 +141,12 @@ services:
 
 rootless Podman 可以直接跑，前提是**容器在 user namespace 内以 uid 0 启动**。rootless Podman 默认就是这样：你的用户 ID 会映射成容器里的 uid 0，所以启动时需要的 `PUID`/`PGID`、`chown`、`setcap` 都能在 namespace 内完成。
 
+先建好宿主机目录，并把本项目 `conf/` 目录下的所有文件复制到配置目录（`/app/conf` 挂载过去是空目录的话，会盖掉镜像里的 `aria2.conf`，aria2 起不来）：
+
 ```bash
+mkdir -p /yourdata /yourconf
+cp -r conf/. /yourconf/
+
 podman run -d --name aria2-ui \
   -p 8000:80 \
   -e PUID=0 -e PGID=0 \

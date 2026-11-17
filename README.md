@@ -143,7 +143,13 @@ The image works with rootless Podman as long as the container starts as uid 0 **
 Plain rootless Podman does that by mapping your host uid to container uid 0, so the `PUID`/`PGID`, `chown`
 and `setcap` steps during startup succeed inside that namespace.
 
+Create the host folders first and copy the whole `conf/` folder from this project into the config directory —
+an empty `/app/conf` mount hides the bundled `aria2.conf` and aria2 won't start:
+
 ```bash
+mkdir -p /yourdata /yourconf
+cp -r conf/. /yourconf/
+
 podman run -d --name aria2-ui \
   -p 8000:80 \
   -e PUID=0 -e PGID=0 \
