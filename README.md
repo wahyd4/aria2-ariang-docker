@@ -20,6 +20,7 @@ English | [简体中文](https://github.com/wahyd4/aria2-ariang-docker/blob/mast
   - [Quick run](#quick-run)
   - [Full features run](#full-features-run)
   - [Run with docker-compose](#run-with-docker-compose)
+  - [Rootless Podman](#rootless-podman)
   - [Supported Environment Variables](#supported-environment-variables)
   - [Supported Volumes](#supported-volumes)
 - [Auto HTTPS enabling](#auto-https-enabling)
@@ -136,6 +137,42 @@ services:
 ```
 Then simply run `docker-compose up -d`, that's it!
 
+### Rootless Podman
+
+The image works with rootless Podman as long as the container starts as uid 0 **inside its user namespace**.
+Plain rootless Podman does that by mapping your host uid to container uid 0, so the `PUID`/`PGID`, `chown`
+and `setcap` steps during startup succeed inside that namespace.
+
+Create the host folders first and copy the whole `conf/` folder from this project into the config directory —
+an empty `/app/conf` mount hides the bundled `aria2.conf` and aria2 won't start:
+
+```bash
+mkdir -p /yourdata /yourconf
+cp -r conf/. /yourconf/
+
+podman run -d --name aria2-ui \
+  -p 8000:80 \
+  -e PUID=0 -e PGID=0 \
+  --security-opt label=disable \
+  -v /yourdata:/data \
+  -v /yourconf:/app/conf \
+  wahyd4/aria2-ui
+```
+
+* Do not use `--userns=keep-id` or `--user`: they start the entrypoint as a non-root uid, and then `PUID`/`PGID`,
+  `chown` and `setcap` cannot be applied (`groupmod: Permission denied`). If your setup forces
+  `userns_mode=keep-id`, add `--userns=keep-id:uid=0,gid=0` (Podman >= 4.3) and keep `PUID=0`/`PGID=0`.
+* Rootless users cannot publish host ports below 1024, so map a high port (`-p 8000:80`). The app still listens
+  on `:80` inside the container.
+* On Linux, use `PUID=0` and `PGID=0`: with the default `PUID=1000` the services run as container uid 1000,
+  which is a host subuid (e.g. `100999`), so they cannot write the bind-mounted `/data`.
+  `FIX_DATA_VOLUME_PERMISSIONS=true` makes the write work but chowns your files to that subuid, which means you
+  can no longer manage them. With `PUID=0`/`PGID=0` the container runs as uid 0 (= your host user) and the
+  downloaded files stay owned by you. Do not copy this combination to a rootful Docker daemon or to Kubernetes
+  `runAsNonRoot`.
+* On SELinux-enforcing hosts (Fedora/RHEL) add `--security-opt label=disable` to the bind mounts, otherwise the
+  container exits with `mkdir ... Permission denied`.
+
 ### Supported Environment Variables
 | ENV | Description|
 |:---|:---|
@@ -232,6 +269,6 @@ I couldn't tell you how to run it in Kubernetes step by step, but once you have 
 ## FAQ
   1. `Aria2 Status Disconnected` usually means the browser cannot reach the RPC endpoint on the port AriaNg assumed. By default AriaNg derives the port from the page URL, so `-p 8000:80` or an HTTPS reverse proxy works without extra settings. Set `ARIA2_EXTERNAL_PORT` only when the browser reaches the app through a different port than the one serving the page, then recreate the container.
   2. If there is no speed at all when you downloading a BitTorrent file, please try to use a popular torrent file first to help the application to cache `DHT` file. Then the speed should get fast and fast, as well as downloading other links. Also publish the BitTorrent port range (`-p 6881-6999:6881-6999/tcp -p 6881-6999:6881-6999/udp`); without inbound peers DHT and peer counts stay low, so downloads are slow.
-  3. If you see any errors related to `setcap` which probably means the Linux you are running doesn't support running this application with `non-root` user. So please specify the `PUID` and `PGID` to `0` explicitly to use `root` user to run it.
+  3. `setcap`-related errors mean the platform cannot grant the `non-root` user the capability to bind low ports (seen on some NAS kernels and on exotic storage drivers). Set `PUID` and `PGID` to `0` to run it as `root`. This is unrelated to rootless Podman: a rootless container still starts as uid 0 inside its user namespace, see [Rootless Podman](#rootless-podman).
   4. How can I get `Rclone` authenticated? Due to Rclone is running in this docker image only as a component rather than an application, you can only interact with it via `/rclone` endpoint, and no other ports. So the web browser authentication mechanism doesn't work here. Please configure Rclone through command line within the container. You can follow the official doc [Configuring rclone on a remote / headless machine](https://rclone.org/remote_setup) or this [issue](https://github.com/wahyd4/aria2-ariang-docker/issues/118)
   5. Why the app stopped working when I have `- v /<some-folder>:/app/conf` mounted. It happens when you mount the entire `/app/conf` folder but you don't have any files under that folder on your host. Copy the **whole** [`conf`](https://github.com/wahyd4/aria2-ariang-docker/tree/master/conf) folder to your local folder and rerun the container — not just `aria2.conf` and `aria2.session`. `aria2.conf` invokes `/app/conf/auto-upload.sh` and `/app/conf/aria2-sample-hook.sh`, so those scripts must be present too.
